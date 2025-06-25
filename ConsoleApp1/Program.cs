@@ -8,36 +8,39 @@ namespace ConsoleApp1;
 class Program
 {
     private List<Department> departments = new List<Department>();
-    
+
     static void HospitalTxt()
-{
-    Console.ForegroundColor = ConsoleColor.DarkCyan;
-    Console.WriteLine(@"
-     ░░░░░░░      ██╗░░██╗░█████╗░░██████╗██████╗░██╗████████╗░█████╗░██╗░░░░░      ░░░░░░░
-     ░░██╗░░      ██║░░██║██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗██║░░░░░      ░░██╗░░
-     ██████╗      ███████║██║░░██║╚█████╗░██████╔╝██║░░░██║░░░███████║██║░░░░░      ██████╗
-     ╚═██╔═╝      ██╔══██║██║░░██║░╚═══██╗██╔═══╝░██║░░░██║░░░██╔══██║██║░░░░░      ╚═██╔═╝
-     ░░╚═╝░░      ██║░░██║╚█████╔╝██████╔╝██║░░░░░██║░░░██║░░░██║░░██║███████╗      ░░╚═╝░░
-     ░░░░░░░      ╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░░░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝      ░░░░░░░");
-        
-    Console.ResetColor();
-}
+    {
+        Console.ForegroundColor = ConsoleColor.DarkCyan;
+        Console.WriteLine(@"
+                    ██╗░░██╗░█████╗░░██████╗██████╗░██╗████████╗░█████╗░██╗░░░░░
+                    ██║░░██║██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗██║░░░░░
+                    ███████║██║░░██║╚█████╗░██████╔╝██║░░░██║░░░███████║██║░░░░░
+                    ██╔══██║██║░░██║░╚═══██╗██╔═══╝░██║░░░██║░░░██╔══██║██║░░░░░
+                    ██║░░██║╚█████╔╝██████╔╝██║░░░░░██║░░░██║░░░██║░░██║███████╗
+                    ╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░░░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝");
+
+        Console.ResetColor();
+    }
 
 
     static void Main(string[] args)
     {
-        
+
 
         User user = new User();
         Doctor doctor = new Doctor();
         Admin admin = new Admin();
 
         UserAdminDoctorControl userControl = new UserAdminDoctorControl();
-        
+
         string[] panelOptions = { @"
-█▀▀█╗ █▀▀▄╗ █▀▄▀█╗ █╗ █▀▀▄╗ 
-█▄▄█║ █  █╝ █ ▀ █║ █║ █  █║ 
-▀  ▀╝ ▀▀▀   ▀   ▀╝ ▀╝ ▀  ▀╝ ",
+
+
+
+ ▄▀▄  █▀▀▄╗ █▀▄▀█╗ █╗ █▀▀▄╗ 
+ █▀█  █  █╝ █ ▀ █║ █║ █  █║ 
+█   █ ▀▀▀   ▀   ▀╝ ▀╝ ▀  ▀╝",
 @"                 
 █  █╗ █▀▀  █▀▀ █▀▀█╗ 
 █  █║ ▀▀█╗ █▀▀ █▄▄▀╝ 
@@ -53,10 +56,8 @@ class Program
         {
             Console.Clear();
 
-            
             HospitalTxt();
             
-
             for (int i = 0; i < panelOptions.Length; i++)
             {
                 if (i == selectedIndex)
@@ -85,14 +86,14 @@ class Program
             }
 
         } while (key != ConsoleKey.Enter);
-        if(selectedIndex == 0)
+        if (selectedIndex == 0)
         {
 
         }
-        else if(selectedIndex == 1)
+        else if (selectedIndex == 1)
         {
             Console.Clear();
-            
+
 
             userControl.SignInOrSignUp();
         }

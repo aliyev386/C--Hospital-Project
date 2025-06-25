@@ -8,21 +8,30 @@ using System.Threading.Tasks;
 namespace ConsoleApp1.Models
 {
      class User : Person
-    {
-        public string Email { get; set; }
+     {
         public string PhoneNumber { get; set; }
         public User() { }
-        public User(string name, string surname, string email, string phoneNumber)
+        public User(string name, string surname, string email,string username,string password, string phoneNumber)
         {
             Name = name;
             Surname = surname;
             Email = email;
+            UserName = username;
+            Password = password;
             PhoneNumber = phoneNumber;
+        }
+        public string GenerateUsername()
+        {
+            Random rand = new Random();
+            int number = rand.Next(10, 99);
+            string initials = $"{Name[0]}{Surname[0]}".ToLower();
+            string username = $"{Surname}_{initials}{number}";
+            return username;
         }
         public override string ToString()
         {
             return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nPhone number: {PhoneNumber}";
         }
         
-    }
+     }
 }
