@@ -8,6 +8,11 @@ namespace ConsoleApp1.Controls
 {
     public class AdminControl
     {
-        
+        public object GetDoctors()
+        {
+            var data = UserControl.allDoctors;
+            return data;
+        }
+
     }
 }

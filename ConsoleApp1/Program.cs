@@ -32,7 +32,7 @@ class Program
         Doctor doctor = new Doctor();
         Admin admin = new Admin();
 
-        UserAdminDoctorControl userControl = new UserAdminDoctorControl();
+        UserControl userControl = new UserControl();
 
         string[] panelOptions = { @"
 

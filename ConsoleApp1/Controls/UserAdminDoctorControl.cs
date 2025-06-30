@@ -17,7 +17,7 @@ using System.Transactions;
 namespace ConsoleApp1.Controls
 {
 
-    class UserAdminDoctorControl
+    class UserControl
     {
 
         public static List<Doctor> doctors1 = new List<Doctor> {
@@ -60,8 +60,8 @@ namespace ConsoleApp1.Controls
                      ░╚═════╝░╚═════╝░╚══════╝╚═╝░░╚═╝");
             Console.ResetColor();
         }
-        public UserAdminDoctorControl() { }
-        static UserAdminDoctorControl()
+        public UserControl() { }
+        static UserControl()
         {
             allDoctors.AddRange(doctors1);
             allDoctors.AddRange(doctors2);
@@ -749,7 +749,68 @@ namespace ConsoleApp1.Controls
                     Console.WriteLine("Wrong Password!!!");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
-                    Console.WriteLine("\n\n\tPress any key for continue....");
+                    Console.WriteLine("\n\n\tPress ecs key for continue....");
+                    Console.ResetColor();
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                }
+            }
+            else if (selectedCrudIndex == 5)
+            {
+                Console.Clear();
+                UserTxt();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("|Enter Phone number: ");
+                string phoneNum = Console.ReadLine()!;
+                if (index.PhoneNumber == phoneNum)
+                {
+                    Console.Write("|Enter new phone: ");
+                    string newPhone = Console.ReadLine()!;
+                    Console.ResetColor();
+                    phoneNum = newPhone;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Phone changed succesfully...");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress Ecs for continue....");
+                    Console.ResetColor();
+                    while (true)
+                    {
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            MainMenu(index);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Wrong Phone number!!!");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress enc key for continue....");
                     Console.ResetColor();
                     ConsoleKey ecsKey;
                     ecsKey = Console.ReadKey(true).Key;
