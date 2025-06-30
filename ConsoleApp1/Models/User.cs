@@ -30,7 +30,7 @@ namespace ConsoleApp1.Models
         }
         public override string ToString()
         {
-            return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nPhone number: {PhoneNumber}";
+            return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nUsername: {UserName}\nPassword: {Password}\nPhone number: {PhoneNumber}";
         }
         
      }

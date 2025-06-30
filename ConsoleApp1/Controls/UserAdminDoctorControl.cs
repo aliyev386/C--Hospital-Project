@@ -5,10 +5,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Reflection.Metadata;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Transactions;
 
 
 
@@ -19,20 +21,22 @@ namespace ConsoleApp1.Controls
     {
 
         public static List<Doctor> doctors1 = new List<Doctor> {
-                new Doctor("Umid", "Aslanov", DateTime.Parse("01-01-2015")),
-                new Doctor("Huseyin", "Memmedzade", DateTime.Parse("05-08-2010")),
-                new Doctor("Ali", "Agayev", DateTime.Parse("04-03-2020")),
-            };
+            new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123", DateTime.Parse("01-01-2015")),
+            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
+            new Doctor("Ali", "Agayev", "ali.agayev20@gmail.com", "Agayev_AA20", "ali789", DateTime.Parse("04-03-2020")),};
+
         public static List<Doctor> doctors2 = new List<Doctor> {
-                new Doctor("Huseyin", "Memmedzade", DateTime.Parse("05-08-2010")),
-                new Doctor("Heyder", "Omerzade", DateTime.Parse("04-03-2020")),
-            };
+            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
+            new Doctor("Heyder", "Omerzade", "heyder.o@gmail.com", "Omerzade_HO20", "heyder321", DateTime.Parse("04-03-2020")),};
+
         public static List<Doctor> doctors3 = new List<Doctor> {
-                new Doctor("Resad", "Memmedov", DateTime.Parse("05-08-2010")),
-                new Doctor("Emin", "Abbasov", DateTime.Parse("04-03-2020")),
-                new Doctor("Ibrahim", "Nebiyev", DateTime.Parse("05-08-2010")),
-                new Doctor("Ali", "Nebili", DateTime.Parse("04-03-2020")),
-            };
+            new Doctor("Resad", "Memmedov", "resad.m@gmail.com", "Memmedov_RM10", "resad654", DateTime.Parse("05-08-2010")),
+            new Doctor("Emin", "Abbasov", "emin.a@gmail.com", "Abbasov_EA20", "emin987", DateTime.Parse("04-03-2020")),
+            new Doctor("Ibrahim", "Nebiyev", "ibrahim.n@gmail.com", "Nebiyev_IN10", "ibrahim159", DateTime.Parse("05-08-2010")),
+            new Doctor("Ali", "Nebili", "ali.nebili@gmail.com", "Nebili_AN20", "ali753", DateTime.Parse("04-03-2020")),};
+
+        public static List<Doctor> allDoctors = new List<Doctor>();
+
 
         List<Department> departments = new List<Department>
             {
@@ -40,7 +44,6 @@ namespace ConsoleApp1.Controls
                 new Department("Travmatologiya", doctors2.Count, doctors2),
                 new Department("Stamotologiya", doctors3.Count, doctors3),
             };
-
 
         private List<User> users = new List<User> {
             new User("Omer","Aliyev","aliyev@gmail.com","Aliye_oa18","omer123","777319060")
@@ -58,6 +61,12 @@ namespace ConsoleApp1.Controls
             Console.ResetColor();
         }
         public UserAdminDoctorControl() { }
+        static UserAdminDoctorControl()
+        {
+            allDoctors.AddRange(doctors1);
+            allDoctors.AddRange(doctors2);
+            allDoctors.AddRange(doctors3);
+        }
         public void SignInOrSignUp()
         {
             string[][] options = new string[][]
@@ -180,12 +189,12 @@ namespace ConsoleApp1.Controls
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-             ░██████╗██╗░██████╗░███╗░░██╗  ██╗░░░██╗██████╗░
-             ██╔════╝██║██╔════╝░████╗░██║  ██║░░░██║██╔══██╗
-             ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║░░░██║██████╔╝
-             ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║░░░██║██╔═══╝░
-             ██████╔╝██║╚██████╔╝██║░╚███║  ╚██████╔╝██║░░░░░
-             ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ░╚═════╝░╚═╝░░░░░");
+                    ░██████╗██╗░██████╗░███╗░░██╗  ██╗░░░██╗██████╗░
+                    ██╔════╝██║██╔════╝░████╗░██║  ██║░░░██║██╔══██╗
+                    ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║░░░██║██████╔╝
+                    ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║░░░██║██╔═══╝░
+                    ██████╔╝██║╚██████╔╝██║░╚███║  ╚██████╔╝██║░░░░░
+                    ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ░╚═════╝░╚═╝░░░░░");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -199,22 +208,20 @@ namespace ConsoleApp1.Controls
             {
                 Console.Write("\t|Enter Email address: ");
                 string email = Console.ReadLine()!;
-                string emailPattern = @"^[\w!#$%&'*+\-/=?\^_{|}~]+(\.[\w!#$%&'*+\-/=?\^_{|}~]+)*"
-                                    + "@"
-                                    + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z";
 
-                if (!Regex.IsMatch(email, emailPattern))
+                User indexEmail = SearchUserEmail(email);
+                if (indexEmail != null)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\t|Invalid Email! Try again...");
+                    Console.WriteLine("\t|This email already exists!!!");
                     Console.ResetColor();
-                    continue;
+                    break;
                 }
+
 
                 Console.Write("\t|Enter Phone number: ");
                 string phoneNumber = Console.ReadLine()!;
 
-                // Username təklifi
                 User tempUser = new User(name, surname, email, "", "", phoneNumber);
                 string usernameOffer = tempUser.GenerateUsername();
 
@@ -266,12 +273,12 @@ namespace ConsoleApp1.Controls
                     Console.Write("\t|Enter your preferred username: ");
                     finalUsername = Console.ReadLine()!;
                 }
-
+                Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("\t|Enter password: ");
                 string password = Console.ReadLine()!;
+                Console.ResetColor();
                 User newUser = new User(name, surname, email, finalUsername, password, phoneNumber);
                 users.Add(newUser);
-
                 Loading();
                 Console.Clear();
                 UserTxt();
@@ -279,7 +286,6 @@ namespace ConsoleApp1.Controls
                 break;
             }
         }
-
         public void SignIn()
         {
             Console.Clear();
@@ -313,10 +319,6 @@ namespace ConsoleApp1.Controls
                 Console.ResetColor();
             }
             Console.ResetColor();
-
-
-
-
         }
 
         public void MainMenu(User index)
@@ -324,24 +326,26 @@ namespace ConsoleApp1.Controls
             Console.Clear();
             UserTxt();
             string[] crudOptions = {
-                "\n\n\n\t|Your profile",
-                "\n\t|g",
-                "\n\t|g",
-                "\n\t|g",
+                "\n\n\n\t|Show profile",
+                "\n\t|Show Departments",
+                "\n\t|Show All Doctors",
+                "\n\t|Change Username",
+                "\n\t|Change Password",
+                "\n\t|Change Phone Number",
+
             };
             int selectedCrudIndex = 0;
             ConsoleKey crudKey;
-            int menuStartLine = Console.CursorTop;
+
             do
             {
-                Console.SetCursorPosition(0, menuStartLine);
-
-
+                Console.Clear();
+                UserTxt();
                 for (int i = 0; i < crudOptions.Length; i++)
                 {
                     if (i == selectedCrudIndex)
                     {
-                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.ForegroundColor = ConsoleColor.Blue;
                         Console.WriteLine("   " + crudOptions[i]);
                         Console.ResetColor();
                     }
@@ -354,7 +358,6 @@ namespace ConsoleApp1.Controls
                 }
 
                 crudKey = Console.ReadKey(true).Key;
-
                 if (crudKey == ConsoleKey.UpArrow)
                 {
                     selectedCrudIndex = (selectedCrudIndex == 0) ? crudOptions.Length - 1 : selectedCrudIndex - 1;
@@ -367,166 +370,403 @@ namespace ConsoleApp1.Controls
             } while (crudKey != ConsoleKey.Enter);
             if (selectedCrudIndex == 0)
             {
-                index.ToString();
-            }
-
-            string free = " free";
-            string reserved = " reserved";
-
-            string[] options2_ =
+                while (true)
                 {
+
+                    Console.Clear();
+                    UserTxt();
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.WriteLine("\n--- USER PROFILE ---\n");
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tName: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(index.Name);
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tSurname: ");
+                    Console.ForegroundColor = ConsoleColor.Green;
+                    Console.WriteLine(index.Surname);
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tEmail: ");
+                    Console.ForegroundColor = ConsoleColor.Gray;
+                    Console.WriteLine(index.Email);
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tUsername: ");
+                    Console.ForegroundColor = ConsoleColor.Blue;
+                    Console.WriteLine(index.UserName);
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tPassword: ");
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine(index.Password);
+
+                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.Write("\tPhone number: ");
+                    Console.ForegroundColor = ConsoleColor.Yellow;
+                    Console.WriteLine(index.PhoneNumber);
+                    Console.ResetColor();
+
+                    Console.WriteLine("\tPress Ecs for continue....");
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+
+                }
+
+            }
+            else if (selectedCrudIndex == 1)
+            {
+                while (true)
+                {
+
+                    string free = " free";
+                    string reserved = " reserved";
+
+                    string[] options2_ =
+                        {
                 "09:00-11:00",
                 "12:00-14:00",
                 "15:00-17:00"
             };
-            #region Kursor
-            string[] options = departments.Select(d => d.Name).ToArray();
+                    #region Kursor
+                    string[] options = departments.Select(d => d.Name).ToArray();
 
 
-            int selectedIndex = 0;
-            ConsoleKey key;
+                    int selectedIndex = 0;
+                    ConsoleKey key;
 
-            do
-            {
-                Console.Clear();
-                Console.WriteLine("sobeden birini sec...\n");
-
-                for (int i = 0; i < options.Length; i++)
-                {
-                    if (i == selectedIndex)
-                    {
-                        Console.ForegroundColor = ConsoleColor.Green;
-                        Console.WriteLine("-> " + options[i]);
-                        Console.ResetColor();
-                    }
-                    else
-                    {
-                        Console.WriteLine("   " + options[i]);
-                    }
-                }
-
-                key = Console.ReadKey(true).Key;
-
-                if (key == ConsoleKey.UpArrow)
-                {
-                    selectedIndex = (selectedIndex == 0) ? options.Length - 1 : selectedIndex - 1;
-                }
-                else if (key == ConsoleKey.DownArrow)
-                {
-                    selectedIndex = (selectedIndex + 1) % options.Length;
-                }
-
-            } while (key != ConsoleKey.Enter);
-
-            Console.Clear();
-
-            #endregion
-            if (selectedIndex >= 0 && selectedIndex < options.Length)
-            {
-                int selectedIndex2 = 0;
-                ConsoleKey key2;
-
-                do
-                {
-                    Console.Clear();
-                    Console.WriteLine("sobede olan hekimlerden birini secin...\n");
-
-                    for (int i = 0; i < departments[selectedIndex].DoctorCount; i++)
-                    {
-                        if (i == selectedIndex2)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Green;
-                            Console.WriteLine();
-                            Console.WriteLine("-> " + departments[selectedIndex].Doctors[i]);
-                            Console.ResetColor();
-                        }
-                        else
-                        {
-                            Console.WriteLine();
-                            Console.WriteLine(" " + departments[selectedIndex].Doctors[i]);
-                        }
-                    }
-
-                    key2 = Console.ReadKey(true).Key;
-
-                    if (key2 == ConsoleKey.UpArrow)
-                    {
-                        selectedIndex2 = (selectedIndex2 == 0) ? departments[selectedIndex].Doctors.Count - 1 : selectedIndex2 - 1;
-                    }
-                    else if (key2 == ConsoleKey.DownArrow)
-                    {
-                        selectedIndex2 = (selectedIndex2 + 1) % departments[selectedIndex].Doctors.Count;
-                    }
-
-                } while (key2 != ConsoleKey.Enter);
-                if (selectedIndex2 >= 0 && selectedIndex2 < departments[selectedIndex].Doctors.Count)
-
-                {
-                    Doctor selectedDoctor = departments[selectedIndex].Doctors[selectedIndex2];
-                    int selectedIndex3 = 0;
-                    ConsoleKey key3;
                     do
                     {
                         Console.Clear();
-                        Console.WriteLine("size uygun olan vaxtlardan birini secin...\n");
-
-                        for (int i = 0; i < options2_.Length; i++)
+                        UserTxt();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine("\n\n\tSelect one of the departments...");
+                        Console.ResetColor();
+                        for (int i = 0; i < options.Length; i++)
                         {
-
-                            string timeStatus = selectedDoctor.ReservedTimes.Contains(options2_[i]) ? reserved : free;
-                            if (i == selectedIndex3)
+                            if (i == selectedIndex)
                             {
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("-> " + options2_[i] + timeStatus);
+                                Console.ForegroundColor = ConsoleColor.Blue;
+                                Console.WriteLine("\n|" + options[i]);
                                 Console.ResetColor();
                             }
                             else
                             {
-                                Console.WriteLine("   " + options2_[i] + timeStatus);
+                                Console.ForegroundColor = ConsoleColor.Cyan;
+                                Console.WriteLine("\n|" + options[i]);
+                                Console.ResetColor();
+                            }
+                        }
+
+                        key = Console.ReadKey(true).Key;
+
+                        if (key == ConsoleKey.UpArrow)
+                        {
+                            selectedIndex = (selectedIndex == 0) ? options.Length - 1 : selectedIndex - 1;
+                        }
+                        else if (key == ConsoleKey.DownArrow)
+                        {
+                            selectedIndex = (selectedIndex + 1) % options.Length;
+                        }
+
+                    } while (key != ConsoleKey.Enter);
+
+                    Console.Clear();
+
+                    #endregion
+                    if (selectedIndex >= 0 && selectedIndex < options.Length)
+                    {
+                        int selectedIndex2 = 0;
+                        ConsoleKey key2;
+
+                        do
+                        {
+                            Console.Clear();
+                            UserTxt();
+                            Console.ForegroundColor = ConsoleColor.DarkCyan;
+                            Console.WriteLine("\n\n\t|Choose one of the doctors on the department...\n");
+                            Console.ResetColor();
+
+                            for (int i = 0; i < departments[selectedIndex].DoctorCount; i++)
+                            {
+                                if (i == selectedIndex2)
+                                {
+                                    Console.ForegroundColor = ConsoleColor.Blue;
+                                    Console.WriteLine();
+                                    Console.WriteLine("\n|" + departments[selectedIndex].Doctors[i]);
+                                    Console.ResetColor();
+                                }
+                                else
+                                {
+                                    Console.WriteLine();
+                                    Console.ForegroundColor = ConsoleColor.Cyan;
+                                    Console.WriteLine("\n|" + departments[selectedIndex].Doctors[i]);
+                                    Console.ResetColor();
+                                }
                             }
 
-                        }
+                            key2 = Console.ReadKey(true).Key;
 
-                        key3 = Console.ReadKey(true).Key;
+                            if (key2 == ConsoleKey.UpArrow)
+                            {
+                                selectedIndex2 = (selectedIndex2 == 0) ? departments[selectedIndex].Doctors.Count - 1 : selectedIndex2 - 1;
+                            }
+                            else if (key2 == ConsoleKey.DownArrow)
+                            {
+                                selectedIndex2 = (selectedIndex2 + 1) % departments[selectedIndex].Doctors.Count;
+                            }
 
-                        if (key3 == ConsoleKey.UpArrow)
+                        } while (key2 != ConsoleKey.Enter);
+                        if (selectedIndex2 >= 0 && selectedIndex2 < departments[selectedIndex].Doctors.Count)
+
                         {
-                            selectedIndex3 = (selectedIndex3 == 0) ? options2_.Length - 1 : selectedIndex3 - 1;
-                        }
-                        else if (key3 == ConsoleKey.DownArrow)
-                        {
-                            selectedIndex3 = (selectedIndex3 + 1) % options2_.Length;
-                        }
+                            Doctor selectedDoctor = departments[selectedIndex].Doctors[selectedIndex2];
+                            int selectedIndex3 = 0;
+                            ConsoleKey key3;
+                            do
+                            {
+                                Console.Clear();
+                                UserTxt();
+                                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                Console.WriteLine("\n\n\tChoose a time that suits you...\n");
+                                Console.ResetColor();
 
-                    } while (key3 != ConsoleKey.Enter);
-                    if (selectedIndex3 >= 0 && selectedIndex3 < options2_.Length)
-                    {
+                                for (int i = 0; i < options2_.Length; i++)
+                                {
 
-                        string selectedTime = options2_[selectedIndex3];
+                                    string timeStatus = selectedDoctor.ReservedTimes.Contains(options2_[i]) ? reserved : free;
+                                    if (i == selectedIndex3)
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Blue;
+                                        Console.WriteLine("\n|" + options2_[i] + timeStatus);
+                                        Console.ResetColor();
+                                    }
+                                    else
+                                    {
+                                        Console.ForegroundColor = ConsoleColor.Cyan;
+                                        Console.WriteLine("\n|" + options2_[i] + timeStatus);
+                                        Console.ResetColor();
+                                    }
 
-                        if (selectedDoctor.ReservedTimes.Contains(selectedTime))
-                        {
-                            Console.WriteLine("Hemin vaxt artiq bu hekim ucun rezerv olunub. Zehmet olmasa basqa bir vaxt secin.");
-                            Console.WriteLine("\nPress enter for continue...");
-                            Console.ReadLine();
-                            MainMenu(index);
-                        }
-                        else
-                        {
-                            selectedDoctor.ReservedTimes.Add(selectedTime);
-                            Console.WriteLine($"{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
-                            Console.WriteLine("\nPress enter for continue...");
-                            Console.ReadLine();
-                            Console.Clear();
-                            /////////////////////////////////////////////////////////////Yeniden baslamalidir///////////////////////////////////////////////////////////
+                                }
+
+                                key3 = Console.ReadKey(true).Key;
+
+                                if (key3 == ConsoleKey.UpArrow)
+                                {
+                                    selectedIndex3 = (selectedIndex3 == 0) ? options2_.Length - 1 : selectedIndex3 - 1;
+                                }
+                                else if (key3 == ConsoleKey.DownArrow)
+                                {
+                                    selectedIndex3 = (selectedIndex3 + 1) % options2_.Length;
+                                }
+
+                            } while (key3 != ConsoleKey.Enter);
+                            if (selectedIndex3 >= 0 && selectedIndex3 < options2_.Length)
+                            {
+                                string selectedTime = options2_[selectedIndex3];
+
+                                if (selectedDoctor.ReservedTimes.Contains(selectedTime))
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                    Console.WriteLine("This time is already reserved for this doctor. If you don't mind, please choose another time.");
+                                    Console.WriteLine("\nPress Enter for continue...");
+                                    Console.ReadLine();
+                                    Console.ResetColor();
+                                    continue;
+                                }
+                                else
+                                {
+                                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                    selectedDoctor.ReservedTimes.Add(selectedTime);
+                                    Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
+                                    Console.WriteLine("\nPress enter for continue...");
+                                    Console.ReadLine();
+                                    Console.ResetColor();
+                                    MainMenu(index);
+                                    break;
+                                }
+                            }
                         }
                     }
-
+                }
+            }
+            else if (selectedCrudIndex == 2)
+            {
+                while (true)
+                {
+                    Console.Clear();
+                    UserTxt();
+                    Console.WriteLine();
+                    Console.WriteLine();
+                    int count = 0;
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    foreach (var item in allDoctors)
+                    {
+                        count++;
+                        Console.WriteLine($"----------{count}---------");
+                        Console.WriteLine(item.ToString());
+                    }
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\tPress Ecs for continue....");
+                    Console.ResetColor();
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
                 }
 
 
             }
+            else if (selectedCrudIndex == 3)
+            {
 
+                Console.Clear();
+                UserTxt();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("|Enter your Username: ");
+                string username = Console.ReadLine()!;
+                index = SearchUsername(username!);
+                if (index != null)
+                {
+                    Console.Write("\n|Enter new Username: ");
+                    string newUsername = Console.ReadLine()!;
+                    Console.ResetColor();
+                    username = newUsername!;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("\nUsername is changed succesfully...");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress Ecs for continue....");
+                    Console.ResetColor();
+                    while (true)
+                    {
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            MainMenu(index);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Wrong username!!!");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress any key for continue....");
+                    Console.ResetColor();
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                }
+
+
+            }
+            else if (selectedCrudIndex == 4)
+            {
+                Console.Clear();
+                UserTxt();
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("|Enter Password: ");
+                string password = Console.ReadLine()!;
+                if(index.Password == password)
+                {
+                    Console.Write("|Enter new password: ");
+                    string newPassword = Console.ReadLine()!;
+                    Console.ResetColor();
+                    password = newPassword;
+                    Console.ForegroundColor = ConsoleColor.DarkGreen;
+                    Console.WriteLine("Password changed succesfully...");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress Ecs for continue....");
+                    Console.ResetColor();
+                    while (true)
+                    {
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            MainMenu(index);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                else
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("Wrong Password!!!");
+                    Console.ResetColor();
+                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                    Console.WriteLine("\n\n\tPress any key for continue....");
+                    Console.ResetColor();
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                    else
+                    {
+                        Console.Clear();
+                        MainMenu(index);
+                        return;
+                    }
+                }
+            }
         }
     }
 }
