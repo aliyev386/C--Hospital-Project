@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Controls;
+﻿using Serilog;
+using ConsoleApp1.Controls;
 using ConsoleApp1.Models;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -26,7 +27,8 @@ class Program
 
     static void Main(string[] args)
     {
-
+        
+        Log.Information("Hospital.");
 
         User user = new User();
         Doctor doctor = new Doctor();
@@ -93,10 +95,15 @@ class Program
         else if (selectedIndex == 1)
         {
             Console.Clear();
-
-
+            userControl.ConfigureLogger();
+            Log.Information("User secildi");
+            
             userControl.SignInOrSignUp();
            
+        }
+        else if (selectedIndex == 2)
+        {
+
         }
 
     }

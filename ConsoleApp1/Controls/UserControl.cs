@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Models;
+using Serilog;
 using Microsoft.VisualBasic.FileIO;
 using System;
 using System.Collections.Generic;
@@ -19,7 +20,6 @@ namespace ConsoleApp1.Controls
 
     class UserControl
     {
-
         public static List<Doctor> doctors1 = new List<Doctor> {
             new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123", DateTime.Parse("01-01-2015")),
             new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
@@ -69,6 +69,7 @@ namespace ConsoleApp1.Controls
         }
         public void SignInOrSignUp()
         {
+            LogInfo("Sign in or Sign up.");
             string[][] options = new string[][]
 {
         new string[]
@@ -143,6 +144,7 @@ namespace ConsoleApp1.Controls
         }
         public void Loading()
         {
+            LogInfo("Loading...");
             string[] dots = { "", ".", "..", "..." };
 
             for (int i = 0; i < dots.Length; i++)
@@ -184,8 +186,11 @@ namespace ConsoleApp1.Controls
             }
             return null!;
         }
+
         public void SignUp()
         {
+            ConfigureLogger();
+            LogInfo("Sign up secildi.");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
@@ -201,14 +206,46 @@ namespace ConsoleApp1.Controls
             Console.WriteLine();
             Console.Write("\t|Enter name: ");
             string name = Console.ReadLine()!;
+            try
+            {
+                if (name == "")
+                {
+                    throw (new Exception("It cant be null"));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Name is null.", ex);
+            }
+
             Console.Write("\t|Enter surname: ");
             string surname = Console.ReadLine()!;
-
+            try
+            {
+                if (surname == "")
+                {
+                    throw (new Exception("It cant be null"));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Surname is null.", ex);
+            }
             while (true)
             {
                 Console.Write("\t|Enter Email address: ");
                 string email = Console.ReadLine()!;
-
+                try
+                {
+                    if (email == "")
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogException("Email is null.", ex);
+                }
                 User indexEmail = SearchUserEmail(email);
                 if (indexEmail != null)
                 {
@@ -221,6 +258,17 @@ namespace ConsoleApp1.Controls
 
                 Console.Write("\t|Enter Phone number: ");
                 string phoneNumber = Console.ReadLine()!;
+                try
+                {
+                    if (phoneNumber == "")
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogException("Phone number is null.", ex);
+                }
 
                 User tempUser = new User(name, surname, email, "", "", phoneNumber);
                 string usernameOffer = tempUser.GenerateUsername();
@@ -272,14 +320,37 @@ namespace ConsoleApp1.Controls
                 {
                     Console.Write("\t|Enter your preferred username: ");
                     finalUsername = Console.ReadLine()!;
+                    try
+                    {
+                        if (phoneNumber == "")
+                        {
+                            throw (new Exception("It cant be null"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        LogException("Phone number is null.", ex);
+                    }
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("\t|Enter password: ");
                 string password = Console.ReadLine()!;
+                try
+                {
+                    if (password == "")
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    LogException("Password is null.", ex);
+                }
                 Console.ResetColor();
                 User newUser = new User(name, surname, email, finalUsername, password, phoneNumber);
                 users.Add(newUser);
                 Loading();
+                LogInfo("User qeytiyatdan kecdi.");
                 Console.Clear();
                 UserTxt();
                 SignIn();
@@ -288,6 +359,7 @@ namespace ConsoleApp1.Controls
         }
         public void SignIn()
         {
+            LogInfo("Sign in secildi.");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
@@ -304,8 +376,30 @@ namespace ConsoleApp1.Controls
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.Write("Enter Username: ");
             string Username = Console.ReadLine();
+            try
+            {
+                if (Username == "")
+                {
+                    throw (new Exception("It cant be null"));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Username number is null.", ex);
+            }
             Console.Write("Enter Password: ");
             string Password = Console.ReadLine();
+            try
+            {
+                if (Password == "")
+                {
+                    throw (new Exception("It cant be null"));
+                }
+            }
+            catch (Exception ex)
+            {
+                LogException("Password number is null.", ex);
+            }
             User index = SearchUsername(Username!);
             if (index != null && index.Password == Password)
             {
@@ -323,15 +417,17 @@ namespace ConsoleApp1.Controls
 
         public void MainMenu(User index)
         {
+            LogInfo("crud emelliyatlar.");
             Console.Clear();
             UserTxt();
             string[] crudOptions = {
-                "\n\n\n\t|Show profile",
-                "\n\t|Show Departments",
-                "\n\t|Show All Doctors",
-                "\n\t|Change Username",
-                "\n\t|Change Password",
-                "\n\t|Change Phone Number",
+                "\n\n\n\t|1.Show profile",
+                "\n\t|2.Show Departments",
+                "\n\t|3.Show All Doctors",
+                "\n\t|4.Change Username",
+                "\n\t|5.Change Password",
+                "\n\t|6.Change Phone Number",
+                "\n\n\t|Close",
 
             };
             int selectedCrudIndex = 0;
@@ -370,6 +466,7 @@ namespace ConsoleApp1.Controls
             } while (crudKey != ConsoleKey.Enter);
             if (selectedCrudIndex == 0)
             {
+                LogInfo("Show profile secildi.");
                 while (true)
                 {
 
@@ -430,6 +527,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 1)
             {
+                LogInfo("Show Departments secildi.");
                 while (true)
                 {
 
@@ -607,6 +705,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 2)
             {
+                LogInfo("Show All Doctors.");
                 while (true)
                 {
                     Console.Clear();
@@ -643,7 +742,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 3)
             {
-
+                LogInfo("Change Username secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -660,6 +759,7 @@ namespace ConsoleApp1.Controls
                     username = newUsername!;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\nUsername is changed succesfully...");
+                    LogInfo("Username deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -708,6 +808,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 4)
             {
+                LogInfo("Change password secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -715,7 +816,7 @@ namespace ConsoleApp1.Controls
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("|Enter Password: ");
                 string password = Console.ReadLine()!;
-                if(index.Password == password)
+                if (index.Password == password)
                 {
                     Console.Write("|Enter new password: ");
                     string newPassword = Console.ReadLine()!;
@@ -723,6 +824,7 @@ namespace ConsoleApp1.Controls
                     password = newPassword;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Password changed succesfully...");
+                    LogInfo("Password deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -769,6 +871,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 5)
             {
+                LogInfo("Change Phone number secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -784,6 +887,7 @@ namespace ConsoleApp1.Controls
                     phoneNum = newPhone;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Phone changed succesfully...");
+                    LogInfo("Telefon nomresi deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -828,6 +932,52 @@ namespace ConsoleApp1.Controls
                     }
                 }
             }
+            else if (selectedCrudIndex == 6)
+            {
+                Log.Information("Proqram Bitdi.");
+                return;
+            }
+
+        }
+
+        public void ConfigureLogger()
+        {
+            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            string logFolderPath = Path.Combine(desktopPath, "Logs");
+            string logFilePath = Path.Combine(logFolderPath, "application-log.txt");
+
+            if (!Directory.Exists(logFolderPath))
+                Directory.CreateDirectory(logFolderPath);
+
+            var outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
+
+            Log.Logger = new LoggerConfiguration()
+                .MinimumLevel.Debug()
+                .WriteTo.File(logFilePath, outputTemplate: outputTemplate, rollingInterval: RollingInterval.Day)
+                .Enrich.WithThreadId()
+                .Enrich.WithEnvironmentName()
+                .CreateLogger();
+        }
+
+        // 📌 Fərqli log metodları
+        public void LogInfo(string message)
+        {
+            Log.Information(message);
+        }
+
+        public void LogWarning(string message)
+        {
+            Log.Warning(message);
+        }
+
+        public void LogError(string message)
+        {
+            Log.Error(message);
+        }
+
+        public void LogException(string context, Exception ex)
+        {
+            Log.Error(ex, context);
         }
     }
 }
