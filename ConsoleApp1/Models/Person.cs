@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Serilog;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,11 +12,12 @@ namespace ConsoleApp1.Models
     {
         public string Name { get; set; }
         public string Surname { get; set; }
+        private string _email;
         public string Email
         {get;set;
             //get
             //{
-            //    return Email;
+            //    return _email;
             //}
             //set
             //{
@@ -24,7 +26,18 @@ namespace ConsoleApp1.Models
             //                        + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z";
             //    if (Regex.IsMatch(Email, emailPattern))
             //    {
-            //        Email = value;
+            //        _email = value;
+            //    }
+            //    else
+            //    {
+            //        try
+            //        {
+            //            throw new Exception("Error");
+            //        }
+            //        catch (Exception ex)
+            //        {
+            //            Log.Error(ex, "Wrong email");
+            //        }
             //    }
 
             //}

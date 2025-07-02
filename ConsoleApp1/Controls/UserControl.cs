@@ -1,6 +1,6 @@
 ﻿using ConsoleApp1.Models;
-using Serilog;
 using Microsoft.VisualBasic.FileIO;
+using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +8,9 @@ using System.Net.Http.Headers;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
+using System.Runtime.ConstrainedExecution;
 using System.Text;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -45,9 +47,13 @@ namespace ConsoleApp1.Controls
                 new Department("Stamotologiya", doctors3.Count, doctors3),
             };
 
+
+
         private List<User> users = new List<User> {
             new User("Omer","Aliyev","aliyev@gmail.com","Aliye_oa18","omer123","777319060")
         };
+
+
         public void UserTxt()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -692,6 +698,7 @@ namespace ConsoleApp1.Controls
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     selectedDoctor.ReservedTimes.Add(selectedTime);
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
+                                    PrintCheck($"{index.Name} {index.UserName}",index.Email,$"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], options2_[selectedIndex3],selectedDoctor.WorkExperience);
                                     Console.WriteLine("\nPress enter for continue...");
                                     Console.ReadLine();
                                     Console.ResetColor();
@@ -959,7 +966,6 @@ namespace ConsoleApp1.Controls
                 .CreateLogger();
         }
 
-        // 📌 Fərqli log metodları
         public void LogInfo(string message)
         {
             Log.Information(message);
@@ -978,6 +984,23 @@ namespace ConsoleApp1.Controls
         public void LogException(string context, Exception ex)
         {
             Log.Error(ex, context);
+        }
+        public static void PrintCheck(string userFullName, string userEmail, string doctorFullName, string department, string timeSlot, DateTime date)
+        {
+
+            string fileName = $"check_{userFullName} {DateTime.Now.Ticks}.txt";
+            string content = $"Reservation confirmation\n" +
+                             $"--------------------------------------\n" +
+                             $"User: {userFullName}\n" +
+                             $"Email: {userEmail}\n" +
+                             $"Department: {department}\n" +
+                             $"Doctor: {doctorFullName}\n" +
+                             $"Date: {date.ToShortDateString()}\n" +
+                             $"Time: {timeSlot}\n" +
+                             $"--------------------------------------\n" +
+                             $"Thank you! your reservation has\nbeen succesfully registered\n";
+            File.WriteAllText(fileName, content);
+            Console.WriteLine("Check created succesfully\n");
         }
     }
 }
