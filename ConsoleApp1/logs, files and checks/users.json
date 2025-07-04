@@ -1,0 +1,20 @@
+[
+  {
+    "phoneNumber": "777319060",
+    "name": "Omer",
+    "surname": "Aliyev",
+    "email": "aliyev@gmail.com",
+    "userName": "Aliye_oa18",
+    "password": "omer123",
+    "age": 15
+  },
+  {
+    "phoneNumber": "847567837566",
+    "name": "omer",
+    "surname": "aliyev",
+    "email": "aliyevomer386@gmail.com",
+    "userName": "omer123",
+    "password": "omer123",
+    "age": 45
+  }
+]

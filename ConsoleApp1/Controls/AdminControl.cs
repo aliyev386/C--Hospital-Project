@@ -11,8 +11,14 @@ namespace ConsoleApp1.Controls
         public object GetDoctors()
         {
             var data = UserControl.allDoctors;
+            
             return data;
+                        
         }
+        
+        
+        
+
 
     }
 }

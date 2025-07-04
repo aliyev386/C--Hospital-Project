@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Controls;
+using ConsoleApp1.Helpers;
 using ConsoleApp1.Models;
 using Serilog;
 using System;
@@ -13,16 +14,18 @@ namespace ConsoleApp1
     {
         public Aplication() { }
 
+        
+
         static void HospitalTxt()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-                    ██╗░░██╗░█████╗░░██████╗██████╗░██╗████████╗░█████╗░██╗░░░░░
-                    ██║░░██║██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗██║░░░░░
-                    ███████║██║░░██║╚█████╗░██████╔╝██║░░░██║░░░███████║██║░░░░░
-                    ██╔══██║██║░░██║░╚═══██╗██╔═══╝░██║░░░██║░░░██╔══██║██║░░░░░
-                    ██║░░██║╚█████╔╝██████╔╝██║░░░░░██║░░░██║░░░██║░░██║███████╗
-                    ╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░░░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝");
+                            ██╗░░██╗░█████╗░░██████╗██████╗░██╗████████╗░█████╗░██╗░░░░░
+                            ██║░░██║██╔══██╗██╔════╝██╔══██╗██║╚══██╔══╝██╔══██╗██║░░░░░
+                            ███████║██║░░██║╚█████╗░██████╔╝██║░░░██║░░░███████║██║░░░░░
+                            ██╔══██║██║░░██║░╚═══██╗██╔═══╝░██║░░░██║░░░██╔══██║██║░░░░░
+                            ██║░░██║╚█████╔╝██████╔╝██║░░░░░██║░░░██║░░░██║░░██║███████╗
+                            ╚═╝░░╚═╝░╚════╝░╚═════╝░╚═╝░░░░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝");
 
             Console.ResetColor();
         }
@@ -30,7 +33,9 @@ namespace ConsoleApp1
 
         public void Start()
         {
+            
 
+            Logs.ConfigureLogger();
             Log.Information("Program basladi.");
 
             User user = new User();
@@ -98,8 +103,7 @@ namespace ConsoleApp1
             else if (selectedIndex == 1)
             {
                 Console.Clear();
-                userControl.ConfigureLogger();
-                Log.Information("User secildi");
+                Logs.LogInfo("User secildi");
 
                 userControl.SignInOrSignUp();
 

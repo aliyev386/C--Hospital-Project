@@ -3,12 +3,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    abstract class Person
+    public abstract class Person
     {
         public string Name { get; set; }
         public string Surname { get; set; }
@@ -42,17 +43,20 @@ namespace ConsoleApp1.Models
 
             //}
         }
+        
         public string UserName { get; set; }
         public string Password { get; set; }
-        public int Age
+        public int Age { get; set; }
+        protected Person() { }
+        protected Person(string name, string surname, string email, string username, string password, int age)
         {
-            get => Age;
-            set
-            {
-                if (Age < 0) Age = 0;
-            }
+            Name = name;
+            Surname = surname;
+            Email = email;
+            UserName = username;
+            Password = password;
+            Age = age;
         }
-
 
 
 

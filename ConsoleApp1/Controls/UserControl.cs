@@ -1,4 +1,6 @@
-﻿using ConsoleApp1.Models;
+﻿using ConsoleApp1.Controls;
+using ConsoleApp1.Helpers;
+using ConsoleApp1.Models;
 using Microsoft.VisualBasic.FileIO;
 using Serilog;
 using System;
@@ -13,6 +15,7 @@ using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.Threading.Tasks.Dataflow;
 using System.Transactions;
 
 
@@ -22,6 +25,7 @@ namespace ConsoleApp1.Controls
 
     class UserControl
     {
+
         public static List<Doctor> doctors1 = new List<Doctor> {
             new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123", DateTime.Parse("01-01-2015")),
             new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
@@ -47,10 +51,10 @@ namespace ConsoleApp1.Controls
                 new Department("Stamotologiya", doctors3.Count, doctors3),
             };
 
+        public List<Department> GetDepartments() => departments;
 
-
-        private List<User> users = new List<User> {
-            new User("Omer","Aliyev","aliyev@gmail.com","Aliye_oa18","omer123","777319060")
+        public static List<User> users = new List<User> {
+            new User("Omer","Aliyev","aliyev@gmail.com","Aliye_oa18","omer123",15,"777319060")
         };
 
 
@@ -58,37 +62,50 @@ namespace ConsoleApp1.Controls
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-                     ██╗░░░██╗░██████╗███████╗██████╗░
-                     ██║░░░██║██╔════╝██╔════╝██╔══██╗
-                     ██║░░░██║╚█████╗░█████╗░░██████╔╝
-                     ██║░░░██║░╚═══██╗██╔══╝░░██╔══██╗
-                     ╚██████╔╝██████╔╝███████╗██║░░██║
-                     ░╚═════╝░╚═════╝░╚══════╝╚═╝░░╚═╝");
+                           ██╗░░░██╗░██████╗███████╗██████╗░
+                           ██║░░░██║██╔════╝██╔════╝██╔══██╗
+                           ██║░░░██║╚█████╗░█████╗░░██████╔╝
+                           ██║░░░██║░╚═══██╗██╔══╝░░██╔══██╗
+                           ╚██████╔╝██████╔╝███████╗██║░░██║
+                           ░╚═════╝░╚═════╝░╚══════╝╚═╝░░╚═╝");
             Console.ResetColor();
         }
         public UserControl() { }
+
         static UserControl()
         {
             allDoctors.AddRange(doctors1);
             allDoctors.AddRange(doctors2);
             allDoctors.AddRange(doctors3);
+            JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
+
+
+            var departments = new List<Department>
+    {
+        new Department("Pediatriya", doctors1.Count , doctors1),
+        new Department("Travmatologiya", doctors2.Count, doctors2),
+        new Department("Stamotologiya", doctors3.Count, doctors3),
+    };
+
+            JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
         }
+
         public void SignInOrSignUp()
         {
-            LogInfo("Sign in or Sign up.");
+            Logs.LogInfo("Sign in or Sign up.");
             string[][] options = new string[][]
 {
         new string[]
         {
-            "       █▀▀ ░▀░ █▀▀▀ █▀▀▄ 　 █░░█ █▀▀█",
-            "       ▀▀█ ▀█▀ █░▀█ █░░█ 　 █░░█ █░░█",
-            "       ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░▀ 　 ░▀▀▀ █▀▀▀"
+            "       █▀▀ ░▀░ █▀▀▀ █▀▀▄    █░░█ █▀▀█",
+            "       ▀▀█ ▀█▀ █░▀█ █░░█    █░░█ █░░█",
+            "       ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░▀    ░▀▀▀ █▀▀▀"
         },
         new string[]
         {
-            "       █▀▀ ░▀░ █▀▀▀ █▀▀▄ 　 ░▀░ █▀▀▄",
-            "       ▀▀█ ▀█▀ █░▀█ █░░█ 　 ▀█▀ █░░█",
-            "       ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░▀ 　 ▀▀▀ ▀░░▀"
+            "       █▀▀ ░▀░ █▀▀▀ █▀▀▄    ░▀░ █▀▀▄",
+            "       ▀▀█ ▀█▀ █░▀█ █░░█    ▀█▀ █░░█",
+            "       ▀▀▀ ▀▀▀ ▀▀▀▀ ▀░░▀    ▀▀▀ ▀░░▀"
         }
 };
 
@@ -138,19 +155,16 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
             if (selectedIndex == 0)
             {
-
                 SignUp();
             }
             else if (selectedIndex == 1)
             {
                 SignIn();
-
-
             }
         }
         public void Loading()
         {
-            LogInfo("Loading...");
+            Logs.LogInfo("Loading...");
             string[] dots = { "", ".", "..", "..." };
 
             for (int i = 0; i < dots.Length; i++)
@@ -171,7 +185,6 @@ namespace ConsoleApp1.Controls
         }
         public User SearchUserEmail(string email)
         {
-
             foreach (var user in users)
             {
                 if (user.Email == email)
@@ -195,17 +208,16 @@ namespace ConsoleApp1.Controls
 
         public void SignUp()
         {
-            ConfigureLogger();
-            LogInfo("Sign up secildi.");
+            Logs.LogInfo("Sign up secildi.");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-                    ░██████╗██╗░██████╗░███╗░░██╗  ██╗░░░██╗██████╗░
-                    ██╔════╝██║██╔════╝░████╗░██║  ██║░░░██║██╔══██╗
-                    ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║░░░██║██████╔╝
-                    ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║░░░██║██╔═══╝░
-                    ██████╔╝██║╚██████╔╝██║░╚███║  ╚██████╔╝██║░░░░░
-                    ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ░╚═════╝░╚═╝░░░░░");
+                         ░██████╗██╗░██████╗░███╗░░██╗  ██╗░░░██╗██████╗░
+                         ██╔════╝██║██╔════╝░████╗░██║  ██║░░░██║██╔══██╗
+                         ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║░░░██║██████╔╝
+                         ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║░░░██║██╔═══╝░
+                         ██████╔╝██║╚██████╔╝██║░╚███║  ╚██████╔╝██║░░░░░
+                         ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ░╚═════╝░╚═╝░░░░░");
             Console.ResetColor();
             Console.ForegroundColor = ConsoleColor.Cyan;
 
@@ -221,7 +233,7 @@ namespace ConsoleApp1.Controls
             }
             catch (Exception ex)
             {
-                LogException("Name is null.", ex);
+                Logs.LogException("Name is null.", ex);
             }
 
             Console.Write("\t|Enter surname: ");
@@ -235,7 +247,7 @@ namespace ConsoleApp1.Controls
             }
             catch (Exception ex)
             {
-                LogException("Surname is null.", ex);
+                Logs.LogException("Surname is null.", ex);
             }
             while (true)
             {
@@ -250,7 +262,7 @@ namespace ConsoleApp1.Controls
                 }
                 catch (Exception ex)
                 {
-                    LogException("Email is null.", ex);
+                    Logs.LogException("Email is null.", ex);
                 }
                 User indexEmail = SearchUserEmail(email);
                 if (indexEmail != null)
@@ -273,10 +285,24 @@ namespace ConsoleApp1.Controls
                 }
                 catch (Exception ex)
                 {
-                    LogException("Phone number is null.", ex);
+                    Logs.LogException("Phone number is null.", ex);
                 }
 
-                User tempUser = new User(name, surname, email, "", "", phoneNumber);
+                Console.Write("\t|Enter Age: ");
+                int age = int.Parse(Console.ReadLine()!);
+                try
+                {
+                    if (age == null)
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                }
+                catch (Exception ex)
+                {
+                    Logs.LogException("Age is null.", ex);
+                }
+
+                User tempUser = new User(name, surname, email, "", "", age, phoneNumber);
                 string usernameOffer = tempUser.GenerateUsername();
 
                 Console.WriteLine();
@@ -335,7 +361,7 @@ namespace ConsoleApp1.Controls
                     }
                     catch (Exception ex)
                     {
-                        LogException("Phone number is null.", ex);
+                        Logs.LogException("Phone number is null.", ex);
                     }
                 }
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -350,13 +376,14 @@ namespace ConsoleApp1.Controls
                 }
                 catch (Exception ex)
                 {
-                    LogException("Password is null.", ex);
+                    Logs.LogException("Password is null.", ex);
                 }
                 Console.ResetColor();
-                User newUser = new User(name, surname, email, finalUsername, password, phoneNumber);
+                User newUser = new User(name, surname, email, finalUsername, password, age, phoneNumber);
                 users.Add(newUser);
+                JsonHelper.SaveToFile(PathConfig.UsersFilePath, users);
                 Loading();
-                LogInfo("User qeytiyatdan kecdi.");
+                Logs.LogInfo("User qeytiyatdan kecdi.");
                 Console.Clear();
                 UserTxt();
                 SignIn();
@@ -365,23 +392,28 @@ namespace ConsoleApp1.Controls
         }
         public void SignIn()
         {
-            LogInfo("Sign in secildi.");
+            Logs.LogInfo("Sign in secildi.");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-                     ░██████╗██╗░██████╗░███╗░░██╗  ██╗███╗░░██╗
-                     ██╔════╝██║██╔════╝░████╗░██║  ██║████╗░██║
-                     ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║██╔██╗██║
-                     ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║██║╚████║
-                     ██████╔╝██║╚██████╔╝██║░╚███║  ██║██║░╚███║
-                     ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ╚═╝╚═╝░░╚══╝");
+                           ░██████╗██╗░██████╗░███╗░░██╗  ██╗███╗░░██╗
+                           ██╔════╝██║██╔════╝░████╗░██║  ██║████╗░██║
+                           ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║██╔██╗██║
+                           ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║██║╚████║
+                           ██████╔╝██║╚██████╔╝██║░╚███║  ██║██║░╚███║
+                           ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ╚═╝╚═╝░░╚══╝");
             Console.ResetColor();
 
             Console.WriteLine("");
             Console.WriteLine("");
             Console.ForegroundColor = ConsoleColor.Cyan;
+
+
+            string filePath = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "users.json");
+            List<User> usersFromFile = JsonHelper.LoadFromFile<User>(filePath);
+
             Console.Write("Enter Username: ");
-            string Username = Console.ReadLine();
+            string Username = Console.ReadLine()!;
             try
             {
                 if (Username == "")
@@ -391,10 +423,10 @@ namespace ConsoleApp1.Controls
             }
             catch (Exception ex)
             {
-                LogException("Username number is null.", ex);
+                Logs.LogException("Username number is null.", ex);
             }
             Console.Write("Enter Password: ");
-            string Password = Console.ReadLine();
+            string Password = Console.ReadLine()!;
             try
             {
                 if (Password == "")
@@ -404,11 +436,12 @@ namespace ConsoleApp1.Controls
             }
             catch (Exception ex)
             {
-                LogException("Password number is null.", ex);
+                Logs.LogException("Password number is null.", ex);
             }
-            User index = SearchUsername(Username!);
+            User index = SearchUsername(Username);
             if (index != null && index.Password == Password)
             {
+                Logs.LogInfo("user daxil oldu");
                 Loading();
                 MainMenu(index);
             }
@@ -423,7 +456,7 @@ namespace ConsoleApp1.Controls
 
         public void MainMenu(User index)
         {
-            LogInfo("crud emelliyatlar.");
+            Logs.LogInfo("crud emelliyatlar.");
             Console.Clear();
             UserTxt();
             string[] crudOptions = {
@@ -472,7 +505,7 @@ namespace ConsoleApp1.Controls
             } while (crudKey != ConsoleKey.Enter);
             if (selectedCrudIndex == 0)
             {
-                LogInfo("Show profile secildi.");
+                Logs.LogInfo("Show profile secildi.");
                 while (true)
                 {
 
@@ -533,7 +566,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 1)
             {
-                LogInfo("Show Departments secildi.");
+                Logs.LogInfo("Show Departments secildi.");
                 while (true)
                 {
 
@@ -698,7 +731,23 @@ namespace ConsoleApp1.Controls
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     selectedDoctor.ReservedTimes.Add(selectedTime);
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
-                                    PrintCheck($"{index.Name} {index.UserName}",index.Email,$"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], options2_[selectedIndex3],selectedDoctor.WorkExperience);
+                                    PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], options2_[selectedIndex3], selectedDoctor.WorkExperience);
+                                    string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "checks");
+
+                                    if (!Directory.Exists(rootFolder))
+                                        Directory.CreateDirectory(rootFolder);
+
+                                    string safeUser = index.UserName.Replace(" ", "_");
+                                    string fileName = $"check_{safeUser}_{DateTime.Now.Ticks}.txt";
+                                    string fullPath = Path.Combine(rootFolder, fileName);
+
+                                    GmailSender.SendEmailWithAttachment(
+                                        $"{index.Email}",
+                                        "Xestexana qebiziniz",
+                                        $"Hormetli{index.Name}. Reservasiya ugurla tamamlandi. Zehmet olmasa elave olunan qebzi yoxlayin.",
+                                        fullPath
+                                    );
+
                                     Console.WriteLine("\nPress enter for continue...");
                                     Console.ReadLine();
                                     Console.ResetColor();
@@ -712,7 +761,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 2)
             {
-                LogInfo("Show All Doctors.");
+                Logs.LogInfo("Show All Doctors.");
                 while (true)
                 {
                     Console.Clear();
@@ -749,7 +798,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 3)
             {
-                LogInfo("Change Username secildi.");
+                Logs.LogInfo("Change Username secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -766,7 +815,7 @@ namespace ConsoleApp1.Controls
                     username = newUsername!;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\nUsername is changed succesfully...");
-                    LogInfo("Username deyisdirildi.");
+                    Logs.LogInfo("Username deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -815,7 +864,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 4)
             {
-                LogInfo("Change password secildi.");
+                Logs.LogInfo("Change password secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -831,7 +880,7 @@ namespace ConsoleApp1.Controls
                     password = newPassword;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Password changed succesfully...");
-                    LogInfo("Password deyisdirildi.");
+                    Logs.LogInfo("Password deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -878,7 +927,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 5)
             {
-                LogInfo("Change Phone number secildi.");
+                Logs.LogInfo("Change Phone number secildi.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -894,7 +943,7 @@ namespace ConsoleApp1.Controls
                     phoneNum = newPhone;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Phone changed succesfully...");
-                    LogInfo("Telefon nomresi deyisdirildi.");
+                    Logs.LogInfo("Telefon nomresi deyisdirildi.");
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -942,65 +991,38 @@ namespace ConsoleApp1.Controls
             else if (selectedCrudIndex == 6)
             {
                 Log.Information("Proqram Bitdi.");
+                Log.Information("#==========================================#");
                 return;
             }
 
         }
 
-        public void ConfigureLogger()
-        {
-            string desktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-            string logFolderPath = Path.Combine(desktopPath, "Logs");
-            string logFilePath = Path.Combine(logFolderPath, "application-log.txt");
 
-            if (!Directory.Exists(logFolderPath))
-                Directory.CreateDirectory(logFolderPath);
-
-            var outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
-
-            Log.Logger = new LoggerConfiguration()
-                .MinimumLevel.Debug()
-                .WriteTo.File(logFilePath, outputTemplate: outputTemplate, rollingInterval: RollingInterval.Day)
-                .Enrich.WithThreadId()
-                .Enrich.WithEnvironmentName()
-                .CreateLogger();
-        }
-
-        public void LogInfo(string message)
-        {
-            Log.Information(message);
-        }
-
-        public void LogWarning(string message)
-        {
-            Log.Warning(message);
-        }
-
-        public void LogError(string message)
-        {
-            Log.Error(message);
-        }
-
-        public void LogException(string context, Exception ex)
-        {
-            Log.Error(ex, context);
-        }
         public static void PrintCheck(string userFullName, string userEmail, string doctorFullName, string department, string timeSlot, DateTime date)
         {
-
-            string fileName = $"check_{userFullName} {DateTime.Now.Ticks}.txt";
-            string content = $"Reservation confirmation\n" +
-                             $"--------------------------------------\n" +
+            string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks");
+            string checkFolder = Path.Combine(rootFolder, "checks");
+            if (!Directory.Exists(checkFolder))
+            {
+                Directory.CreateDirectory(checkFolder);
+            }
+            string safeUser = userFullName.Replace(" ", "_");
+            string fileName = $"check_{safeUser}_{DateTime.Now.Ticks}.txt";
+            string fullPath = Path.Combine(checkFolder, fileName);
+            string content = $"       Reservation confirmation\n" +
+                             $"======================================\n" +
                              $"User: {userFullName}\n" +
                              $"Email: {userEmail}\n" +
                              $"Department: {department}\n" +
                              $"Doctor: {doctorFullName}\n" +
                              $"Date: {date.ToShortDateString()}\n" +
                              $"Time: {timeSlot}\n" +
-                             $"--------------------------------------\n" +
+                             $"======================================\n" +
                              $"Thank you! your reservation has\nbeen succesfully registered\n";
-            File.WriteAllText(fileName, content);
-            Console.WriteLine("Check created succesfully\n");
+            File.WriteAllText(fullPath, content);
+            Console.WriteLine("Check created successfully.\n");
+
         }
+        
     }
 }

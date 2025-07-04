@@ -1,0 +1,173 @@
+[2025-07-04 16:27:53 INF] Program basladi.
+[2025-07-04 16:28:07 INF] Program basladi.
+[2025-07-04 16:28:09 INF] User secildi
+[2025-07-04 16:28:09 INF] Sign in or Sign up.
+[2025-07-04 16:28:10 INF] Sign up secildi.
+[2025-07-04 16:28:35 INF] Loading...
+[2025-07-04 16:28:37 INF] User qeytiyatdan kecdi.
+[2025-07-04 16:28:37 INF] Sign in secildi.
+[2025-07-04 16:29:37 INF] Program basladi.
+[2025-07-04 16:29:39 INF] User secildi
+[2025-07-04 16:29:39 INF] Sign in or Sign up.
+[2025-07-04 16:32:51 INF] Program basladi.
+[2025-07-04 17:34:17 INF] Program basladi.
+[2025-07-04 18:33:19 INF] Program basladi.
+[2025-07-04 18:33:21 INF] User secildi
+[2025-07-04 18:33:21 INF] Sign in or Sign up.
+[2025-07-04 18:33:22 INF] Sign up secildi.
+[2025-07-04 18:33:55 INF] Loading...
+[2025-07-04 18:33:57 INF] User qeytiyatdan kecdi.
+[2025-07-04 18:33:57 INF] Sign in secildi.
+[2025-07-04 18:34:05 INF] user daxil oldu
+[2025-07-04 18:34:05 INF] Loading...
+[2025-07-04 18:34:07 INF] crud emelliyatlar.
+[2025-07-04 18:34:10 INF] Show Departments secildi.
+[2025-07-04 18:40:51 INF] Program basladi.
+[2025-07-04 18:41:09 INF] Program basladi.
+[2025-07-04 18:41:11 INF] User secildi
+[2025-07-04 18:41:11 INF] Sign in or Sign up.
+[2025-07-04 18:41:14 INF] Sign up secildi.
+[2025-07-04 18:41:19 INF] Program basladi.
+[2025-07-04 18:41:20 INF] User secildi
+[2025-07-04 18:41:20 INF] Sign in or Sign up.
+[2025-07-04 18:41:21 INF] Sign in secildi.
+[2025-07-04 18:48:31 INF] Program basladi.
+[2025-07-04 18:48:33 INF] User secildi
+[2025-07-04 18:48:33 INF] Sign in or Sign up.
+[2025-07-04 18:48:34 INF] Sign in secildi.
+[2025-07-04 18:53:52 INF] Program basladi.
+[2025-07-04 18:53:53 INF] User secildi
+[2025-07-04 18:53:53 INF] Sign in or Sign up.
+[2025-07-04 18:53:54 INF] Sign in secildi.
+[2025-07-04 18:54:39 INF] Program basladi.
+[2025-07-04 18:54:41 INF] User secildi
+[2025-07-04 18:54:41 INF] Sign in or Sign up.
+[2025-07-04 18:54:41 INF] Sign in secildi.
+[2025-07-04 18:55:05 INF] Program basladi.
+[2025-07-04 18:55:07 INF] User secildi
+[2025-07-04 18:55:07 INF] Sign in or Sign up.
+[2025-07-04 18:55:07 INF] Sign in secildi.
+[2025-07-04 18:55:44 INF] Program basladi.
+[2025-07-04 18:55:46 INF] User secildi
+[2025-07-04 18:55:46 INF] Sign in or Sign up.
+[2025-07-04 18:55:46 INF] Sign in secildi.
+[2025-07-04 18:56:44 INF] Program basladi.
+[2025-07-04 18:56:59 INF] User secildi
+[2025-07-04 18:56:59 INF] Sign in or Sign up.
+[2025-07-04 18:57:01 INF] Sign in secildi.
+[2025-07-04 19:00:24 INF] Program basladi.
+[2025-07-04 19:00:26 INF] User secildi
+[2025-07-04 19:00:26 INF] Sign in or Sign up.
+[2025-07-04 19:00:26 INF] Sign in secildi.
+[2025-07-04 19:01:50 INF] Program basladi.
+[2025-07-04 19:01:51 INF] User secildi
+[2025-07-04 19:01:51 INF] Sign in or Sign up.
+[2025-07-04 19:01:51 INF] Sign in secildi.
+[2025-07-04 19:02:02 INF] Program basladi.
+[2025-07-04 19:02:03 INF] User secildi
+[2025-07-04 19:02:03 INF] Sign in or Sign up.
+[2025-07-04 19:02:03 INF] Sign in secildi.
+[2025-07-04 19:04:18 INF] Program basladi.
+[2025-07-04 19:04:19 INF] User secildi
+[2025-07-04 19:04:19 INF] Sign in or Sign up.
+[2025-07-04 19:04:20 INF] Sign up secildi.
+[2025-07-04 19:05:05 INF] Loading...
+[2025-07-04 19:05:07 INF] User qeytiyatdan kecdi.
+[2025-07-04 19:05:07 INF] Sign in secildi.
+[2025-07-04 19:05:16 INF] user daxil oldu
+[2025-07-04 19:05:16 INF] Loading...
+[2025-07-04 19:05:21 INF] Program basladi.
+[2025-07-04 19:05:23 INF] User secildi
+[2025-07-04 19:05:23 INF] Sign in or Sign up.
+[2025-07-04 19:05:24 INF] Sign in secildi.
+[2025-07-04 19:06:14 INF] Program basladi.
+[2025-07-04 19:06:14 INF] User secildi
+[2025-07-04 19:06:14 INF] Sign in or Sign up.
+[2025-07-04 19:06:15 INF] Sign in secildi.
+[2025-07-04 19:06:46 INF] Program basladi.
+[2025-07-04 19:06:47 INF] User secildi
+[2025-07-04 19:06:47 INF] Sign in or Sign up.
+[2025-07-04 19:06:48 INF] Sign in secildi.
+[2025-07-04 19:07:36 INF] Program basladi.
+[2025-07-04 19:07:38 INF] User secildi
+[2025-07-04 19:07:38 INF] Sign in or Sign up.
+[2025-07-04 19:07:38 INF] Sign in secildi.
+[2025-07-04 19:08:27 INF] Program basladi.
+[2025-07-04 19:08:28 INF] User secildi
+[2025-07-04 19:08:28 INF] Sign in or Sign up.
+[2025-07-04 19:08:29 INF] Sign in secildi.
+[2025-07-04 19:08:30 ERR] Username number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignIn() in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 426
+[2025-07-04 19:08:31 ERR] Password number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignIn() in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 439
+[2025-07-04 19:45:46 INF] Program basladi.
+[2025-07-04 19:47:48 INF] Program basladi.
+[2025-07-04 19:47:51 INF] User secildi
+[2025-07-04 19:47:51 INF] Sign in or Sign up.
+[2025-07-04 19:47:53 INF] Sign in secildi.
+[2025-07-04 19:52:12 INF] Program basladi.
+[2025-07-04 19:52:13 INF] User secildi
+[2025-07-04 19:52:13 INF] Sign in or Sign up.
+[2025-07-04 19:52:15 INF] Sign in secildi.
+[2025-07-04 19:53:34 INF] Program basladi.
+[2025-07-04 19:53:35 INF] User secildi
+[2025-07-04 19:53:35 INF] Sign in or Sign up.
+[2025-07-04 19:53:36 INF] Sign in secildi.
+[2025-07-04 19:53:37 ERR] Username number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignIn() in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 426
+[2025-07-04 19:56:11 INF] Program basladi.
+[2025-07-04 19:56:13 INF] User secildi
+[2025-07-04 19:56:13 INF] Sign in or Sign up.
+[2025-07-04 19:56:13 INF] Sign in secildi.
+[2025-07-04 19:56:35 INF] Program basladi.
+[2025-07-04 19:56:38 INF] User secildi
+[2025-07-04 19:56:38 INF] Sign in or Sign up.
+[2025-07-04 19:56:39 INF] Sign in secildi.
+[2025-07-04 19:57:25 INF] Program basladi.
+[2025-07-04 19:57:26 INF] User secildi
+[2025-07-04 19:57:26 INF] Sign in or Sign up.
+[2025-07-04 19:57:26 INF] Sign in secildi.
+[2025-07-04 19:57:33 INF] Program basladi.
+[2025-07-04 19:57:35 INF] User secildi
+[2025-07-04 19:57:35 INF] Sign in or Sign up.
+[2025-07-04 19:57:35 INF] Sign up secildi.
+[2025-07-04 19:58:07 INF] Loading...
+[2025-07-04 19:58:09 INF] User qeytiyatdan kecdi.
+[2025-07-04 19:58:09 INF] Sign in secildi.
+[2025-07-04 19:58:20 INF] user daxil oldu
+[2025-07-04 19:58:20 INF] Loading...
+[2025-07-04 19:58:22 INF] crud emelliyatlar.
+[2025-07-04 19:58:27 INF] Program basladi.
+[2025-07-04 19:58:29 INF] User secildi
+[2025-07-04 19:58:29 INF] Sign in or Sign up.
+[2025-07-04 19:58:29 INF] Sign in secildi.
+[2025-07-04 20:42:39 INF] Program basladi.
+[2025-07-04 20:42:41 INF] User secildi
+[2025-07-04 20:42:41 INF] Sign in or Sign up.
+[2025-07-04 20:42:42 INF] Sign in secildi.
+[2025-07-04 20:44:50 INF] Program basladi.
+[2025-07-04 20:44:52 INF] User secildi
+[2025-07-04 20:44:52 INF] Sign in or Sign up.
+[2025-07-04 20:44:53 INF] Sign in secildi.
+[2025-07-04 20:47:35 INF] Program basladi.
+[2025-07-04 20:47:37 INF] User secildi
+[2025-07-04 20:47:37 INF] Sign in or Sign up.
+[2025-07-04 20:47:39 INF] Sign in secildi.
+[2025-07-04 20:50:22 INF] Program basladi.
+[2025-07-04 20:50:23 INF] User secildi
+[2025-07-04 20:50:23 INF] Sign in or Sign up.
+[2025-07-04 20:50:24 INF] Sign in secildi.
+[2025-07-04 20:51:06 INF] Program basladi.
+[2025-07-04 20:51:19 INF] Program basladi.
+[2025-07-04 20:51:23 INF] User secildi
+[2025-07-04 20:51:23 INF] Sign in or Sign up.
+[2025-07-04 20:51:41 INF] Program basladi.
+[2025-07-04 20:51:42 INF] User secildi
+[2025-07-04 20:51:42 INF] Sign in or Sign up.
+[2025-07-04 20:52:04 INF] Program basladi.
+[2025-07-04 20:52:05 INF] User secildi
+[2025-07-04 20:52:05 INF] Sign in or Sign up.
+[2025-07-04 20:52:07 INF] Sign in secildi.

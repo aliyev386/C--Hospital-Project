@@ -7,17 +7,19 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-     class User : Person
-     {
+    public class User : Person
+    {
         public string PhoneNumber { get; set; }
         public User() { }
-        public User(string name, string surname, string email,string username,string password, string phoneNumber)
+        public User(string name, string surname, string email, string username, string password, int age, string phoneNumber)
+            :base (name, surname, email, username, password,age) 
         {
             Name = name;
             Surname = surname;
             Email = email;
             UserName = username;
             Password = password;
+            Age = age;
             PhoneNumber = phoneNumber;
         }
         public string GenerateUsername()
@@ -32,6 +34,6 @@ namespace ConsoleApp1.Models
         {
             return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nUsername: {UserName}\nPassword: {Password}\nPhone number: {PhoneNumber}";
         }
-        
-     }
+
+    }
 }
