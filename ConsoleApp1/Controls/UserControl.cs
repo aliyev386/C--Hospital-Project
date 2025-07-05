@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http.Headers;
+using System.Reflection;
 using System.Reflection.Metadata;
 using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
@@ -17,6 +18,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Threading.Tasks.Dataflow;
 using System.Transactions;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 
 
@@ -43,7 +45,6 @@ namespace ConsoleApp1.Controls
 
         public static List<Doctor> allDoctors = new List<Doctor>();
 
-
         List<Department> departments = new List<Department>
             {
                 new Department("Pediatriya", doctors1.Count , doctors1),
@@ -53,10 +54,25 @@ namespace ConsoleApp1.Controls
 
         public List<Department> GetDepartments() => departments;
 
-        public static List<User> users = new List<User> {
-            new User("Omer","Aliyev","aliyev@gmail.com","Aliye_oa18","omer123",15,"777319060")
+
+        public static List<User> users = new List<User>
+        {
+
         };
 
+
+
+        public static string filePath = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName,
+        "logs, files and checks",
+        "users.json"
+);
+
+        public static List<User> usersFromFile = JsonHelper.LoadFromFile<User>(filePath);
+        public static List<User> GetAllUsers()
+        {
+            return JsonHelper.LoadFromFile<User>(filePath);
+        }
 
         public void UserTxt()
         {
@@ -74,22 +90,26 @@ namespace ConsoleApp1.Controls
 
         static UserControl()
         {
+            string folderPath = Path.GetDirectoryName(filePath)!;
+            if (!Directory.Exists(folderPath))
+            {
+                Directory.CreateDirectory(folderPath);
+            }
+
             allDoctors.AddRange(doctors1);
             allDoctors.AddRange(doctors2);
             allDoctors.AddRange(doctors3);
             JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
 
-
             var departments = new List<Department>
-    {
-        new Department("Pediatriya", doctors1.Count , doctors1),
-        new Department("Travmatologiya", doctors2.Count, doctors2),
-        new Department("Stamotologiya", doctors3.Count, doctors3),
-    };
+            {
+                new Department("Pediatriya", doctors1.Count , doctors1),
+                new Department("Travmatologiya", doctors2.Count, doctors2),
+                new Department("Stamotologiya", doctors3.Count, doctors3),
+            };
 
             JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
         }
-
         public void SignInOrSignUp()
         {
             Logs.LogInfo("Sign in or Sign up.");
@@ -132,7 +152,6 @@ namespace ConsoleApp1.Controls
                         }
                         else
                         {
-
                             Console.ForegroundColor = ConsoleColor.Cyan;
                             Console.Write(options[col][row] + "\t");
                             Console.ResetColor();
@@ -155,11 +174,11 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
             if (selectedIndex == 0)
             {
-                SignUp();
+                SignUp(GetAllUsers());
             }
             else if (selectedIndex == 1)
             {
-                SignIn();
+                SignIn(GetAllUsers());
             }
         }
         public void Loading()
@@ -183,30 +202,17 @@ namespace ConsoleApp1.Controls
 
             Console.Clear();
         }
-        public User SearchUserEmail(string email)
+        public User SearchUserEmail(List<User> usersFromFile, string email)
         {
-            foreach (var user in users)
-            {
-                if (user.Email == email)
-                {
-                    return user;
-                }
-            }
-            return null!;
-        }
-        public User SearchUsername(string username)
-        {
-            foreach (var user in users)
-            {
-                if (user.UserName == username)
-                {
-                    return user;
-                }
-            }
-            return null!;
+            return usersFromFile.FirstOrDefault(u => u.Email == email)!;
         }
 
-        public void SignUp()
+        public User SearchUsername(List<User> users, string username)
+        {
+            return users.FirstOrDefault(u => u.UserName == username)!;
+        }
+
+        public void SignUp(List<User> usersFromFile)
         {
             Logs.LogInfo("Sign up secildi.");
             Console.Clear();
@@ -264,13 +270,13 @@ namespace ConsoleApp1.Controls
                 {
                     Logs.LogException("Email is null.", ex);
                 }
-                User indexEmail = SearchUserEmail(email);
+                User indexEmail = SearchUserEmail(usersFromFile, email);
                 if (indexEmail != null)
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
                     Console.WriteLine("\t|This email already exists!!!");
                     Console.ResetColor();
-                    break;
+                    continue;
                 }
 
 
@@ -380,78 +386,116 @@ namespace ConsoleApp1.Controls
                 }
                 Console.ResetColor();
                 User newUser = new User(name, surname, email, finalUsername, password, age, phoneNumber);
-                users.Add(newUser);
-                JsonHelper.SaveToFile(PathConfig.UsersFilePath, users);
+                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                usersFromFile.Add(newUser);
+                JsonHelper.SaveToFile(filePath, usersFromFile);
                 Loading();
                 Logs.LogInfo("User qeytiyatdan kecdi.");
                 Console.Clear();
                 UserTxt();
-                SignIn();
+                SignIn(GetAllUsers());
                 break;
             }
         }
-        public void SignIn()
+        public void SignIn(List<User> usersFromFile)
         {
-            Logs.LogInfo("Sign in secildi.");
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.DarkCyan;
-            Console.WriteLine(@"
+            while (true)
+            {
+
+                Logs.LogInfo("Sign in secildi.");
+                Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
+                Console.WriteLine(@"
                            ░██████╗██╗░██████╗░███╗░░██╗  ██╗███╗░░██╗
                            ██╔════╝██║██╔════╝░████╗░██║  ██║████╗░██║
                            ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║██╔██╗██║
                            ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║██║╚████║
                            ██████╔╝██║╚██████╔╝██║░╚███║  ██║██║░╚███║
                            ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ╚═╝╚═╝░░╚══╝");
-            Console.ResetColor();
-
-            Console.WriteLine("");
-            Console.WriteLine("");
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
-
-            string filePath = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "users.json");
-            List<User> usersFromFile = JsonHelper.LoadFromFile<User>(filePath);
-
-            Console.Write("Enter Username: ");
-            string Username = Console.ReadLine()!;
-            try
-            {
-                if (Username == "")
-                {
-                    throw (new Exception("It cant be null"));
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.LogException("Username number is null.", ex);
-            }
-            Console.Write("Enter Password: ");
-            string Password = Console.ReadLine()!;
-            try
-            {
-                if (Password == "")
-                {
-                    throw (new Exception("It cant be null"));
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.LogException("Password number is null.", ex);
-            }
-            User index = SearchUsername(Username);
-            if (index != null && index.Password == Password)
-            {
-                Logs.LogInfo("user daxil oldu");
-                Loading();
-                MainMenu(index);
-            }
-            else
-            {
-                Console.ForegroundColor = ConsoleColor.DarkRed;
-                Console.WriteLine("\nUsername Or Password is Wrong!!!");
                 Console.ResetColor();
+
+                Console.WriteLine("");
+                Console.WriteLine("");
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+
+
+                if (usersFromFile == null || usersFromFile.Count == 0)
+                {
+                    Console.ForegroundColor = ConsoleColor.Red;
+                    Console.WriteLine("User null in system please sign up!");
+                    Console.ResetColor();
+                    Console.WriteLine("\n\tPress Ecs for continue....");
+                    ConsoleKey ecsKey;
+                    ecsKey = Console.ReadKey(true).Key;
+                    if (ecsKey == ConsoleKey.Escape)
+                    {
+                        Console.Clear();
+                        SignInOrSignUp();
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    Console.Write("Enter Username: ");
+                    string Username = Console.ReadLine()!;
+                    try
+                    {
+                        if (Username == "")
+                        {
+                            throw (new Exception("It cant be null"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Username number is null.", ex);
+                    }
+                    Console.Write("Enter Password: ");
+                    string Password = Console.ReadLine()!;
+                    try
+                    {
+                        if (Password == "")
+                        {
+                            throw (new Exception("It cant be null"));
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Password number is null.", ex);
+                    }
+                    User index = SearchUsername(usersFromFile, Username);
+                    if (index != null && index.Password == Password)
+                    {
+                        Logs.LogInfo("user daxil oldu");
+                        Loading();
+                        MainMenu(index);
+                        break;
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\nUsername Or Password is Wrong!!!");
+                        Console.ResetColor();
+                        Console.WriteLine("\n\tPress Ecs for continue....");
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            SignInOrSignUp();
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
             }
-            Console.ResetColor();
         }
 
         public void MainMenu(User index)
@@ -737,16 +781,19 @@ namespace ConsoleApp1.Controls
                                     if (!Directory.Exists(rootFolder))
                                         Directory.CreateDirectory(rootFolder);
 
-                                    string safeUser = index.UserName.Replace(" ", "_");
-                                    string fileName = $"check_{safeUser}_{DateTime.Now.Ticks}.txt";
-                                    string fullPath = Path.Combine(rootFolder, fileName);
+                                    
 
-                                    GmailSender.SendEmailWithAttachment(
-                                        $"{index.Email}",
-                                        "Xestexana qebiziniz",
-                                        $"Hormetli{index.Name}. Reservasiya ugurla tamamlandi. Zehmet olmasa elave olunan qebzi yoxlayin.",
-                                        fullPath
-                                    );
+                                    string body = $"       Reservation confirmation\n" +
+                             $"======================================\n" +
+                             $"User: {index.Name} {index.Surname}\n" +
+                             $"Email: {index.Email}\n" +
+                             $"Department: {departments[selectedIndex]}\n" +
+                             $"Doctor: {departments[selectedIndex].Doctors[selectedIndex2].Name}\n" +
+                             $"Date: {DateTime.Now.Month}\n" +
+                             $"Time: {options2_[selectedIndex3]}\n" +
+                             $"======================================\n" +
+                             $"Thank you! your reservation has\nbeen succesfully registered\n";
+                                    GmailSender.SendEmail(index.Email, "New Reservation Created", body);
 
                                     Console.WriteLine("\nPress enter for continue...");
                                     Console.ReadLine();
@@ -806,8 +853,7 @@ namespace ConsoleApp1.Controls
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("|Enter your Username: ");
                 string username = Console.ReadLine()!;
-                index = SearchUsername(username!);
-                if (index != null)
+                if (username == index.UserName)
                 {
                     Console.Write("\n|Enter new Username: ");
                     string newUsername = Console.ReadLine()!;
@@ -1000,7 +1046,9 @@ namespace ConsoleApp1.Controls
 
         public static void PrintCheck(string userFullName, string userEmail, string doctorFullName, string department, string timeSlot, DateTime date)
         {
-            string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks");
+            string rootFolder = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName,
+        "logs, files and checks");
             string checkFolder = Path.Combine(rootFolder, "checks");
             if (!Directory.Exists(checkFolder))
             {
@@ -1023,6 +1071,6 @@ namespace ConsoleApp1.Controls
             Console.WriteLine("Check created successfully.\n");
 
         }
-        
+
     }
 }

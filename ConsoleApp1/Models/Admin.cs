@@ -8,17 +8,16 @@ namespace ConsoleApp1.Models
 {
     class Admin : Person
     {
-        public string Fullname {  get; set; }
-        public string Password {  get; set; }
+        
         public Admin() { }
-        public Admin(string name,string surname,int age,string fullname,string password)
+        public Admin(string name, string surname, string email, string username, string password, int age)
+            : base(name,surname,email,username,password,age)
         {
             Name = name;
             Surname = surname;
-            Age = age;
-            Fullname = fullname;
+            UserName = username;
             Password = password;
-
+            Age = age;
         }
     }
 }
