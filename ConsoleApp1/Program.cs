@@ -10,8 +10,7 @@ class Program
 {
     static void Main(string[] args)
     {
-        Aplication aplication = new Aplication();
-        aplication.Start();
+        Aplication.Start();
     }
 }
 

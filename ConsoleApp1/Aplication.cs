@@ -31,18 +31,19 @@ namespace ConsoleApp1
         }
 
 
-        public void Start()
+        public static void Start()
         {
             
 
             Logs.ConfigureLogger();
-            Log.Information("Program basladi.");
+            Log.Information("=============Hospital=============");
+            Log.Information("Program started.");
 
-            User user = new User();
-            Doctor doctor = new Doctor();
-            Admin admin = new Admin();
+            
 
             UserControl userControl = new UserControl();
+            Doctor doctorControl = new Doctor();
+            Admin adminControl = new Admin();
 
             string[] panelOptions = { @"
 
@@ -98,18 +99,23 @@ namespace ConsoleApp1
             } while (key != ConsoleKey.Enter);
             if (selectedIndex == 0)
             {
+                Console.Clear();
+                Logs.LogInfo("Admin selected");
+                AdminControl.LogIn(AdminControl.GetAllAdmins());
 
             }
             else if (selectedIndex == 1)
             {
                 Console.Clear();
-                Logs.LogInfo("User secildi");
-
-                userControl.SignInOrSignUp();
+                Logs.LogInfo("User selected");
+                UserControl.SignInOrSignUp();
 
             }
             else if (selectedIndex == 2)
             {
+                Console.Clear();
+                Logs.LogInfo("Doctor selected");
+                DoctorControl.SignInOrSignUp();
 
             }
 

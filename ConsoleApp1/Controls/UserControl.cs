@@ -27,54 +27,72 @@ namespace ConsoleApp1.Controls
 
     class UserControl
     {
+        public static string[] availableSlots = { "09:00-11:00", "12:00-14:00", "15:00-17:00" };
+        public static List<string> emptySlots = new List<string>();
 
         public static List<Doctor> doctors1 = new List<Doctor> {
-            new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123", DateTime.Parse("01-01-2015")),
-            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
-            new Doctor("Ali", "Agayev", "ali.agayev20@gmail.com", "Agayev_AA20", "ali789", DateTime.Parse("04-03-2020")),};
+            new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123",23, DateTime.Parse("01-01-2015"), new List<string>(emptySlots)),
+            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456",32, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
+            new Doctor("Ali", "Agayev", "ali.agayev20@gmail.com", "Agayev_AA20", "ali789",26, DateTime.Parse("04-03-2020"), new List<string>(emptySlots)),};
 
         public static List<Doctor> doctors2 = new List<Doctor> {
-            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456", DateTime.Parse("05-08-2010")),
-            new Doctor("Heyder", "Omerzade", "heyder.o@gmail.com", "Omerzade_HO20", "heyder321", DateTime.Parse("04-03-2020")),};
+            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456",32, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
+            new Doctor("Heyder", "Omerzade", "heyder.o@gmail.com", "Omerzade_HO20", "heyder321",35, DateTime.Parse("04-03-2020"), new List<string>(emptySlots)),};
 
         public static List<Doctor> doctors3 = new List<Doctor> {
-            new Doctor("Resad", "Memmedov", "resad.m@gmail.com", "Memmedov_RM10", "resad654", DateTime.Parse("05-08-2010")),
-            new Doctor("Emin", "Abbasov", "emin.a@gmail.com", "Abbasov_EA20", "emin987", DateTime.Parse("04-03-2020")),
-            new Doctor("Ibrahim", "Nebiyev", "ibrahim.n@gmail.com", "Nebiyev_IN10", "ibrahim159", DateTime.Parse("05-08-2010")),
-            new Doctor("Ali", "Nebili", "ali.nebili@gmail.com", "Nebili_AN20", "ali753", DateTime.Parse("04-03-2020")),};
+            new Doctor("Resad", "Memmedov", "resad.m@gmail.com", "Memmedov_RM10", "resad654",30, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
+            new Doctor("Emin", "Abbasov", "emin.a@gmail.com", "Abbasov_EA20", "emin987",37, DateTime.Parse("04-03-2020"), new List < string >(emptySlots)),
+            new Doctor("Ibrahim", "Nebiyev", "ibrahim.n@gmail.com", "Nebiyev_IN10", "ibrahim159",33, DateTime.Parse("05-08-2010"), new List < string >(emptySlots)),
+            new Doctor("Ali", "Nebili", "ali.nebili@gmail.com", "Nebili_AN20", "ali753",45, DateTime.Parse("04-03-2020"), new List < string >(emptySlots)),};
 
-        public static List<Doctor> allDoctors = new List<Doctor>();
+        public static List<Doctor> allDoctors = JsonHelper.LoadFromFile<Doctor>(PathConfig.DoctorsFilePath);
 
-        List<Department> departments = new List<Department>
+        public static List<Department> departments = new List<Department>
             {
                 new Department("Pediatriya", doctors1.Count , doctors1),
                 new Department("Travmatologiya", doctors2.Count, doctors2),
                 new Department("Stamotologiya", doctors3.Count, doctors3),
             };
 
-        public List<Department> GetDepartments() => departments;
 
 
         public static List<User> users = new List<User>
         {
-
+            new User("Ayan","Aliyeva","aliyeva@gmail.com","ayan_12","ayan123",16,"45345634635")
         };
 
 
 
         public static string filePath = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName,
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
         "logs, files and checks",
         "users.json"
-);
+        );
+        public static string filePathD = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+        "logs, files and checks",
+        "doctors.json"
+        );
+        public static string filePathDP = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+        "logs, files and checks",
+        "departments.json"
+        );
 
-        public static List<User> usersFromFile = JsonHelper.LoadFromFile<User>(filePath);
         public static List<User> GetAllUsers()
         {
             return JsonHelper.LoadFromFile<User>(filePath);
         }
+        public static List<Doctor> GetAllDoctors()
+        {
+            return JsonHelper.LoadFromFile<Doctor>(filePathD);
+        }
+        public static List<Department> GetAllDepartments()
+        {
+            return JsonHelper.LoadFromFile<Department>(filePathDP);
+        }
 
-        public void UserTxt()
+        public static void UserTxt()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
@@ -96,22 +114,43 @@ namespace ConsoleApp1.Controls
                 Directory.CreateDirectory(folderPath);
             }
 
-            allDoctors.AddRange(doctors1);
-            allDoctors.AddRange(doctors2);
-            allDoctors.AddRange(doctors3);
-            JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
-
-            var departments = new List<Department>
+            string folderPathD = Path.GetDirectoryName(filePathD)!;
+            if (!Directory.Exists(folderPathD))
             {
-                new Department("Pediatriya", doctors1.Count , doctors1),
-                new Department("Travmatologiya", doctors2.Count, doctors2),
-                new Department("Stamotologiya", doctors3.Count, doctors3),
-            };
+                Directory.CreateDirectory(folderPathD);
+            }
 
-            JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
+            string folderPathDp = Path.GetDirectoryName(filePathDP)!;
+            if (!Directory.Exists(folderPathDp))
+            {
+                Directory.CreateDirectory(folderPathDp);
+            }
+            if (!File.Exists(PathConfig.UsersFilePath))
+            {
+                JsonHelper.SaveToFile(PathConfig.UsersFilePath, users);
+            }
+            if (!File.Exists(PathConfig.DoctorsFilePath))
+            {
+                allDoctors.AddRange(doctors1);
+                allDoctors.AddRange(doctors2);
+                allDoctors.AddRange(doctors3);
+                JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
+            }
+            if (!File.Exists(PathConfig.DesktopPath))
+            {
+                var departments = new List<Department>
+                {
+                    new Department("Pediatriya", doctors1.Count , doctors1),
+                    new Department("Travmatologiya", doctors2.Count, doctors2),
+                    new Department("Stamotologiya", doctors3.Count, doctors3),
+                };
+                JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
+            }
+
         }
-        public void SignInOrSignUp()
+        public static void SignInOrSignUp()
         {
+            Console.ResetColor();
             Logs.LogInfo("Sign in or Sign up.");
             string[][] options = new string[][]
 {
@@ -181,7 +220,7 @@ namespace ConsoleApp1.Controls
                 SignIn(GetAllUsers());
             }
         }
-        public void Loading()
+        public static void Loading()
         {
             Logs.LogInfo("Loading...");
             string[] dots = { "", ".", "..", "..." };
@@ -202,177 +241,240 @@ namespace ConsoleApp1.Controls
 
             Console.Clear();
         }
-        public User SearchUserEmail(List<User> usersFromFile, string email)
+        public static User SearchUserEmail(List<User> users, string email)
         {
-            return usersFromFile.FirstOrDefault(u => u.Email == email)!;
+            return users.FirstOrDefault(u => u.Email == email)!;
         }
-
-        public User SearchUsername(List<User> users, string username)
+        public static User SearchUsername(List<User> users, string username)
         {
             return users.FirstOrDefault(u => u.UserName == username)!;
         }
 
-        public void SignUp(List<User> usersFromFile)
+        public static void SignUp(List<User> usersFromFile)
         {
-            Logs.LogInfo("Sign up secildi.");
+            Logs.LogInfo("Sign up selected.");
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.DarkCyan;
             Console.WriteLine(@"
-                         ░██████╗██╗░██████╗░███╗░░██╗  ██╗░░░██╗██████╗░
-                         ██╔════╝██║██╔════╝░████╗░██║  ██║░░░██║██╔══██╗
-                         ╚█████╗░██║██║░░██╗░██╔██╗██║  ██║░░░██║██████╔╝
-                         ░╚═══██╗██║██║░░╚██╗██║╚████║  ██║░░░██║██╔═══╝░
-                         ██████╔╝██║╚██████╔╝██║░╚███║  ╚██████╔╝██║░░░░░
-                         ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ░╚═════╝░╚═╝░░░░░");
+                         ░██████╗██╗░██████╗░███╗░░██╗    ██╗░░░██╗██████╗░
+                         ██╔════╝██║██╔════╝░████╗░██║    ██║░░░██║██╔══██╗
+                         ╚█████╗░██║██║░░██╗░██╔██╗██║    ██║░░░██║██████╔╝
+                         ░╚═══██╗██║██║░░╚██╗██║╚████║    ██║░░░██║██╔═══╝░
+                         ██████╔╝██║╚██████╔╝██║░╚███║    ╚██████╔╝██║░░░░░
+                         ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝    ░╚═════╝░╚═╝░░░░░");
             Console.ResetColor();
-            Console.ForegroundColor = ConsoleColor.Cyan;
-
-            Console.WriteLine();
-            Console.Write("\t|Enter name: ");
-            string name = Console.ReadLine()!;
-            try
+            string name;
+            string surname;
+            string email;
+            string phoneNumber;
+            int age;
+            string finalUsername;
+            string password;
+            while (true)
             {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+
+                Console.WriteLine();
+                Console.Write("\t|Enter name: ");
+                name = Console.ReadLine()!;
                 if (name == "")
                 {
-                    throw (new Exception("It cant be null"));
+                    try
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Name is null.", ex);
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\tIt cant be null!!!");
+                        Console.ResetColor();
+                        continue;
+                    }
                 }
-            }
-            catch (Exception ex)
-            {
-                Logs.LogException("Name is null.", ex);
-            }
-
-            Console.Write("\t|Enter surname: ");
-            string surname = Console.ReadLine()!;
-            try
-            {
-                if (surname == "")
-                {
-                    throw (new Exception("It cant be null"));
-                }
-            }
-            catch (Exception ex)
-            {
-                Logs.LogException("Surname is null.", ex);
+                break;
             }
             while (true)
             {
-                Console.Write("\t|Enter Email address: ");
-                string email = Console.ReadLine()!;
-                try
+
+                Console.Write("\t|Enter surname: ");
+                surname = Console.ReadLine()!;
+                if (surname == "")
                 {
-                    if (email == "")
+                    try
                     {
                         throw (new Exception("It cant be null"));
                     }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Surname is null.", ex);
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\tIt cant be null!!!");
+                        Console.ResetColor();
+                        continue;
+                    }
                 }
-                catch (Exception ex)
+                break;
+            }
+            while (true)
+            {
+
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("\t|Enter Email address: ");
+                email = Console.ReadLine()!;
+                string emailPattern = @"^[\w!#$%&'*+\-/=?\^_{|}~]+(\.[\w!#$%&'*+\-/=?\^_{|}~]+)*"
+                                    + "@"
+                                    + @"((([\-\w]+\.)+[a-zA-Z]{2,4})|(([0-9]{1,3}\.){3}[0-9]{1,3}))\z";
+                if (!Regex.IsMatch(email, emailPattern) || email == "")
                 {
-                    Logs.LogException("Email is null.", ex);
+                    try
+                    {
+                        throw new Exception("Error");
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Wrong email", ex);
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\tEmail is null or wrong\n");
+                        Console.ResetColor();
+                        Console.ResetColor();
+                        continue;
+                    }
                 }
-                User indexEmail = SearchUserEmail(usersFromFile, email);
-                if (indexEmail != null)
+                break;
+            }
+            while (true)
+            {
+                Console.Write("\t|Enter Phone number: ");
+                phoneNumber = Console.ReadLine()!;
+                if (phoneNumber == "")
+                {
+                    try
+                    {
+                        throw (new Exception("It cant be null"));
+                    }
+                    catch (Exception ex)
+                    {
+                        Logs.LogException("Phone number is null.", ex);
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
+                        Console.WriteLine("\tIt cant be null!!!");
+                        Console.ResetColor();
+                        continue;
+                    }
+                }
+                break;
+            }
+
+
+            while (true)
+            {
+                Console.ForegroundColor = ConsoleColor.Cyan;
+                Console.Write("\t|Enter Age: ");
+                string? input = Console.ReadLine();
+                Console.ResetColor();
+                if (string.IsNullOrWhiteSpace(input))
                 {
                     Console.ForegroundColor = ConsoleColor.DarkRed;
-                    Console.WriteLine("\t|This email already exists!!!");
+                    Console.WriteLine("\tAge can't be null or empty!");
                     Console.ResetColor();
                     continue;
                 }
-
-
-                Console.Write("\t|Enter Phone number: ");
-                string phoneNumber = Console.ReadLine()!;
-                try
+                if (!int.TryParse(input, out age))
                 {
-                    if (phoneNumber == "")
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\tAge must be a number!");
+                    Console.ResetColor();
+                    continue;
+                }
+                if (age < 0 || age > 130)
+                {
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\tAge must be between 0 and 130!");
+                    Console.ResetColor();
+                    continue;
+                }
+                break;
+            }
+
+            User tempUser = new User(name, surname, email, "", "", age, phoneNumber);
+            string usernameOffer = tempUser.GenerateUsername();
+
+            Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine($"\t|System suggests this username: {usernameOffer}");
+            Console.WriteLine("\t|Do you want to use this username?");
+            Console.ResetColor();
+            string[] options = { "\t|yes", "\t|no" };
+            int selectedIndex = 0;
+            ConsoleKey key;
+            int menuStartLine = Console.CursorTop;
+
+            do
+            {
+                Console.SetCursorPosition(0, menuStartLine);
+
+                for (int i = 0; i < options.Length; i++)
+                {
+                    if (i == selectedIndex)
                     {
-                        throw (new Exception("It cant be null"));
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(" >" + options[i]);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("  " + options[i]);
+                        Console.ResetColor();
                     }
                 }
-                catch (Exception ex)
-                {
-                    Logs.LogException("Phone number is null.", ex);
-                }
 
-                Console.Write("\t|Enter Age: ");
-                int age = int.Parse(Console.ReadLine()!);
-                try
-                {
-                    if (age == null)
-                    {
-                        throw (new Exception("It cant be null"));
-                    }
-                }
-                catch (Exception ex)
-                {
-                    Logs.LogException("Age is null.", ex);
-                }
+                key = Console.ReadKey(true).Key;
 
-                User tempUser = new User(name, surname, email, "", "", age, phoneNumber);
-                string usernameOffer = tempUser.GenerateUsername();
+                if (key == ConsoleKey.UpArrow)
+                    selectedIndex = (selectedIndex == 0) ? options.Length - 1 : selectedIndex - 1;
+                else if (key == ConsoleKey.DownArrow)
+                    selectedIndex = (selectedIndex + 1) % options.Length;
 
-                Console.WriteLine();
-                Console.WriteLine($"\t|System suggests this username: {usernameOffer}");
-                Console.WriteLine("\t|Do you want to use this username?");
+            } while (key != ConsoleKey.Enter);
 
-                string[] options = { "\t|yes", "\t|no" };
-                int selectedIndex = 0;
-                ConsoleKey key;
-                int menuStartLine = Console.CursorTop;
+            
+            while (true)
+            {
 
-                do
-                {
-                    Console.SetCursorPosition(0, menuStartLine);
-
-                    for (int i = 0; i < options.Length; i++)
-                    {
-                        if (i == selectedIndex)
-                        {
-                            Console.ForegroundColor = ConsoleColor.Blue;
-                            Console.WriteLine(" >" + options[i]);
-                            Console.ResetColor();
-                        }
-                        else
-                        {
-                            Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.WriteLine("  " + options[i]);
-                            Console.ResetColor();
-                        }
-                    }
-
-                    key = Console.ReadKey(true).Key;
-
-                    if (key == ConsoleKey.UpArrow)
-                        selectedIndex = (selectedIndex == 0) ? options.Length - 1 : selectedIndex - 1;
-                    else if (key == ConsoleKey.DownArrow)
-                        selectedIndex = (selectedIndex + 1) % options.Length;
-
-                } while (key != ConsoleKey.Enter);
-
-                string finalUsername;
                 if (selectedIndex == 0)
                 {
                     finalUsername = usernameOffer;
                 }
                 else
                 {
+                    Console.ForegroundColor = ConsoleColor.Cyan;
                     Console.Write("\t|Enter your preferred username: ");
                     finalUsername = Console.ReadLine()!;
-                    try
+                    if (phoneNumber == "")
                     {
-                        if (phoneNumber == "")
+                        try
                         {
                             throw (new Exception("It cant be null"));
                         }
-                    }
-                    catch (Exception ex)
-                    {
-                        Logs.LogException("Phone number is null.", ex);
+                        catch (Exception ex)
+                        {
+                            Logs.LogException("Phone number is null.", ex);
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine("\tIt cant be null!!!");
+                            Console.ResetColor();
+                            continue;
+                        }
                     }
                 }
+                break;
+            }
+            while (true)
+            {
+
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("\t|Enter password: ");
-                string password = Console.ReadLine()!;
+                password = Console.ReadLine()!;
                 try
                 {
                     if (password == "")
@@ -383,26 +485,30 @@ namespace ConsoleApp1.Controls
                 catch (Exception ex)
                 {
                     Logs.LogException("Password is null.", ex);
+                    Console.ForegroundColor = ConsoleColor.DarkRed;
+                    Console.WriteLine("\tIt cant be null!!!");
+                    Console.ResetColor();
+                    continue;
                 }
-                Console.ResetColor();
-                User newUser = new User(name, surname, email, finalUsername, password, age, phoneNumber);
-                /////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-                usersFromFile.Add(newUser);
-                JsonHelper.SaveToFile(filePath, usersFromFile);
-                Loading();
-                Logs.LogInfo("User qeytiyatdan kecdi.");
-                Console.Clear();
-                UserTxt();
-                SignIn(GetAllUsers());
                 break;
             }
+            Console.ResetColor();
+            User newUser = new User(name, surname, email, finalUsername, password, age, phoneNumber);
+
+            usersFromFile.Add(newUser);
+            JsonHelper.SaveToFile(filePath, usersFromFile);
+            Loading();
+            Logs.LogInfo("User signed up.");
+            Console.Clear();
+            UserTxt();
+            SignIn(GetAllUsers());
         }
-        public void SignIn(List<User> usersFromFile)
+        public static void SignIn(List<User> usersFromFile)
         {
             while (true)
             {
 
-                Logs.LogInfo("Sign in secildi.");
+                Logs.LogInfo("Sign in selected.");
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(@"
@@ -417,8 +523,6 @@ namespace ConsoleApp1.Controls
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.Cyan;
-
-
 
                 if (usersFromFile == null || usersFromFile.Count == 0)
                 {
@@ -470,7 +574,7 @@ namespace ConsoleApp1.Controls
                     User index = SearchUsername(usersFromFile, Username);
                     if (index != null && index.Password == Password)
                     {
-                        Logs.LogInfo("user daxil oldu");
+                        Logs.LogInfo("User is logged in");
                         Loading();
                         MainMenu(index);
                         break;
@@ -497,15 +601,14 @@ namespace ConsoleApp1.Controls
                 }
             }
         }
-
-        public void MainMenu(User index)
+        public static void MainMenu(User index)
         {
-            Logs.LogInfo("crud emelliyatlar.");
+            Logs.LogInfo("crud operations.");
             Console.Clear();
             UserTxt();
             string[] crudOptions = {
                 "\n\n\n\t|1.Show profile",
-                "\n\t|2.Show Departments",
+                "\n\t|2.Show Departments (reserve doctor)",
                 "\n\t|3.Show All Doctors",
                 "\n\t|4.Change Username",
                 "\n\t|5.Change Password",
@@ -513,9 +616,9 @@ namespace ConsoleApp1.Controls
                 "\n\n\t|Close",
 
             };
+            #region ShowProfile
             int selectedCrudIndex = 0;
             ConsoleKey crudKey;
-
             do
             {
                 Console.Clear();
@@ -549,80 +652,81 @@ namespace ConsoleApp1.Controls
             } while (crudKey != ConsoleKey.Enter);
             if (selectedCrudIndex == 0)
             {
-                Logs.LogInfo("Show profile secildi.");
+                Logs.LogInfo("Show profile selected.");
                 while (true)
                 {
-
-                    Console.Clear();
-                    UserTxt();
-                    Console.WriteLine();
-                    Console.WriteLine();
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.WriteLine("\n--- USER PROFILE ---\n");
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tName: ");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(index.Name);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tSurname: ");
-                    Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine(index.Surname);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tEmail: ");
-                    Console.ForegroundColor = ConsoleColor.Gray;
-                    Console.WriteLine(index.Email);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tUsername: ");
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine(index.UserName);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tPassword: ");
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine(index.Password);
-
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.Write("\tPhone number: ");
-                    Console.ForegroundColor = ConsoleColor.Yellow;
-                    Console.WriteLine(index.PhoneNumber);
-                    Console.ResetColor();
-
-                    Console.WriteLine("\tPress Ecs for continue....");
-                    ConsoleKey ecsKey;
-                    ecsKey = Console.ReadKey(true).Key;
-                    if (ecsKey == ConsoleKey.Escape)
+                    var userInList = PathConfig.usersFromFile.FirstOrDefault(u => u.Email == index.Email);
+                    if (userInList!.Email == index.Email)
                     {
+
                         Console.Clear();
-                        MainMenu(index);
-                        break;
-                    }
-                    else
-                    {
-                        continue;
-                    }
+                        UserTxt();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("\n--- USER PROFILE ---\n");
 
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tName: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(userInList.Name);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tSurname: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(userInList.Surname);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tEmail: ");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine(userInList.Email);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tUsername: ");
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(userInList.UserName);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tPassword: ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(userInList.Password);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tPhone number: ");
+                        Console.ForegroundColor = ConsoleColor.Yellow;
+                        Console.WriteLine(userInList.PhoneNumber);
+                        Console.ResetColor();
+
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            MainMenu(index);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                    }
                 }
 
             }
+            #endregion
+            #region Reserve Doctor
             else if (selectedCrudIndex == 1)
             {
-                Logs.LogInfo("Show Departments secildi.");
+                Logs.LogInfo("Show Departments selected.");
                 while (true)
                 {
 
                     string free = " free";
                     string reserved = " reserved";
 
-                    string[] options2_ =
-                        {
-                "09:00-11:00",
-                "12:00-14:00",
-                "15:00-17:00"
-            };
+
                     #region Kursor
                     string[] options = departments.Select(d => d.Name).ToArray();
 
@@ -713,7 +817,6 @@ namespace ConsoleApp1.Controls
 
                         } while (key2 != ConsoleKey.Enter);
                         if (selectedIndex2 >= 0 && selectedIndex2 < departments[selectedIndex].Doctors.Count)
-
                         {
                             Doctor selectedDoctor = departments[selectedIndex].Doctors[selectedIndex2];
                             int selectedIndex3 = 0;
@@ -726,20 +829,20 @@ namespace ConsoleApp1.Controls
                                 Console.WriteLine("\n\n\tChoose a time that suits you...\n");
                                 Console.ResetColor();
 
-                                for (int i = 0; i < options2_.Length; i++)
+                                for (int i = 0; i < availableSlots.Length; i++)
                                 {
 
-                                    string timeStatus = selectedDoctor.ReservedTimes.Contains(options2_[i]) ? reserved : free;
+                                    string timeStatus = selectedDoctor.TimeSlots.Contains(availableSlots[i]) ? reserved : free;
                                     if (i == selectedIndex3)
                                     {
                                         Console.ForegroundColor = ConsoleColor.Blue;
-                                        Console.WriteLine("\n|" + options2_[i] + timeStatus);
+                                        Console.WriteLine("\n|" + availableSlots[i] + timeStatus);
                                         Console.ResetColor();
                                     }
                                     else
                                     {
                                         Console.ForegroundColor = ConsoleColor.Cyan;
-                                        Console.WriteLine("\n|" + options2_[i] + timeStatus);
+                                        Console.WriteLine("\n|" + availableSlots[i] + timeStatus);
                                         Console.ResetColor();
                                     }
 
@@ -749,19 +852,19 @@ namespace ConsoleApp1.Controls
 
                                 if (key3 == ConsoleKey.UpArrow)
                                 {
-                                    selectedIndex3 = (selectedIndex3 == 0) ? options2_.Length - 1 : selectedIndex3 - 1;
+                                    selectedIndex3 = (selectedIndex3 == 0) ? availableSlots.Length - 1 : selectedIndex3 - 1;
                                 }
                                 else if (key3 == ConsoleKey.DownArrow)
                                 {
-                                    selectedIndex3 = (selectedIndex3 + 1) % options2_.Length;
+                                    selectedIndex3 = (selectedIndex3 + 1) % availableSlots.Length;
                                 }
 
                             } while (key3 != ConsoleKey.Enter);
-                            if (selectedIndex3 >= 0 && selectedIndex3 < options2_.Length)
+                            if (selectedIndex3 >= 0 && selectedIndex3 < availableSlots.Length)
                             {
-                                string selectedTime = options2_[selectedIndex3];
+                                string selectedTime = availableSlots[selectedIndex3];
 
-                                if (selectedDoctor.ReservedTimes.Contains(selectedTime))
+                                if (selectedDoctor.TimeSlots.Contains(selectedTime))
                                 {
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     Console.WriteLine("This time is already reserved for this doctor. If you don't mind, please choose another time.");
@@ -772,27 +875,28 @@ namespace ConsoleApp1.Controls
                                 }
                                 else
                                 {
+                                    selectedDoctor.TimeSlots.Add(selectedTime);
+
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
-                                    selectedDoctor.ReservedTimes.Add(selectedTime);
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
-                                    PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], options2_[selectedIndex3], selectedDoctor.WorkExperience);
+                                    PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], availableSlots[selectedIndex3], selectedDoctor.WorkExperience);
                                     string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "checks");
 
                                     if (!Directory.Exists(rootFolder))
                                         Directory.CreateDirectory(rootFolder);
 
-                                    
+
 
                                     string body = $"       Reservation confirmation\n" +
-                             $"======================================\n" +
-                             $"User: {index.Name} {index.Surname}\n" +
-                             $"Email: {index.Email}\n" +
-                             $"Department: {departments[selectedIndex]}\n" +
-                             $"Doctor: {departments[selectedIndex].Doctors[selectedIndex2].Name}\n" +
-                             $"Date: {DateTime.Now.Month}\n" +
-                             $"Time: {options2_[selectedIndex3]}\n" +
-                             $"======================================\n" +
-                             $"Thank you! your reservation has\nbeen succesfully registered\n";
+                                    $"======================================\n" +
+                                    $"User: {index.Name} {index.Surname}\n" +
+                                    $"Email: {index.Email}\n" +
+                                    $"Department: {departments[selectedIndex]}\n" +
+                                    $"Doctor: {departments[selectedIndex].Doctors[selectedIndex2].Name}\n" +
+                                    $"Date: {DateTime.Now.Month}\n" +
+                                    $"Time: {availableSlots[selectedIndex3]}\n" +
+                                    $"======================================\n" +
+                                    $"Thank you! your reservation has\nbeen succesfully registered\n";
                                     GmailSender.SendEmail(index.Email, "New Reservation Created", body);
 
                                     Console.WriteLine("\nPress enter for continue...");
@@ -806,9 +910,10 @@ namespace ConsoleApp1.Controls
                     }
                 }
             }
+            #endregion
             else if (selectedCrudIndex == 2)
             {
-                Logs.LogInfo("Show All Doctors.");
+                Logs.LogInfo("Show all doctors selected.");
                 while (true)
                 {
                     Console.Clear();
@@ -817,7 +922,7 @@ namespace ConsoleApp1.Controls
                     Console.WriteLine();
                     int count = 0;
                     Console.ForegroundColor = ConsoleColor.Cyan;
-                    foreach (var item in allDoctors)
+                    foreach (var item in PathConfig.doctorsFromFile)
                     {
                         count++;
                         Console.WriteLine($"----------{count}---------");
@@ -845,7 +950,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 3)
             {
-                Logs.LogInfo("Change Username secildi.");
+                Logs.LogInfo("Change Username selected.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -853,15 +958,17 @@ namespace ConsoleApp1.Controls
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("|Enter your Username: ");
                 string username = Console.ReadLine()!;
-                if (username == index.UserName)
+                var userInList = PathConfig.usersFromFile.FirstOrDefault(u => u.Email == index.Email);
+                if (userInList != null && username == userInList.UserName)
                 {
                     Console.Write("\n|Enter new Username: ");
                     string newUsername = Console.ReadLine()!;
                     Console.ResetColor();
-                    username = newUsername!;
+                    userInList.UserName = newUsername;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\nUsername is changed succesfully...");
-                    Logs.LogInfo("Username deyisdirildi.");
+                    Logs.LogInfo("Username changed.");
+                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -910,7 +1017,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 4)
             {
-                Logs.LogInfo("Change password secildi.");
+                Logs.LogInfo("Change password selected.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -918,15 +1025,17 @@ namespace ConsoleApp1.Controls
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("|Enter Password: ");
                 string password = Console.ReadLine()!;
-                if (index.Password == password)
+                var userInList = PathConfig.usersFromFile.FirstOrDefault(u => u.Email == index.Email);
+                if (userInList != null && password == userInList.Password)
                 {
                     Console.Write("|Enter new password: ");
                     string newPassword = Console.ReadLine()!;
                     Console.ResetColor();
-                    password = newPassword;
+                    userInList.Password = newPassword;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Password changed succesfully...");
-                    Logs.LogInfo("Password deyisdirildi.");
+                    Logs.LogInfo("Password changed.");
+                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -973,7 +1082,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 5)
             {
-                Logs.LogInfo("Change Phone number secildi.");
+                Logs.LogInfo("Change phone number selected.");
                 Console.Clear();
                 UserTxt();
                 Console.WriteLine();
@@ -981,15 +1090,17 @@ namespace ConsoleApp1.Controls
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.Write("|Enter Phone number: ");
                 string phoneNum = Console.ReadLine()!;
-                if (index.PhoneNumber == phoneNum)
+                var userInList = PathConfig.usersFromFile.FirstOrDefault(u => u.Email == index.Email);
+                if (userInList != null && phoneNum == userInList.PhoneNumber)
                 {
                     Console.Write("|Enter new phone: ");
                     string newPhone = Console.ReadLine()!;
                     Console.ResetColor();
-                    phoneNum = newPhone;
+                    userInList.PhoneNumber = newPhone;
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Phone changed succesfully...");
-                    Logs.LogInfo("Telefon nomresi deyisdirildi.");
+                    Logs.LogInfo("Telefon nomresi changed.");
+                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -1036,7 +1147,7 @@ namespace ConsoleApp1.Controls
             }
             else if (selectedCrudIndex == 6)
             {
-                Log.Information("Proqram Bitdi.");
+                Log.Information("Proqram Ended.");
                 Log.Information("#==========================================#");
                 return;
             }

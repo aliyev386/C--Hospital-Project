@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    class Department
+    public class Department
     {
         public string Name { get; set; }
         public int DoctorCount { get; set; }

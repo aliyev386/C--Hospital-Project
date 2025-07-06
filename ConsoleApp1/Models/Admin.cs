@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    class Admin : Person
+    public class Admin : Person
     {
         
         public Admin() { }
@@ -18,6 +18,10 @@ namespace ConsoleApp1.Models
             UserName = username;
             Password = password;
             Age = age;
+        }
+        public override string ToString()
+        {
+            return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nUsername: {UserName}\nPassword: {Password}";
         }
     }
 }
