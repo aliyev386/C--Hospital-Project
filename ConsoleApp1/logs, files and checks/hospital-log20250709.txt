@@ -1,0 +1,277 @@
+[2025-07-09 10:20:53 INF] =============Hospital=============
+[2025-07-09 10:20:53 INF] Program started.
+[2025-07-09 10:21:02 INF] Doctor selected
+[2025-07-09 10:21:02 INF] Sign in or Sign up.
+[2025-07-09 10:21:04 INF] Sign up selected.
+[2025-07-09 10:22:19 INF] Cv sended
+[2025-07-09 10:22:25 INF] =============Hospital=============
+[2025-07-09 10:22:25 INF] Program started.
+[2025-07-09 10:22:26 INF] Admin selected
+[2025-07-09 10:22:32 INF] user daxil oldu
+[2025-07-09 10:22:32 INF] Loading...
+[2025-07-09 10:22:56 INF] =============Hospital=============
+[2025-07-09 10:22:56 INF] Program started.
+[2025-07-09 10:22:57 INF] Admin selected
+[2025-07-09 10:23:01 INF] user daxil oldu
+[2025-07-09 10:23:01 INF] Loading...
+[2025-07-09 10:23:16 INF] Doctor accepted: gdkh gfh
+[2025-07-09 10:53:52 INF] =============Hospital=============
+[2025-07-09 10:53:52 INF] Program started.
+[2025-07-09 10:53:55 INF] Doctor selected
+[2025-07-09 10:53:55 INF] Sign in or Sign up.
+[2025-07-09 10:53:57 INF] Sign in selected.
+[2025-07-09 10:54:37 INF] Doctor is logged in
+[2025-07-09 10:54:37 INF] Loading...
+[2025-07-09 10:54:45 INF] =============Hospital=============
+[2025-07-09 10:54:45 INF] Program started.
+[2025-07-09 10:54:47 INF] Doctor selected
+[2025-07-09 10:54:47 INF] Sign in or Sign up.
+[2025-07-09 10:54:48 INF] Sign in selected.
+[2025-07-09 10:54:53 INF] Sign in selected.
+[2025-07-09 10:57:49 INF] =============Hospital=============
+[2025-07-09 10:57:49 INF] Program started.
+[2025-07-09 10:57:51 INF] User selected
+[2025-07-09 10:57:52 INF] Sign in or Sign up.
+[2025-07-09 10:57:54 INF] Sign in selected.
+[2025-07-09 10:57:58 INF] Sign in selected.
+[2025-07-09 10:58:01 INF] User is logged in
+[2025-07-09 10:58:01 INF] Loading...
+[2025-07-09 10:58:03 INF] crud operations.
+[2025-07-09 10:58:06 INF] Show Departments selected.
+[2025-07-09 10:58:19 INF] crud operations.
+[2025-07-09 10:58:20 INF] Show profile selected.
+[2025-07-09 10:58:22 INF] crud operations.
+[2025-07-09 10:58:24 INF] Show Departments selected.
+[2025-07-09 10:58:34 INF] =============Hospital=============
+[2025-07-09 10:58:34 INF] Program started.
+[2025-07-09 10:58:37 INF] User selected
+[2025-07-09 10:58:37 INF] Sign in or Sign up.
+[2025-07-09 10:58:38 INF] Sign in selected.
+[2025-07-09 10:58:41 INF] User is logged in
+[2025-07-09 10:58:41 INF] Loading...
+[2025-07-09 10:58:43 INF] crud operations.
+[2025-07-09 10:58:45 INF] Show Departments selected.
+[2025-07-09 11:03:28 INF] =============Hospital=============
+[2025-07-09 11:03:28 INF] Program started.
+[2025-07-09 11:03:30 INF] User selected
+[2025-07-09 11:03:30 INF] Sign in or Sign up.
+[2025-07-09 11:03:31 INF] Sign in selected.
+[2025-07-09 11:03:47 INF] Sign in selected.
+[2025-07-09 11:03:53 INF] User is logged in
+[2025-07-09 11:03:53 INF] Loading...
+[2025-07-09 11:03:55 INF] crud operations.
+[2025-07-09 11:03:58 INF] Show Departments selected.
+[2025-07-09 11:07:02 INF] =============Hospital=============
+[2025-07-09 11:07:02 INF] Program started.
+[2025-07-09 11:07:04 INF] Doctor selected
+[2025-07-09 11:07:04 INF] Sign in or Sign up.
+[2025-07-09 11:07:05 INF] Sign up selected.
+[2025-07-09 11:07:40 INF] Cv sended
+[2025-07-09 11:07:48 INF] =============Hospital=============
+[2025-07-09 11:07:48 INF] Program started.
+[2025-07-09 11:07:52 INF] Admin selected
+[2025-07-09 11:07:55 INF] user daxil oldu
+[2025-07-09 11:07:55 INF] Loading...
+[2025-07-09 11:08:15 INF] Doctor accepted: yeni  doctor
+[2025-07-09 11:08:33 INF] =============Hospital=============
+[2025-07-09 11:08:33 INF] Program started.
+[2025-07-09 11:08:34 INF] User selected
+[2025-07-09 11:08:34 INF] Sign in or Sign up.
+[2025-07-09 11:08:36 INF] Sign in selected.
+[2025-07-09 11:08:39 INF] Sign in selected.
+[2025-07-09 11:08:42 INF] User is logged in
+[2025-07-09 11:08:42 INF] Loading...
+[2025-07-09 11:08:44 INF] crud operations.
+[2025-07-09 11:08:55 INF] Show Departments selected.
+[2025-07-09 11:28:43 INF] =============Hospital=============
+[2025-07-09 11:28:43 INF] Program started.
+[2025-07-09 11:28:45 INF] User selected
+[2025-07-09 11:28:45 INF] Sign in or Sign up.
+[2025-07-09 11:28:48 INF] Sign in selected.
+[2025-07-09 11:28:56 INF] User is logged in
+[2025-07-09 11:28:56 INF] Loading...
+[2025-07-09 11:28:58 INF] crud operations.
+[2025-07-09 11:29:01 INF] Show all doctors selected.
+[2025-07-09 11:42:43 INF] =============Hospital=============
+[2025-07-09 11:42:43 INF] Program started.
+[2025-07-09 11:42:52 INF] Doctor selected
+[2025-07-09 11:42:52 INF] Sign in or Sign up.
+[2025-07-09 11:42:56 INF] Sign in selected.
+[2025-07-09 11:43:16 INF] Doctor is logged in
+[2025-07-09 11:43:16 INF] Loading...
+[2025-07-09 11:43:22 INF] =============Hospital=============
+[2025-07-09 11:43:22 INF] Program started.
+[2025-07-09 11:43:23 INF] User selected
+[2025-07-09 11:43:23 INF] Sign in or Sign up.
+[2025-07-09 11:43:28 INF] Sign up selected.
+[2025-07-09 11:43:28 ERR] Name is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignUp(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 234
+[2025-07-09 11:43:29 ERR] Name is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignUp(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 234
+[2025-07-09 11:43:29 ERR] Name is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignUp(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 234
+[2025-07-09 11:43:29 ERR] Name is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignUp(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 234
+[2025-07-09 11:43:35 INF] =============Hospital=============
+[2025-07-09 11:43:35 INF] Program started.
+[2025-07-09 11:43:37 INF] User selected
+[2025-07-09 11:43:37 INF] Sign in or Sign up.
+[2025-07-09 11:43:38 INF] Sign in selected.
+[2025-07-09 11:43:45 INF] User is logged in
+[2025-07-09 11:43:45 INF] Loading...
+[2025-07-09 11:43:47 INF] crud operations.
+[2025-07-09 11:43:54 INF] Show Departments selected.
+[2025-07-09 11:44:19 INF] =============Hospital=============
+[2025-07-09 11:44:19 INF] Program started.
+[2025-07-09 11:44:23 INF] Doctor selected
+[2025-07-09 11:44:23 INF] Sign in or Sign up.
+[2025-07-09 11:44:23 INF] Sign up selected.
+[2025-07-09 11:45:08 INF] Cv sended
+[2025-07-09 11:45:17 INF] =============Hospital=============
+[2025-07-09 11:45:17 INF] Program started.
+[2025-07-09 11:45:18 INF] User selected
+[2025-07-09 11:45:18 INF] Sign in or Sign up.
+[2025-07-09 11:45:21 INF] Sign in selected.
+[2025-07-09 11:45:25 INF] User is logged in
+[2025-07-09 11:45:25 INF] Loading...
+[2025-07-09 11:45:27 INF] crud operations.
+[2025-07-09 11:45:30 INF] Show Departments selected.
+[2025-07-09 11:45:57 INF] =============Hospital=============
+[2025-07-09 11:45:57 INF] Program started.
+[2025-07-09 11:45:59 INF] User selected
+[2025-07-09 11:45:59 INF] Sign in or Sign up.
+[2025-07-09 11:46:00 INF] Sign in selected.
+[2025-07-09 11:46:05 INF] User is logged in
+[2025-07-09 11:46:05 INF] Loading...
+[2025-07-09 11:46:07 INF] crud operations.
+[2025-07-09 11:46:10 INF] Show Departments selected.
+[2025-07-09 11:46:39 INF] =============Hospital=============
+[2025-07-09 11:46:40 INF] Program started.
+[2025-07-09 11:46:43 INF] Admin selected
+[2025-07-09 11:46:47 INF] user daxil oldu
+[2025-07-09 11:46:47 INF] Loading...
+[2025-07-09 11:49:00 INF] =============Hospital=============
+[2025-07-09 11:49:00 INF] Program started.
+[2025-07-09 11:49:01 INF] User selected
+[2025-07-09 11:49:01 INF] Sign in or Sign up.
+[2025-07-09 11:49:03 INF] Sign in selected.
+[2025-07-09 11:49:07 INF] Sign in selected.
+[2025-07-09 11:49:11 ERR] Password number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignIn(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 515
+[2025-07-09 11:49:12 INF] Sign in selected.
+[2025-07-09 11:49:15 INF] User is logged in
+[2025-07-09 11:49:15 INF] Loading...
+[2025-07-09 11:49:17 INF] crud operations.
+[2025-07-09 11:49:18 INF] Show Departments selected.
+[2025-07-09 11:49:24 INF] =============Hospital=============
+[2025-07-09 11:49:24 INF] Program started.
+[2025-07-09 11:49:25 INF] User selected
+[2025-07-09 11:49:25 INF] Sign in or Sign up.
+[2025-07-09 11:49:26 INF] Sign in selected.
+[2025-07-09 11:49:30 INF] User is logged in
+[2025-07-09 11:49:30 INF] Loading...
+[2025-07-09 11:49:32 INF] crud operations.
+[2025-07-09 11:49:36 INF] Change Username selected.
+[2025-07-09 11:49:42 INF] Username changed.
+[2025-07-09 11:49:44 INF] crud operations.
+[2025-07-09 11:49:46 INF] Show Departments selected.
+[2025-07-09 11:49:59 INF] =============Hospital=============
+[2025-07-09 11:49:59 INF] Program started.
+[2025-07-09 11:50:00 INF] User selected
+[2025-07-09 11:50:00 INF] Sign in or Sign up.
+[2025-07-09 11:50:01 INF] Sign in selected.
+[2025-07-09 11:50:04 INF] User is logged in
+[2025-07-09 11:50:04 INF] Loading...
+[2025-07-09 11:50:06 INF] crud operations.
+[2025-07-09 11:50:08 INF] Show Departments selected.
+[2025-07-09 11:50:39 INF] =============Hospital=============
+[2025-07-09 11:50:39 INF] Program started.
+[2025-07-09 11:50:40 INF] Admin selected
+[2025-07-09 11:50:43 INF] user daxil oldu
+[2025-07-09 11:50:43 INF] Loading...
+[2025-07-09 11:51:21 INF] =============Hospital=============
+[2025-07-09 11:51:21 INF] Program started.
+[2025-07-09 11:51:22 INF] User selected
+[2025-07-09 11:51:22 INF] Sign in or Sign up.
+[2025-07-09 11:51:24 INF] Sign in selected.
+[2025-07-09 11:51:26 INF] User is logged in
+[2025-07-09 11:51:26 INF] Loading...
+[2025-07-09 11:51:28 INF] crud operations.
+[2025-07-09 11:51:30 INF] Show all doctors selected.
+[2025-07-09 11:51:45 INF] crud operations.
+[2025-07-09 11:51:49 INF] Show Departments selected.
+[2025-07-09 12:04:09 INF] =============Hospital=============
+[2025-07-09 12:04:09 INF] Program started.
+[2025-07-09 12:04:12 INF] Doctor selected
+[2025-07-09 12:04:12 INF] Sign in or Sign up.
+[2025-07-09 12:04:14 INF] Sign up selected.
+[2025-07-09 12:04:34 INF] Cv sended
+[2025-07-09 12:04:38 INF] =============Hospital=============
+[2025-07-09 12:04:38 INF] Program started.
+[2025-07-09 12:04:39 INF] Admin selected
+[2025-07-09 12:04:42 INF] user daxil oldu
+[2025-07-09 12:04:42 INF] Loading...
+[2025-07-09 12:05:06 INF] =============Hospital=============
+[2025-07-09 12:05:06 INF] Program started.
+[2025-07-09 12:05:08 INF] Admin selected
+[2025-07-09 12:05:14 INF] user daxil oldu
+[2025-07-09 12:05:14 INF] Loading...
+[2025-07-09 12:05:23 INF] =============Hospital=============
+[2025-07-09 12:05:23 INF] Program started.
+[2025-07-09 12:05:26 INF] Doctor selected
+[2025-07-09 12:05:26 INF] Sign in or Sign up.
+[2025-07-09 12:05:27 INF] Sign up selected.
+[2025-07-09 12:05:56 INF] Cv sended
+[2025-07-09 12:06:07 INF] =============Hospital=============
+[2025-07-09 12:06:07 INF] Program started.
+[2025-07-09 12:06:08 INF] Admin selected
+[2025-07-09 12:06:12 INF] user daxil oldu
+[2025-07-09 12:06:12 INF] Loading...
+[2025-07-09 12:06:36 INF] Doctor accepted: resid canavar
+[2025-07-09 12:07:01 INF] =============Hospital=============
+[2025-07-09 12:07:01 INF] Program started.
+[2025-07-09 12:07:03 INF] User selected
+[2025-07-09 12:07:03 INF] Sign in or Sign up.
+[2025-07-09 12:07:04 INF] Sign in selected.
+[2025-07-09 12:07:07 INF] User is logged in
+[2025-07-09 12:07:07 INF] Loading...
+[2025-07-09 12:07:09 INF] crud operations.
+[2025-07-09 12:07:11 INF] Show Departments selected.
+[2025-07-09 12:09:30 INF] =============Hospital=============
+[2025-07-09 12:09:30 INF] Program started.
+[2025-07-09 12:09:33 INF] Doctor selected
+[2025-07-09 12:09:33 INF] Sign in or Sign up.
+[2025-07-09 12:09:34 INF] Sign up selected.
+[2025-07-09 12:10:02 INF] Cv sended
+[2025-07-09 12:10:06 INF] =============Hospital=============
+[2025-07-09 12:10:06 INF] Program started.
+[2025-07-09 12:10:07 INF] Admin selected
+[2025-07-09 12:10:10 INF] user daxil oldu
+[2025-07-09 12:10:10 INF] Loading...
+[2025-07-09 12:10:29 INF] Doctor accepted: romer dfkjg
+[2025-07-09 12:10:44 INF] =============Hospital=============
+[2025-07-09 12:10:44 INF] Program started.
+[2025-07-09 12:10:46 INF] User selected
+[2025-07-09 12:10:46 INF] Sign in or Sign up.
+[2025-07-09 12:10:46 INF] Sign in selected.
+[2025-07-09 12:10:53 INF] User is logged in
+[2025-07-09 12:10:53 INF] Loading...
+[2025-07-09 12:10:55 INF] crud operations.
+[2025-07-09 12:10:56 INF] Show Departments selected.
+[2025-07-09 12:11:37 INF] =============Hospital=============
+[2025-07-09 12:11:37 INF] Program started.
+[2025-07-09 12:11:38 INF] Doctor selected
+[2025-07-09 12:11:38 INF] Sign in or Sign up.
+[2025-07-09 12:11:39 INF] Sign up selected.
+[2025-07-09 12:11:54 INF] Cv sended
+[2025-07-09 12:12:01 INF] =============Hospital=============
+[2025-07-09 12:12:01 INF] Program started.
+[2025-07-09 12:12:05 INF] Admin selected
+[2025-07-09 12:12:07 INF] user daxil oldu
+[2025-07-09 12:12:07 INF] Loading...
+[2025-07-09 12:12:17 INF] Doctor accepted: omerre ldfkjh

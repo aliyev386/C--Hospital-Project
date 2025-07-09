@@ -22,7 +22,7 @@ namespace ConsoleApp1.Models
             Age = age;
             PhoneNumber = phoneNumber;
         }
-        public string GenerateUsername()
+        public override string GenerateUsername()
         {
             Random rand = new Random();
             int number = rand.Next(10, 99);

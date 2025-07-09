@@ -33,6 +33,14 @@ namespace ConsoleApp1.Models
             Password = password;
             Age = age;
         }
+        public virtual string GenerateUsername()
+        {
+            Random rand = new Random();
+            int number = rand.Next(10, 99);
+            string initials = $"{Name[0]}{Surname[0]}".ToLower();
+            string username = $"{Surname}_{initials}{number}";
+            return username;
+        }
 
 
 

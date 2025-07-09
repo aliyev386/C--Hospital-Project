@@ -1,0 +1,40 @@
+[2025-07-09 12:21:08 INF] =============Hospital=============
+[2025-07-09 12:21:08 INF] Program started.
+[2025-07-09 12:21:14 INF] User selected
+[2025-07-09 12:21:14 INF] Sign in or Sign up.
+[2025-07-09 12:21:16 INF] Sign in selected.
+[2025-07-09 12:21:19 INF] User is logged in
+[2025-07-09 12:21:19 INF] Loading...
+[2025-07-09 12:21:21 INF] crud operations.
+[2025-07-09 12:21:23 INF] Show Departments selected.
+[2025-07-09 12:21:50 INF] =============Hospital=============
+[2025-07-09 12:21:50 INF] Program started.
+[2025-07-09 12:21:53 INF] User selected
+[2025-07-09 12:21:53 INF] Sign in or Sign up.
+[2025-07-09 12:21:55 INF] Sign in selected.
+[2025-07-09 12:22:02 INF] User is logged in
+[2025-07-09 12:22:02 INF] Loading...
+[2025-07-09 12:22:04 INF] crud operations.
+[2025-07-09 12:22:16 INF] Show Departments selected.
+[2025-07-09 12:36:09 INF] =============Hospital=============
+[2025-07-09 12:36:09 INF] Program started.
+[2025-07-09 12:36:10 INF] Admin selected
+[2025-07-09 12:36:15 INF] =============Hospital=============
+[2025-07-09 12:36:15 INF] Program started.
+[2025-07-09 12:36:28 INF] User selected
+[2025-07-09 12:36:28 INF] Sign in or Sign up.
+[2025-07-09 12:36:29 INF] Sign in selected.
+[2025-07-09 12:36:35 INF] Sign in selected.
+[2025-07-09 12:36:38 INF] User is logged in
+[2025-07-09 12:36:38 INF] Loading...
+[2025-07-09 12:36:40 INF] crud operations.
+[2025-07-09 12:36:41 INF] Show Departments selected.
+[2025-07-09 12:36:48 INF] =============Hospital=============
+[2025-07-09 12:36:48 INF] Program started.
+[2025-07-09 12:36:50 INF] User selected
+[2025-07-09 12:36:50 INF] Sign in or Sign up.
+[2025-07-09 12:36:50 INF] Sign in selected.
+[2025-07-09 12:36:54 INF] User is logged in
+[2025-07-09 12:36:54 INF] Loading...
+[2025-07-09 12:36:56 INF] crud operations.
+[2025-07-09 12:36:58 INF] Show Departments selected.

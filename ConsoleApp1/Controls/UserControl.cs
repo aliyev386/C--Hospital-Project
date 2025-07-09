@@ -25,42 +25,9 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleApp1.Controls
 {
 
-    class UserControl
+    public class UserControl 
     {
-        public static string[] availableSlots = { "09:00-11:00", "12:00-14:00", "15:00-17:00" };
-        public static List<string> emptySlots = new List<string>();
-
-        public static List<Doctor> doctors1 = new List<Doctor> {
-            new Doctor("Umid", "Aslanov", "aslanov063@gmail.com", "Aslanov_UA86", "umid123",23, DateTime.Parse("01-01-2015"), new List<string>(emptySlots)),
-            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456",32, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
-            new Doctor("Ali", "Agayev", "ali.agayev20@gmail.com", "Agayev_AA20", "ali789",26, DateTime.Parse("04-03-2020"), new List<string>(emptySlots)),};
-
-        public static List<Doctor> doctors2 = new List<Doctor> {
-            new Doctor("Huseyin", "Memmedzade", "huseyin.m@gmail.com", "Memmedzade_HM10", "huseyin456",32, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
-            new Doctor("Heyder", "Omerzade", "heyder.o@gmail.com", "Omerzade_HO20", "heyder321",35, DateTime.Parse("04-03-2020"), new List<string>(emptySlots)),};
-
-        public static List<Doctor> doctors3 = new List<Doctor> {
-            new Doctor("Resad", "Memmedov", "resad.m@gmail.com", "Memmedov_RM10", "resad654",30, DateTime.Parse("05-08-2010"), new List<string>(emptySlots)),
-            new Doctor("Emin", "Abbasov", "emin.a@gmail.com", "Abbasov_EA20", "emin987",37, DateTime.Parse("04-03-2020"), new List < string >(emptySlots)),
-            new Doctor("Ibrahim", "Nebiyev", "ibrahim.n@gmail.com", "Nebiyev_IN10", "ibrahim159",33, DateTime.Parse("05-08-2010"), new List < string >(emptySlots)),
-            new Doctor("Ali", "Nebili", "ali.nebili@gmail.com", "Nebili_AN20", "ali753",45, DateTime.Parse("04-03-2020"), new List < string >(emptySlots)),};
-
-        public static List<Doctor> allDoctors = JsonHelper.LoadFromFile<Doctor>(PathConfig.DoctorsFilePath);
-
-        public static List<Department> departments = new List<Department>
-            {
-                new Department("Pediatriya", doctors1.Count , doctors1),
-                new Department("Travmatologiya", doctors2.Count, doctors2),
-                new Department("Stamotologiya", doctors3.Count, doctors3),
-            };
-
-
-
-        public static List<User> users = new List<User>
-        {
-            new User("Ayan","Aliyeva","aliyeva@gmail.com","ayan_12","ayan123",16,"45345634635")
-        };
-
+        
 
 
         public static string filePath = Path.Combine(
@@ -68,11 +35,7 @@ namespace ConsoleApp1.Controls
         "logs, files and checks",
         "users.json"
         );
-        public static string filePathD = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "doctors.json"
-        );
+        
         public static string filePathDP = Path.Combine(
         Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
         "logs, files and checks",
@@ -83,10 +46,7 @@ namespace ConsoleApp1.Controls
         {
             return JsonHelper.LoadFromFile<User>(filePath);
         }
-        public static List<Doctor> GetAllDoctors()
-        {
-            return JsonHelper.LoadFromFile<Doctor>(filePathD);
-        }
+        
         public static List<Department> GetAllDepartments()
         {
             return JsonHelper.LoadFromFile<Department>(filePathDP);
@@ -114,11 +74,7 @@ namespace ConsoleApp1.Controls
                 Directory.CreateDirectory(folderPath);
             }
 
-            string folderPathD = Path.GetDirectoryName(filePathD)!;
-            if (!Directory.Exists(folderPathD))
-            {
-                Directory.CreateDirectory(folderPathD);
-            }
+            
 
             string folderPathDp = Path.GetDirectoryName(filePathDP)!;
             if (!Directory.Exists(folderPathDp))
@@ -127,24 +83,18 @@ namespace ConsoleApp1.Controls
             }
             if (!File.Exists(PathConfig.UsersFilePath))
             {
-                JsonHelper.SaveToFile(PathConfig.UsersFilePath, users);
+                JsonHelper.SaveToFile(PathConfig.UsersFilePath, Aplication.users);
             }
-            if (!File.Exists(PathConfig.DoctorsFilePath))
-            {
-                allDoctors.AddRange(doctors1);
-                allDoctors.AddRange(doctors2);
-                allDoctors.AddRange(doctors3);
-                JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
-            }
+            
             if (!File.Exists(PathConfig.DesktopPath))
             {
                 var departments = new List<Department>
                 {
-                    new Department("Pediatriya", doctors1.Count , doctors1),
-                    new Department("Travmatologiya", doctors2.Count, doctors2),
-                    new Department("Stamotologiya", doctors3.Count, doctors3),
+                    new Department("Pediatriya", Aplication.doctors1.Count , Aplication.doctors1),
+                    new Department("Travmatologiya", Aplication.doctors2.Count, Aplication.doctors2),
+                    new Department("Stamotologiya", Aplication.doctors3.Count, Aplication.doctors3),
                 };
-                JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
+                JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, Aplication.departments);
             }
 
         }
@@ -507,7 +457,6 @@ namespace ConsoleApp1.Controls
         {
             while (true)
             {
-
                 Logs.LogInfo("Sign in selected.");
                 Console.Clear();
                 Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -519,7 +468,6 @@ namespace ConsoleApp1.Controls
                            ██████╔╝██║╚██████╔╝██║░╚███║  ██║██║░╚███║
                            ╚═════╝░╚═╝░╚═════╝░╚═╝░░╚══╝  ╚═╝╚═╝░░╚══╝");
                 Console.ResetColor();
-
                 Console.WriteLine("");
                 Console.WriteLine("");
                 Console.ForegroundColor = ConsoleColor.Cyan;
@@ -727,11 +675,10 @@ namespace ConsoleApp1.Controls
                     string reserved = " reserved";
 
 
-                    #region Kursor
-                    string[] options = departments.Select(d => d.Name).ToArray();
 
-
+                    var departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
                     int selectedIndex = 0;
+                   
                     ConsoleKey key;
 
                     do
@@ -741,18 +688,18 @@ namespace ConsoleApp1.Controls
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.WriteLine("\n\n\tSelect one of the departments...");
                         Console.ResetColor();
-                        for (int i = 0; i < options.Length; i++)
+                        for (int i = 0; i < departments.Count; i++)
                         {
                             if (i == selectedIndex)
                             {
                                 Console.ForegroundColor = ConsoleColor.Blue;
-                                Console.WriteLine("\n|" + options[i]);
+                                Console.WriteLine("\n|" + departments[i]);
                                 Console.ResetColor();
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("\n|" + options[i]);
+                                Console.WriteLine("\n|" + departments[i]);
                                 Console.ResetColor();
                             }
                         }
@@ -761,19 +708,18 @@ namespace ConsoleApp1.Controls
 
                         if (key == ConsoleKey.UpArrow)
                         {
-                            selectedIndex = (selectedIndex == 0) ? options.Length - 1 : selectedIndex - 1;
+                            selectedIndex = (selectedIndex == 0) ? departments.Count - 1 : selectedIndex - 1;
                         }
                         else if (key == ConsoleKey.DownArrow)
                         {
-                            selectedIndex = (selectedIndex + 1) % options.Length;
+                            selectedIndex = (selectedIndex + 1) % departments.Count;
                         }
 
                     } while (key != ConsoleKey.Enter);
 
                     Console.Clear();
 
-                    #endregion
-                    if (selectedIndex >= 0 && selectedIndex < options.Length)
+                    if (selectedIndex >= 0 && selectedIndex < departments.Count)
                     {
                         int selectedIndex2 = 0;
                         ConsoleKey key2;
@@ -786,20 +732,20 @@ namespace ConsoleApp1.Controls
                             Console.WriteLine("\n\n\t|Choose one of the doctors on the department...\n");
                             Console.ResetColor();
 
-                            for (int i = 0; i < departments[selectedIndex].DoctorCount; i++)
+                            for (int i = 0; i < Aplication.departments[selectedIndex].DoctorCount; i++)
                             {
                                 if (i == selectedIndex2)
                                 {
                                     Console.ForegroundColor = ConsoleColor.Blue;
                                     Console.WriteLine();
-                                    Console.WriteLine("\n|" + departments[selectedIndex].Doctors[i]);
+                                    Console.WriteLine("\n|" + Aplication.departments[selectedIndex].Doctors[i]);
                                     Console.ResetColor();
                                 }
                                 else
                                 {
                                     Console.WriteLine();
                                     Console.ForegroundColor = ConsoleColor.Cyan;
-                                    Console.WriteLine("\n|" + departments[selectedIndex].Doctors[i]);
+                                    Console.WriteLine("\n|" + Aplication.departments[selectedIndex].Doctors[i]);
                                     Console.ResetColor();
                                 }
                             }
@@ -808,17 +754,17 @@ namespace ConsoleApp1.Controls
 
                             if (key2 == ConsoleKey.UpArrow)
                             {
-                                selectedIndex2 = (selectedIndex2 == 0) ? departments[selectedIndex].Doctors.Count - 1 : selectedIndex2 - 1;
+                                selectedIndex2 = (selectedIndex2 == 0) ? Aplication.departments[selectedIndex].Doctors.Count - 1 : selectedIndex2 - 1;
                             }
                             else if (key2 == ConsoleKey.DownArrow)
                             {
-                                selectedIndex2 = (selectedIndex2 + 1) % departments[selectedIndex].Doctors.Count;
+                                selectedIndex2 = (selectedIndex2 + 1) % Aplication.departments[selectedIndex].Doctors.Count;
                             }
 
                         } while (key2 != ConsoleKey.Enter);
-                        if (selectedIndex2 >= 0 && selectedIndex2 < departments[selectedIndex].Doctors.Count)
+                        if (selectedIndex2 >= 0 && selectedIndex2 < Aplication.departments[selectedIndex].Doctors.Count)
                         {
-                            Doctor selectedDoctor = departments[selectedIndex].Doctors[selectedIndex2];
+                            Doctor selectedDoctor = Aplication.departments[selectedIndex].Doctors[selectedIndex2];
                             int selectedIndex3 = 0;
                             ConsoleKey key3;
                             do
@@ -829,20 +775,20 @@ namespace ConsoleApp1.Controls
                                 Console.WriteLine("\n\n\tChoose a time that suits you...\n");
                                 Console.ResetColor();
 
-                                for (int i = 0; i < availableSlots.Length; i++)
+                                for (int i = 0; i < Aplication.availableSlots.Length; i++)
                                 {
 
-                                    string timeStatus = selectedDoctor.TimeSlots.Contains(availableSlots[i]) ? reserved : free;
+                                    string timeStatus = selectedDoctor.TimeSlots.Contains(Aplication.availableSlots[i]) ? reserved : free;
                                     if (i == selectedIndex3)
                                     {
                                         Console.ForegroundColor = ConsoleColor.Blue;
-                                        Console.WriteLine("\n|" + availableSlots[i] + timeStatus);
+                                        Console.WriteLine("\n|" + Aplication.availableSlots[i] + timeStatus);
                                         Console.ResetColor();
                                     }
                                     else
                                     {
                                         Console.ForegroundColor = ConsoleColor.Cyan;
-                                        Console.WriteLine("\n|" + availableSlots[i] + timeStatus);
+                                        Console.WriteLine("\n|" + Aplication.availableSlots[i] + timeStatus);
                                         Console.ResetColor();
                                     }
 
@@ -852,17 +798,17 @@ namespace ConsoleApp1.Controls
 
                                 if (key3 == ConsoleKey.UpArrow)
                                 {
-                                    selectedIndex3 = (selectedIndex3 == 0) ? availableSlots.Length - 1 : selectedIndex3 - 1;
+                                    selectedIndex3 = (selectedIndex3 == 0) ? Aplication.availableSlots.Length - 1 : selectedIndex3 - 1;
                                 }
                                 else if (key3 == ConsoleKey.DownArrow)
                                 {
-                                    selectedIndex3 = (selectedIndex3 + 1) % availableSlots.Length;
+                                    selectedIndex3 = (selectedIndex3 + 1) % Aplication.availableSlots.Length;
                                 }
 
                             } while (key3 != ConsoleKey.Enter);
-                            if (selectedIndex3 >= 0 && selectedIndex3 < availableSlots.Length)
+                            if (selectedIndex3 >= 0 && selectedIndex3 < Aplication.availableSlots.Length)
                             {
-                                string selectedTime = availableSlots[selectedIndex3];
+                                string selectedTime = Aplication.availableSlots[selectedIndex3];
 
                                 if (selectedDoctor.TimeSlots.Contains(selectedTime))
                                 {
@@ -879,7 +825,8 @@ namespace ConsoleApp1.Controls
 
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
-                                    PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", options[selectedIndex], availableSlots[selectedIndex3], selectedDoctor.WorkExperience);
+                                    var depIndex = departments[selectedIndex];
+                                    PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", depIndex.Name, Aplication.availableSlots[selectedIndex3], selectedDoctor.WorkExperience);
                                     string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "checks");
 
                                     if (!Directory.Exists(rootFolder))
@@ -891,10 +838,10 @@ namespace ConsoleApp1.Controls
                                     $"======================================\n" +
                                     $"User: {index.Name} {index.Surname}\n" +
                                     $"Email: {index.Email}\n" +
-                                    $"Department: {departments[selectedIndex]}\n" +
-                                    $"Doctor: {departments[selectedIndex].Doctors[selectedIndex2].Name}\n" +
+                                    $"Department: {depIndex.Name}\n" +
+                                    $"Doctor: {depIndex.Doctors[selectedIndex2].Name}\n" +
                                     $"Date: {DateTime.Now.Month}\n" +
-                                    $"Time: {availableSlots[selectedIndex3]}\n" +
+                                    $"Time: {Aplication.availableSlots[selectedIndex3]}\n" +
                                     $"======================================\n" +
                                     $"Thank you! your reservation has\nbeen succesfully registered\n";
                                     GmailSender.SendEmail(index.Email, "New Reservation Created", body);
