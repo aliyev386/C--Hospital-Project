@@ -25,32 +25,11 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace ConsoleApp1.Controls
 {
 
-    public class UserControl 
+    public class UserControl
     {
-        
 
 
-        public static string filePath = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "users.json"
-        );
-        
-        public static string filePathDP = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "departments.json"
-        );
 
-        public static List<User> GetAllUsers()
-        {
-            return JsonHelper.LoadFromFile<User>(filePath);
-        }
-        
-        public static List<Department> GetAllDepartments()
-        {
-            return JsonHelper.LoadFromFile<Department>(filePathDP);
-        }
 
         public static void UserTxt()
         {
@@ -68,15 +47,15 @@ namespace ConsoleApp1.Controls
 
         static UserControl()
         {
-            string folderPath = Path.GetDirectoryName(filePath)!;
+            string folderPath = Path.GetDirectoryName(Aplication.filePath)!;
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
             }
 
-            
 
-            string folderPathDp = Path.GetDirectoryName(filePathDP)!;
+
+            string folderPathDp = Path.GetDirectoryName(Aplication.filePathDP)!;
             if (!Directory.Exists(folderPathDp))
             {
                 Directory.CreateDirectory(folderPathDp);
@@ -85,7 +64,7 @@ namespace ConsoleApp1.Controls
             {
                 JsonHelper.SaveToFile(PathConfig.UsersFilePath, Aplication.users);
             }
-            
+
             if (!File.Exists(PathConfig.DesktopPath))
             {
                 var departments = new List<Department>
@@ -163,11 +142,11 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
             if (selectedIndex == 0)
             {
-                SignUp(GetAllUsers());
+                SignUp(Aplication.GetAllUsers());
             }
             else if (selectedIndex == 1)
             {
-                SignIn(GetAllUsers());
+                SignIn(Aplication.GetAllUsers());
             }
         }
         public static void Loading()
@@ -388,7 +367,7 @@ namespace ConsoleApp1.Controls
 
             } while (key != ConsoleKey.Enter);
 
-            
+
             while (true)
             {
 
@@ -446,12 +425,12 @@ namespace ConsoleApp1.Controls
             User newUser = new User(name, surname, email, finalUsername, password, age, phoneNumber);
 
             usersFromFile.Add(newUser);
-            JsonHelper.SaveToFile(filePath, usersFromFile);
+            JsonHelper.SaveToFile(Aplication.filePath, usersFromFile);
             Loading();
             Logs.LogInfo("User signed up.");
             Console.Clear();
             UserTxt();
-            SignIn(GetAllUsers());
+            SignIn(Aplication.GetAllUsers());
         }
         public static void SignIn(List<User> usersFromFile)
         {
@@ -674,11 +653,12 @@ namespace ConsoleApp1.Controls
                     string free = " free";
                     string reserved = " reserved";
 
+                    
 
 
-                    var departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
+
                     int selectedIndex = 0;
-                   
+
                     ConsoleKey key;
 
                     do
@@ -688,18 +668,18 @@ namespace ConsoleApp1.Controls
                         Console.ForegroundColor = ConsoleColor.DarkCyan;
                         Console.WriteLine("\n\n\tSelect one of the departments...");
                         Console.ResetColor();
-                        for (int i = 0; i < departments.Count; i++)
+                        for (int i = 0; i < Aplication.departments.Count; i++)
                         {
                             if (i == selectedIndex)
                             {
                                 Console.ForegroundColor = ConsoleColor.Blue;
-                                Console.WriteLine("\n|" + departments[i]);
+                                Console.WriteLine("\n|" + Aplication.departments[i].Name);
                                 Console.ResetColor();
                             }
                             else
                             {
                                 Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.WriteLine("\n|" + departments[i]);
+                                Console.WriteLine("\n|" + Aplication.departments[i].Name);
                                 Console.ResetColor();
                             }
                         }
@@ -708,22 +688,21 @@ namespace ConsoleApp1.Controls
 
                         if (key == ConsoleKey.UpArrow)
                         {
-                            selectedIndex = (selectedIndex == 0) ? departments.Count - 1 : selectedIndex - 1;
+                            selectedIndex = (selectedIndex == 0) ? Aplication.departments.Count - 1 : selectedIndex - 1;
                         }
                         else if (key == ConsoleKey.DownArrow)
                         {
-                            selectedIndex = (selectedIndex + 1) % departments.Count;
+                            selectedIndex = (selectedIndex + 1) % Aplication.departments.Count;
                         }
 
                     } while (key != ConsoleKey.Enter);
 
                     Console.Clear();
 
-                    if (selectedIndex >= 0 && selectedIndex < departments.Count)
+                    if (selectedIndex >= 0 && selectedIndex < Aplication.departments.Count)
                     {
                         int selectedIndex2 = 0;
                         ConsoleKey key2;
-
                         do
                         {
                             Console.Clear();
@@ -732,7 +711,7 @@ namespace ConsoleApp1.Controls
                             Console.WriteLine("\n\n\t|Choose one of the doctors on the department...\n");
                             Console.ResetColor();
 
-                            for (int i = 0; i < Aplication.departments[selectedIndex].DoctorCount; i++)
+                            for (int i = 0; i < Aplication.departments[selectedIndex].Doctors.Count; i++)
                             {
                                 if (i == selectedIndex2)
                                 {
@@ -825,7 +804,7 @@ namespace ConsoleApp1.Controls
 
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
-                                    var depIndex = departments[selectedIndex];
+                                    var depIndex = Aplication.departments[selectedIndex];
                                     PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", depIndex.Name, Aplication.availableSlots[selectedIndex3], selectedDoctor.WorkExperience);
                                     string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "checks");
 
@@ -915,7 +894,7 @@ namespace ConsoleApp1.Controls
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("\nUsername is changed succesfully...");
                     Logs.LogInfo("Username changed.");
-                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
+                    JsonHelper.SaveToFile(Aplication.filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -982,7 +961,7 @@ namespace ConsoleApp1.Controls
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Password changed succesfully...");
                     Logs.LogInfo("Password changed.");
-                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
+                    JsonHelper.SaveToFile(Aplication.filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");
@@ -1047,7 +1026,7 @@ namespace ConsoleApp1.Controls
                     Console.ForegroundColor = ConsoleColor.DarkGreen;
                     Console.WriteLine("Phone changed succesfully...");
                     Logs.LogInfo("Telefon nomresi changed.");
-                    JsonHelper.SaveToFile(filePath, PathConfig.usersFromFile);
+                    JsonHelper.SaveToFile(Aplication.filePath, PathConfig.usersFromFile);
                     Console.ResetColor();
                     Console.ForegroundColor = ConsoleColor.DarkGray;
                     Console.WriteLine("\n\n\tPress Ecs for continue....");

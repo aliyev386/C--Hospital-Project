@@ -52,12 +52,14 @@ namespace ConsoleApp1.Helpers
         public static readonly string LogFilePath = Path.Combine(RootFolder, "hospital-log.txt");
 
         public static readonly string UsersFilePath = Path.Combine(RootFolder, "users.json");
+        public static readonly string TimeSlotsFilePath = Path.Combine(RootFolder, "timeSlots.json");
         public static readonly string DoctorsFilePath = Path.Combine(RootFolder, "doctors.json");
         public static readonly string CandidatesFilePath = Path.Combine(RootFolder, "candidates.json");
         public static readonly string DepartmentsFilePath = Path.Combine(RootFolder, "departments.json");
         public static readonly string AdminsFilePath = Path.Combine(RootFolder, "admins.json");
 
         public static List<User> usersFromFile = JsonHelper.LoadFromFile<User>(UsersFilePath);
+        public static List<string> timeSlotsFromFile = JsonHelper.LoadFromFile<string>(TimeSlotsFilePath);
         public static List<Doctor> doctorsFromFile = JsonHelper.LoadFromFile<Doctor>(DoctorsFilePath);
         public static List<Doctor> CandidatesFromFile = JsonHelper.LoadFromFile<Doctor>(CandidatesFilePath);
         public static List<Department> departmentsFromFile = JsonHelper.LoadFromFile<Department>(DepartmentsFilePath);

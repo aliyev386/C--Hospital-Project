@@ -4,9 +4,11 @@ using Microsoft.Extensions.Options;
 using Serilog;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.Design;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ConsoleApp1.Controls
 {
@@ -157,7 +159,7 @@ namespace ConsoleApp1.Controls
                     {
                         Logs.LogInfo("user daxil oldu");
                         Loading();
-                        Crud();
+                        Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
                         break;
                     }
                     else
@@ -254,12 +256,16 @@ namespace ConsoleApp1.Controls
             return selectedIndex;
         }
 
-        public static void Crud()
+        public static void Crud(List<User> usersFromFile, List<Department> departmentsFromFile)
         {
             string[] crudOption =
             {
-                "Show cv",
-                "Show cv",
+                "Show All Candidates",
+                "Show All Users",
+                "Show All Departments",
+                "Add New Department",
+                "Delete Tepartment Department",
+
             };
             int selectedIndex = 0;
             ConsoleKey key;
@@ -300,8 +306,6 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
             try
             {
-
-
                 if (selectedIndex == 0)
                 {
                     if (candidates.Count == 0)
@@ -331,6 +335,7 @@ namespace ConsoleApp1.Controls
                         Password: {candidate.Password}
                         Experience Year: {candidate.WorkExperience}
                         Reserved Time Slots: {candidate.ReservedTimeSlots}
+                        Age: {candidate.Age}
                         Department: {candidate.Department}
                         Motivation: {candidate.MotivationText}
                         ", true);
@@ -348,6 +353,7 @@ namespace ConsoleApp1.Controls
                             Password = candidate.Password,
                             WorkExperience = candidate.WorkExperience,
                             ReservedTimeSlots = candidate.ReservedTimeSlots,
+                            Age = candidate.Age,
                             Department = candidate.Department,
                             MotivationText = candidate.MotivationText,
                         };
@@ -427,6 +433,131 @@ namespace ConsoleApp1.Controls
                 Console.ResetColor();
                 Logs.LogException("There is no candidate yet.", ex);
             }
+            try
+            {
+                if (selectedIndex == 1)
+                {
+                    Console.Clear();
+                    AdminTxt();
+                    int userCount = 0;
+                    foreach (var item in usersFromFile)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"======== User {userCount++}=========");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(item);
+                        Console.ResetColor();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("There is no user yet.");
+                Console.ResetColor();
+                Logs.LogException("There is no user yet.", ex);
+            }
+            try
+            {
+                if (selectedIndex == 2)
+                {
+                    Console.Clear();
+                    AdminTxt();
+                    int depCount = 0;
+                    foreach (var item in departmentsFromFile)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine($"======== Department {depCount++}=========");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine(item);
+                        Console.ResetColor();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("There is no department yet.");
+                Console.ResetColor();
+                Logs.LogException("There is no department yet.", ex);
+            }
+            try
+            {
+                if (selectedIndex == 3)
+                {
+                    Console.Clear();
+                    AdminTxt();
+                    Console.WriteLine("\n");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("Enter department name: ");
+                    string depName = Console.ReadLine()!;
+                    Console.ResetColor();
+                    bool istrue = true;
+                    foreach (var item in departmentsFromFile)
+                    {
+                        if (depName == item.Name)
+                        {
+                            istrue = false;
+                        }
+                    }
+                    if (istrue)
+                    {
+                        Department newDep = new Department(depName, 0, null);
+                        departmentsFromFile.Add(newDep);
+                        JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
+                        Logs.LogInfo("Department successfully added");
+                    }
+                    else
+                    {
+                        throw new Exception("Department already exists");
+                    }
+
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Department already exists.");
+                Console.ResetColor();
+                Logs.LogException("Department already exists.", ex);
+            }
+            try
+            {
+                if (selectedIndex == 4)
+                {
+                    Console.Clear();
+                    AdminTxt();
+                    Console.WriteLine("\n");
+                    Console.ForegroundColor = ConsoleColor.Cyan;
+                    Console.Write("Enter department name: ");
+                    string depName = Console.ReadLine()!;
+                    Console.ResetColor();
+                    bool istrue = true;
+                    foreach (var item in departmentsFromFile)
+                    {
+                        if (depName == item.Name)
+                        {
+                            istrue = false;
+                            departmentsFromFile.Remove(item);
+                            JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
+                            Logs.LogInfo("Department successfully deleted");
+                            break;
+                        }
+                    }
+                    if(istrue)
+                    {
+                        throw new Exception("Department is not found");
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.ForegroundColor = ConsoleColor.DarkRed;
+                Console.WriteLine("Department is not found.");
+                Console.ResetColor();
+                Logs.LogException("Department is not found.", ex);
+            }
+
         }
 
         public static void MainMenu()

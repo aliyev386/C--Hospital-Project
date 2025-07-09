@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Models
 {
-    class TimeSlot
+    public class TimeSlot
     {
         public string Interval { get; set; }
         public bool IsReserved { get; set; }

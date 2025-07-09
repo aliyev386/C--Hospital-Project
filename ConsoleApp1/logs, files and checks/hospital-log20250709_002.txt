@@ -38,3 +38,36 @@
 [2025-07-09 12:36:54 INF] Loading...
 [2025-07-09 12:36:56 INF] crud operations.
 [2025-07-09 12:36:58 INF] Show Departments selected.
+[2025-07-09 14:17:16 INF] =============Hospital=============
+[2025-07-09 14:17:16 INF] Program started.
+[2025-07-09 14:17:17 INF] User selected
+[2025-07-09 14:17:17 INF] Sign in or Sign up.
+[2025-07-09 14:17:18 INF] Sign in selected.
+[2025-07-09 14:17:20 INF] Sign in selected.
+[2025-07-09 14:17:23 INF] User is logged in
+[2025-07-09 14:17:23 INF] Loading...
+[2025-07-09 14:17:25 INF] crud operations.
+[2025-07-09 14:17:28 INF] Show Departments selected.
+[2025-07-09 14:18:39 INF] =============Hospital=============
+[2025-07-09 14:18:39 INF] Program started.
+[2025-07-09 14:18:40 INF] User selected
+[2025-07-09 14:18:40 INF] Sign in or Sign up.
+[2025-07-09 14:18:41 INF] Sign in selected.
+[2025-07-09 14:18:43 INF] User is logged in
+[2025-07-09 14:18:43 INF] Loading...
+[2025-07-09 14:18:45 INF] crud operations.
+[2025-07-09 14:18:46 INF] Show Departments selected.
+[2025-07-09 14:19:08 INF] =============Hospital=============
+[2025-07-09 14:19:08 INF] Program started.
+[2025-07-09 14:19:09 INF] Doctor selected
+[2025-07-09 14:19:09 INF] Sign in or Sign up.
+[2025-07-09 14:19:10 INF] Sign up selected.
+[2025-07-09 14:19:32 INF] Cv sended
+[2025-07-09 14:19:35 INF] =============Hospital=============
+[2025-07-09 14:19:35 INF] Program started.
+[2025-07-09 14:19:54 INF] =============Hospital=============
+[2025-07-09 14:19:54 INF] Program started.
+[2025-07-09 14:19:55 INF] Admin selected
+[2025-07-09 14:19:58 INF] user daxil oldu
+[2025-07-09 14:19:58 INF] Loading...
+[2025-07-09 14:20:08 INF] Doctor accepted: lksfjg slfkgh
