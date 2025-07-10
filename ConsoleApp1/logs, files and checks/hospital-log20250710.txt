@@ -87,3 +87,37 @@ System.Exception: It cant be null
 [2025-07-10 15:50:49 INF] Sign in selected.
 [2025-07-10 15:51:02 INF] Doctor is logged in
 [2025-07-10 15:51:02 INF] Loading...
+[2025-07-10 16:41:07 INF] =============Hospital=============
+[2025-07-10 16:41:07 INF] Program started.
+[2025-07-10 16:41:11 INF] Doctor selected
+[2025-07-10 16:41:11 INF] Sign in or Sign up.
+[2025-07-10 16:41:12 INF] Sign in selected.
+[2025-07-10 16:41:26 INF] Doctor is logged in
+[2025-07-10 16:41:26 INF] Loading...
+[2025-07-10 17:51:27 INF] =============Hospital=============
+[2025-07-10 17:51:27 INF] Program started.
+[2025-07-10 17:51:32 INF] Doctor selected
+[2025-07-10 17:51:32 INF] Sign in or Sign up.
+[2025-07-10 17:51:34 INF] Sign in selected.
+[2025-07-10 17:52:01 INF] Doctor is logged in
+[2025-07-10 17:52:01 INF] Loading...
+[2025-07-10 21:42:15 INF] =============Hospital=============
+[2025-07-10 21:42:15 INF] Program started.
+[2025-07-10 21:42:17 INF] User selected
+[2025-07-10 21:42:17 INF] Sign in or Sign up.
+[2025-07-10 21:42:19 INF] Sign in selected.
+[2025-07-10 21:42:21 ERR] Password number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.UserControl.SignIn(List`1 usersFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\UserControl.cs:line 494
+[2025-07-10 21:42:22 INF] Sign in selected.
+[2025-07-10 21:42:27 INF] User is logged in
+[2025-07-10 21:42:27 INF] Loading...
+[2025-07-10 21:42:29 INF] crud operations.
+[2025-07-10 21:42:31 INF] Show Departments selected.
+[2025-07-10 21:44:55 INF] =============Hospital=============
+[2025-07-10 21:44:55 INF] Program started.
+[2025-07-10 21:44:59 INF] Doctor selected
+[2025-07-10 21:44:59 INF] Sign in or Sign up.
+[2025-07-10 21:45:00 INF] Sign in selected.
+[2025-07-10 21:45:15 INF] Doctor is logged in
+[2025-07-10 21:45:15 INF] Loading...

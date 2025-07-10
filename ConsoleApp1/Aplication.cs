@@ -31,7 +31,7 @@ namespace ConsoleApp1
         public static List<Doctor> allDoctors = JsonHelper.LoadFromFile<Doctor>(PathConfig.DoctorsFilePath);
 
         public static List<Department> departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
-
+        public static List<Reservation> AllReservations = JsonHelper.LoadFromFile<Reservation>(PathConfig.ReservationFilePath);
 
 
 
@@ -43,6 +43,11 @@ namespace ConsoleApp1
                 departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
                 return;
             }
+            if (AllReservations == null)
+            {
+                AllReservations = new List<Reservation>();
+            }
+
 
 
             emptySlots = new List<string>();

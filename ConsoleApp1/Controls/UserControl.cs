@@ -796,14 +796,22 @@ namespace ConsoleApp1.Controls
                                 else
                                 {
                                     selectedDoctor.TimeSlots.Add(selectedTime);
-                                    JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath,Aplication.departments);
+                                    JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, Aplication.departments);
+
                                     var doctorInAllDoctors = Aplication.allDoctors.FirstOrDefault(d => d.UserName == selectedDoctor.UserName);
                                     if (doctorInAllDoctors != null && !doctorInAllDoctors.TimeSlots.Contains(selectedTime))
                                     {
                                         doctorInAllDoctors.TimeSlots.Add(selectedTime);
                                     }
-                                    JsonHelper.SaveToFile(PathConfig.DoctorsFilePath,Aplication.allDoctors);
-                                    Console.ForegroundColor = ConsoleColor.DarkCyan;
+                                    JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, Aplication.allDoctors);
+                                    Aplication.AllReservations.Add(new Reservation
+                                    {
+                                        DoctorUserName = selectedDoctor.UserName,
+                                        TimeSlot = selectedTime,
+                                        ReservedByUserName = index.UserName
+                                    });
+                                    JsonHelper.SaveToFile(PathConfig.ReservationFilePath, Aplication.AllReservations);
+
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
                                     var depIndex = Aplication.departments[selectedIndex];
                                     PrintCheck($"{index.Name} {index.UserName}", index.Email, $"{selectedDoctor.Name} {selectedDoctor.Surname}", depIndex.Name, Aplication.availableSlots[selectedIndex3], selectedDoctor.WorkExperience);
@@ -813,9 +821,6 @@ namespace ConsoleApp1.Controls
                                     {
                                         Directory.CreateDirectory(rootFolder);
                                     }
-
-
-
                                     string body = $"       Reservation confirmation\n" +
                                     $"======================================\n" +
                                     $"User: {index.Name} {index.Surname}\n" +

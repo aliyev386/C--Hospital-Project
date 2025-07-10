@@ -1,0 +1,11 @@
+       Reservation confirmation
+======================================
+User: omer omer
+Email: aliyevomer386@gmail.com
+Department: Pediatriya
+Doctor: Umid Aslanov
+Date: 1.01.2015
+Time: 12:00-14:00
+======================================
+Thank you! your reservation has
+been succesfully registered

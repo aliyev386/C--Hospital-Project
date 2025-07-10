@@ -4,7 +4,8 @@
     "reservedTimeSlots": [],
     "department": "Pediatriya",
     "timeSlots": [
-      "09:00-11:00"
+      "09:00-11:00",
+      "12:00-14:00"
     ],
     "motivationText": "\u0130nsanlara k\u00F6m\u0259k etm\u0259k ist\u0259yir\u0259m.",
     "name": "Umid",
