@@ -652,11 +652,6 @@ namespace ConsoleApp1.Controls
 
                     string free = " free";
                     string reserved = " reserved";
-
-                    
-
-
-
                     int selectedIndex = 0;
 
                     ConsoleKey key;
@@ -801,7 +796,13 @@ namespace ConsoleApp1.Controls
                                 else
                                 {
                                     selectedDoctor.TimeSlots.Add(selectedTime);
-
+                                    JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath,Aplication.departments);
+                                    var doctorInAllDoctors = Aplication.allDoctors.FirstOrDefault(d => d.UserName == selectedDoctor.UserName);
+                                    if (doctorInAllDoctors != null && !doctorInAllDoctors.TimeSlots.Contains(selectedTime))
+                                    {
+                                        doctorInAllDoctors.TimeSlots.Add(selectedTime);
+                                    }
+                                    JsonHelper.SaveToFile(PathConfig.DoctorsFilePath,Aplication.allDoctors);
                                     Console.ForegroundColor = ConsoleColor.DarkCyan;
                                     Console.WriteLine($"\n{index.Name} {index.Surname} siz saat {selectedTime} de {selectedDoctor.Name} hekimin qebuluna yazildiniz.");
                                     var depIndex = Aplication.departments[selectedIndex];
@@ -809,7 +810,9 @@ namespace ConsoleApp1.Controls
                                     string rootFolder = Path.Combine(AppContext.BaseDirectory, "logs,files and checks", "checks");
 
                                     if (!Directory.Exists(rootFolder))
+                                    {
                                         Directory.CreateDirectory(rootFolder);
+                                    }
 
 
 
@@ -825,11 +828,21 @@ namespace ConsoleApp1.Controls
                                     $"Thank you! your reservation has\nbeen succesfully registered\n";
                                     GmailSender.SendEmail(index.Email, "New Reservation Created", body);
 
-                                    Console.WriteLine("\nPress enter for continue...");
-                                    Console.ReadLine();
+                                    Console.ForegroundColor = ConsoleColor.DarkGray;
+                                    Console.WriteLine("\tPress Ecs for continue....");
                                     Console.ResetColor();
-                                    MainMenu(index);
-                                    break;
+                                    ConsoleKey ecsKey;
+                                    ecsKey = Console.ReadKey(true).Key;
+                                    if (ecsKey == ConsoleKey.Escape)
+                                    {
+                                        Console.Clear();
+                                        MainMenu(index);
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
                             }
                         }

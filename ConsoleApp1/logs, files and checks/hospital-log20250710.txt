@@ -1,0 +1,89 @@
+[2025-07-10 14:58:06 INF] =============Hospital=============
+[2025-07-10 14:58:06 INF] Program started.
+[2025-07-10 14:58:07 INF] Admin selected
+[2025-07-10 14:58:10 INF] user daxil oldu
+[2025-07-10 14:58:10 INF] Loading...
+[2025-07-10 15:04:56 INF] =============Hospital=============
+[2025-07-10 15:04:56 INF] Program started.
+[2025-07-10 15:05:00 INF] Admin selected
+[2025-07-10 15:05:02 INF] user daxil oldu
+[2025-07-10 15:05:02 INF] Loading...
+[2025-07-10 15:06:26 INF] =============Hospital=============
+[2025-07-10 15:06:26 INF] Program started.
+[2025-07-10 15:06:26 INF] Admin selected
+[2025-07-10 15:06:31 INF] user daxil oldu
+[2025-07-10 15:06:31 INF] Loading...
+[2025-07-10 15:06:42 INF] =============Hospital=============
+[2025-07-10 15:06:42 INF] Program started.
+[2025-07-10 15:06:43 INF] Admin selected
+[2025-07-10 15:06:48 INF] user daxil oldu
+[2025-07-10 15:06:48 INF] Loading...
+[2025-07-10 15:09:19 INF] =============Hospital=============
+[2025-07-10 15:09:19 INF] Program started.
+[2025-07-10 15:09:20 INF] Admin selected
+[2025-07-10 15:09:26 INF] user daxil oldu
+[2025-07-10 15:09:26 INF] Loading...
+[2025-07-10 15:11:15 INF] =============Hospital=============
+[2025-07-10 15:11:15 INF] Program started.
+[2025-07-10 15:11:19 INF] User selected
+[2025-07-10 15:11:19 INF] Sign in or Sign up.
+[2025-07-10 15:11:21 INF] Sign up selected.
+[2025-07-10 15:11:45 INF] Loading...
+[2025-07-10 15:11:47 INF] User signed up.
+[2025-07-10 15:11:47 INF] Sign in selected.
+[2025-07-10 15:11:54 INF] User is logged in
+[2025-07-10 15:11:54 INF] Loading...
+[2025-07-10 15:11:56 INF] crud operations.
+[2025-07-10 15:12:16 INF] Show Departments selected.
+[2025-07-10 15:12:39 INF] crud operations.
+[2025-07-10 15:13:06 INF] =============Hospital=============
+[2025-07-10 15:13:06 INF] Program started.
+[2025-07-10 15:20:00 INF] =============Hospital=============
+[2025-07-10 15:20:00 INF] Program started.
+[2025-07-10 15:20:03 INF] User selected
+[2025-07-10 15:20:03 INF] Sign in or Sign up.
+[2025-07-10 15:20:06 INF] Sign in selected.
+[2025-07-10 15:20:10 INF] User is logged in
+[2025-07-10 15:20:10 INF] Loading...
+[2025-07-10 15:20:12 INF] crud operations.
+[2025-07-10 15:20:14 INF] Show Departments selected.
+[2025-07-10 15:20:23 INF] crud operations.
+[2025-07-10 15:24:29 INF] Show Departments selected.
+[2025-07-10 15:30:07 INF] =============Hospital=============
+[2025-07-10 15:30:07 INF] Program started.
+[2025-07-10 15:30:07 INF] Admin selected
+[2025-07-10 15:30:08 ERR] Username number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.AdminControl.LogIn(List`1 adminFromFile) in C:\Users\Omer\Desktop\C#-Hospital-Procekt\ConsoleApp1\ConsoleApp1\Controls\AdminControl.cs:line 128
+[2025-07-10 15:30:13 INF] =============Hospital=============
+[2025-07-10 15:30:13 INF] Program started.
+[2025-07-10 15:30:15 INF] User selected
+[2025-07-10 15:30:15 INF] Sign in or Sign up.
+[2025-07-10 15:30:16 INF] Sign in selected.
+[2025-07-10 15:30:20 INF] Sign in selected.
+[2025-07-10 15:30:24 INF] User is logged in
+[2025-07-10 15:30:24 INF] Loading...
+[2025-07-10 15:30:26 INF] crud operations.
+[2025-07-10 15:30:32 INF] Show Departments selected.
+[2025-07-10 15:30:37 INF] crud operations.
+[2025-07-10 15:47:45 INF] =============Hospital=============
+[2025-07-10 15:47:45 INF] Program started.
+[2025-07-10 15:47:56 INF] Doctor selected
+[2025-07-10 15:47:56 INF] Sign in or Sign up.
+[2025-07-10 15:47:57 INF] Sign in selected.
+[2025-07-10 15:48:21 INF] Doctor is logged in
+[2025-07-10 15:48:21 INF] Loading...
+[2025-07-10 15:49:00 INF] =============Hospital=============
+[2025-07-10 15:49:00 INF] Program started.
+[2025-07-10 15:49:02 INF] Doctor selected
+[2025-07-10 15:49:02 INF] Sign in or Sign up.
+[2025-07-10 15:49:03 INF] Sign in selected.
+[2025-07-10 15:49:15 INF] Doctor is logged in
+[2025-07-10 15:49:15 INF] Loading...
+[2025-07-10 15:50:47 INF] =============Hospital=============
+[2025-07-10 15:50:47 INF] Program started.
+[2025-07-10 15:50:49 INF] Doctor selected
+[2025-07-10 15:50:49 INF] Sign in or Sign up.
+[2025-07-10 15:50:49 INF] Sign in selected.
+[2025-07-10 15:51:02 INF] Doctor is logged in
+[2025-07-10 15:51:02 INF] Loading...

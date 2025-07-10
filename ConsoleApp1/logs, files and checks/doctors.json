@@ -2,8 +2,10 @@
   {
     "workExperience": "2015-01-01T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
-    "timeSlots": [],
+    "department": "Pediatriya",
+    "timeSlots": [
+      "09:00-11:00"
+    ],
     "motivationText": "\u0130nsanlara k\u00F6m\u0259k etm\u0259k ist\u0259yir\u0259m.",
     "name": "Umid",
     "surname": "Aslanov",
@@ -15,7 +17,7 @@
   {
     "workExperience": "2010-08-05T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Pediatriya",
     "timeSlots": [],
     "motivationText": "H\u0259yat xilas etm\u0259k m\u0259nim m\u0259qs\u0259dimdir",
     "name": "Huseyin",
@@ -28,7 +30,7 @@
   {
     "workExperience": "2020-03-04T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Pediatriya",
     "timeSlots": [],
     "motivationText": "M\u0259suliyy\u0259tli v\u0259 vicdanl\u0131yam",
     "name": "Ali",
@@ -41,7 +43,7 @@
   {
     "workExperience": "2010-08-05T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Travmatologiya",
     "timeSlots": [],
     "motivationText": "H\u0259mi\u015F\u0259 h\u0259kim olmaq ist\u0259mi\u015F\u0259m",
     "name": "Huseyin",
@@ -54,7 +56,7 @@
   {
     "workExperience": "2020-03-04T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Travmatologiya",
     "timeSlots": [],
     "motivationText": "Tibb m\u0259nim h\u0259v\u0259simdir",
     "name": "Heyder",
@@ -67,7 +69,7 @@
   {
     "workExperience": "2010-08-05T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Stomatologiya",
     "timeSlots": [],
     "motivationText": "C\u0259miyy\u0259t\u0259 faydal\u0131 olmaq ist\u0259yir\u0259m",
     "name": "Resad",
@@ -80,7 +82,7 @@
   {
     "workExperience": "2020-03-04T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Stomatologiya",
     "timeSlots": [],
     "motivationText": "T\u0259cr\u00FCb\u0259mi b\u00F6l\u00FC\u015Fm\u0259k \u00FC\u00E7\u00FCn burdayam",
     "name": "Emin",
@@ -93,7 +95,7 @@
   {
     "workExperience": "2010-08-05T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Stomatologiya",
     "timeSlots": [],
     "motivationText": "Pe\u015F\u0259m\u0259 sadiq\u0259m",
     "name": "Ibrahim",
@@ -106,7 +108,7 @@
   {
     "workExperience": "2020-03-04T00:00:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Stomatologiya",
     "timeSlots": [],
     "motivationText": "Yard\u0131m etm\u0259k \u00FC\u00E7\u00FCn hekim olmag isdeyirem",
     "name": "Ali",
@@ -117,120 +119,16 @@
     "age": 45
   },
   {
-    "workExperience": "2025-07-08T17:20:27.8727059+04:00",
+    "workExperience": "2025-07-10T14:17:56.014296+04:00",
     "reservedTimeSlots": [],
-    "department": null,
+    "department": "Pediatriya",
     "timeSlots": [],
-    "motivationText": "hekim olmag isdeyirdim;(",
-    "name": "ayan",
-    "surname": "aliyeva",
-    "email": "ayan@gmail.om",
-    "userName": "ayan",
-    "password": "ayan123",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T10:21:04.0982568+04:00",
-    "reservedTimeSlots": [],
-    "department": null,
-    "timeSlots": [],
-    "motivationText": "gf",
-    "name": "gdkh",
-    "surname": "gfh",
-    "email": "gh@gjdf.hgd",
-    "userName": "dfgdf",
-    "password": "dfgdfs",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T11:07:05.3074357+04:00",
-    "reservedTimeSlots": [],
-    "department": null,
-    "timeSlots": [],
-    "motivationText": "doc",
-    "name": "yeni ",
-    "surname": "doctor",
-    "email": "doc@gmail.com",
-    "userName": "doc",
-    "password": "tor",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T11:44:23.9655938+04:00",
-    "reservedTimeSlots": [],
-    "department": null,
-    "timeSlots": [],
-    "motivationText": "fdh",
-    "name": "dfjg",
-    "surname": "dgh",
-    "email": "fgdh@gmail.com",
-    "userName": "gsjk",
-    "password": "sdfg",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-08T22:10:52.3972033+04:00",
-    "reservedTimeSlots": [],
-    "department": null,
-    "timeSlots": [],
-    "motivationText": "dfh",
-    "name": "dfkjghdf",
-    "surname": "djhdf",
-    "email": "dh@gffdf.gfd",
-    "userName": "gfd",
+    "motivationText": "lkjdgh",
+    "name": "lsfkdjg",
+    "surname": "slkjgh",
+    "email": "ldfkh@dfghgf.fg",
+    "userName": "dfg",
     "password": "dfg",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T12:05:27.1087685+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "dokdoram",
-    "name": "resid",
-    "surname": "canavar",
-    "email": "resdi@gmail.com",
-    "userName": "jtg",
-    "password": "gij",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T12:09:34.3062971+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "dfui",
-    "name": "romer",
-    "surname": "dfkjg",
-    "email": "f@jfg.fd",
-    "userName": "fgbvfg",
-    "password": "fd",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T12:11:39.4872219+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "fdg",
-    "name": "omerre",
-    "surname": "ldfkjh",
-    "email": "\u0027fj@lkfg.fgg",
-    "userName": "rg",
-    "password": "d",
-    "age": null
-  },
-  {
-    "workExperience": "2025-07-09T12:20:16.3351438+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "dfg",
-    "name": "orxan",
-    "surname": "dfg",
-    "email": "sdfg@gfd.fg",
-    "userName": "fsd",
-    "password": "gf",
-    "age": null
+    "age": 4
   }
 ]

@@ -50,21 +50,12 @@ namespace ConsoleApp1.Controls
             new Admin("Omer","Aliyev","aliyevomer386@gmail.com","admin","admin123",15)
         };
 
-        public static string filePathAdmin = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "admins.json"
-        );
 
-        public static List<Admin> GetAllAdmins()
-        {
-            return JsonHelper.LoadFromFile<Admin>(filePathAdmin);
-        }
 
         public AdminControl() { }
         static AdminControl()
         {
-            string folderPath = Path.GetDirectoryName(filePathAdmin)!;
+            string folderPath = Path.GetDirectoryName(Aplication.filePathAdmin)!;
             if (!Directory.Exists(folderPath))
             {
                 Directory.CreateDirectory(folderPath);
@@ -192,7 +183,9 @@ namespace ConsoleApp1.Controls
             do
             {
                 Console.Clear();
+                Console.ForegroundColor = ConsoleColor.DarkCyan;
                 Console.WriteLine(title);
+                Console.ResetColor();
                 Console.WriteLine();
 
                 for (int i = 0; i < options.Count; i++)
@@ -205,7 +198,9 @@ namespace ConsoleApp1.Controls
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine($"  {options[i]}");
+                        Console.ResetColor();
                     }
                 }
 
@@ -219,7 +214,9 @@ namespace ConsoleApp1.Controls
                     }
                     else
                     {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
                         Console.WriteLine("  Back");
+                        Console.ResetColor();
                     }
                 }
 
@@ -251,7 +248,10 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
 
             if (showBack && selectedIndex == options.Count)
+            {
+                Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
                 return -1;
+            }
 
             return selectedIndex;
         }
@@ -308,6 +308,7 @@ namespace ConsoleApp1.Controls
             {
                 if (selectedIndex == 0)
                 {
+
                     if (candidates.Count == 0)
                     {
                         Console.ForegroundColor = ConsoleColor.Red;
@@ -319,7 +320,12 @@ namespace ConsoleApp1.Controls
 
                     int selectedIndexCv = NavigateMenu(
                         candidates.Select(d => $"{d.Name} {d.Surname}").ToList(),
-                        "\n\t\t\t\t\t --- Candidates ---\n",
+                        @"
+                    
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                █ ▄▄▄ ██▀▄ ██▄ ▀█▄ ▄█▄ ▄▄▀█▄ ▄█▄ ▄▄▀██▀▄ ██ ▄ ▄ █▄ ▄▄ █ ▄▄▄▄█
+                █ ███▀██ ▀ ███ █▄▀ ███ ██ ██ ███ ██ ██ ▀ ████ ████ ▄█▀█▄▄▄▄ █
+                ▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▀▀▄▄▀▄▄▄▄▀▀▄▄▄▀▄▄▄▄▀▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀",
                         true);
 
                     if (selectedIndexCv == -1) return;
@@ -377,10 +383,10 @@ namespace ConsoleApp1.Controls
                         {
                             Aplication.departments[index].Doctors = new List<Doctor>();
                         }
-                        Aplication.departments[index].Doctors.Add(newDoctor);
-                        JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, doctors);
-                        JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, Aplication.departments);
                         doctors.Add(newDoctor);
+                        JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, doctors);
+                        Aplication.departments[index].Doctors.Add(newDoctor);
+                        JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, Aplication.departments);
                         candidates.Remove(candidate);
                         JsonHelper.SaveToFile(PathConfig.CandidatesFilePath, candidates);
 
@@ -405,6 +411,7 @@ namespace ConsoleApp1.Controls
                     }
                     else if (actionIndex == 1)
                     {
+
                         candidates.Remove(candidate);
                         JsonHelper.SaveToFile(PathConfig.CandidatesFilePath, candidates);
 
@@ -422,7 +429,12 @@ namespace ConsoleApp1.Controls
                         Console.WriteLine("Candidate has been rejected.");
                         Console.ResetColor();
                         Log.Information("Doctor rejected: {0} {1}", candidate.Name, candidate.Surname);
-                        Console.ReadKey();
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+
                     }
                 }
             }
@@ -437,16 +449,40 @@ namespace ConsoleApp1.Controls
             {
                 if (selectedIndex == 1)
                 {
-                    Console.Clear();
-                    AdminTxt();
-                    int userCount = 0;
-                    foreach (var item in usersFromFile)
+                    while (true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"======== User {userCount++}=========");
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine(item);
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine(@"
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                █▄ ██ ▄█ ▄▄▄▄█▄ ▄▄ █▄ ▄▄▀█ ▄▄▄▄█
+                ██ ██ ██▄▄▄▄ ██ ▄█▀██ ▄ ▄█▄▄▄▄ █
+                ▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▀▄▄▀▄▄▄▄▄▀");
                         Console.ResetColor();
+                        int userCount = 0;
+                        foreach (var item in usersFromFile)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine($"======== User {userCount++}=========");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(item);
+                            Console.ResetColor();
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                 }
             }
@@ -461,16 +497,42 @@ namespace ConsoleApp1.Controls
             {
                 if (selectedIndex == 2)
                 {
-                    Console.Clear();
-                    AdminTxt();
-                    int depCount = 0;
-                    foreach (var item in departmentsFromFile)
+                    while (true)
                     {
-                        Console.ForegroundColor = ConsoleColor.Blue;
-                        Console.WriteLine($"======== Department {depCount++}=========");
-                        Console.ForegroundColor = ConsoleColor.Cyan;
-                        Console.WriteLine(item);
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine(@"
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                █▄ ▄▄▀█▄ ▄▄ █▄ ▄▄ ██▀▄ ██▄ ▄▄▀█ ▄ ▄ █▄ ▀█▀ ▄█▄ ▄▄ █▄ ▀█▄ ▄█ ▄ ▄ █ ▄▄▄▄█
+                ██ ██ ██ ▄█▀██ ▄▄▄██ ▀ ███ ▄ ▄███ ████ █▄█ ███ ▄█▀██ █▄▀ ████ ███▄▄▄▄ █
+                ▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀
+
+");
                         Console.ResetColor();
+                        int depCount = 0;
+                        foreach (var item in departmentsFromFile)
+                        {
+                            Console.ForegroundColor = ConsoleColor.Blue;
+                            Console.WriteLine($"======== Department {depCount++}=========");
+                            Console.ForegroundColor = ConsoleColor.Cyan;
+                            Console.WriteLine(item.Name);
+                            Console.ResetColor();
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
                     }
                 }
             }
@@ -485,33 +547,57 @@ namespace ConsoleApp1.Controls
             {
                 if (selectedIndex == 3)
                 {
-                    Console.Clear();
-                    AdminTxt();
-                    Console.WriteLine("\n");
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("Enter department name: ");
-                    string depName = Console.ReadLine()!;
-                    Console.ResetColor();
-                    bool istrue = true;
-                    foreach (var item in departmentsFromFile)
+                    while (true)
                     {
-                        if (depName == item.Name)
+
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine(@"
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                ██▀▄ ██▄ ▄▄▀█▄ ▄▄▀████▄ ▄▄▀█▄ ▄▄ █▄ ▄▄ ██▀▄ ██▄ ▄▄▀█ ▄ ▄ █▄ ▀█▀ ▄█▄ ▄▄ █▄ ▀█▄ ▄█ ▄ ▄ █
+                ██ ▀ ███ ██ ██ ██ █████ ██ ██ ▄█▀██ ▄▄▄██ ▀ ███ ▄ ▄███ ████ █▄█ ███ ▄█▀██ █▄▀ ████ ██
+                ▀▄▄▀▄▄▀▄▄▄▄▀▀▄▄▄▄▀▀▀▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀");
+                        Console.ResetColor();
+                        Console.WriteLine("\n");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("Enter department name: ");
+                        string depName = Console.ReadLine()!;
+                        Console.ResetColor();
+                        bool istrue = true;
+                        foreach (var item in departmentsFromFile)
                         {
-                            istrue = false;
+                            if (depName == item.Name)
+                            {
+                                istrue = false;
+                            }
+                        }
+                        if (istrue)
+                        {
+                            Department newDep = new Department(depName, 0, null);
+                            departmentsFromFile.Add(newDep);
+                            JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
+                            Logs.LogInfo("Department successfully added");
+                        }
+                        else
+                        {
+                            throw new Exception("Department already exists");
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
+                            break;
+                        }
+                        else
+                        {
+                            continue;
                         }
                     }
-                    if (istrue)
-                    {
-                        Department newDep = new Department(depName, 0, null);
-                        departmentsFromFile.Add(newDep);
-                        JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
-                        Logs.LogInfo("Department successfully added");
-                    }
-                    else
-                    {
-                        throw new Exception("Department already exists");
-                    }
-
                 }
             }
             catch (Exception ex)
@@ -525,29 +611,55 @@ namespace ConsoleApp1.Controls
             {
                 if (selectedIndex == 4)
                 {
-                    Console.Clear();
-                    AdminTxt();
-                    Console.WriteLine("\n");
-                    Console.ForegroundColor = ConsoleColor.Cyan;
-                    Console.Write("Enter department name: ");
-                    string depName = Console.ReadLine()!;
-                    Console.ResetColor();
-                    bool istrue = true;
-                    foreach (var item in departmentsFromFile)
+                    while (true)
                     {
-                        if (depName == item.Name)
+
+                        Console.Clear();
+                        Console.ForegroundColor = ConsoleColor.DarkCyan;
+                        Console.WriteLine(@"
+                ▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄
+                █▄ ▄▄▀█▄ ▄▄ █▄ ▄███▄ ▄▄ █ ▄ ▄ █▄ ▄▄ █████▄ ▄▄▀█▄ ▄▄ █▄ ▄▄ ██▀▄ ██▄ ▄▄▀█ ▄ ▄ █▄ ▀█▀ ▄█▄ ▄▄ █▄ ▀█▄ ▄█ ▄ ▄ █
+                ██ ██ ██ ▄█▀██ ██▀██ ▄█▀███ ████ ▄█▀██████ ██ ██ ▄█▀██ ▄▄▄██ ▀ ███ ▄ ▄███ ████ █▄█ ███ ▄█▀██ █▄▀ ████ ██
+                ▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▄▄▀▄▄▄▄▄▀▀▄▄▄▀▀▄▄▄▄▄▀▀▀▀▀▄▄▄▄▀▀▄▄▄▄▄▀▄▄▄▀▀▀▄▄▀▄▄▀▄▄▀▄▄▀▀▄▄▄▀▀▄▄▄▀▄▄▄▀▄▄▄▄▄▀▄▄▄▀▀▄▄▀▀▄▄▄▀");
+                        Console.ResetColor();
+                        Console.WriteLine("\n");
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("Enter department name: ");
+                        string depName = Console.ReadLine()!;
+                        Console.ResetColor();
+                        bool istrue = true;
+                        foreach (var item in departmentsFromFile)
                         {
-                            istrue = false;
-                            departmentsFromFile.Remove(item);
-                            JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
-                            Logs.LogInfo("Department successfully deleted");
+                            if (depName == item.Name)
+                            {
+                                istrue = false;
+                                departmentsFromFile.Remove(item);
+                                JsonHelper.SaveToFile(Aplication.filePathDP, departmentsFromFile);
+                                Logs.LogInfo("Department successfully deleted");
+                                break;
+                            }
+                        }
+                        if (istrue)
+                        {
+                            throw new Exception("Department is not found");
+                        }
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
                             break;
                         }
+                        else
+                        {
+                            continue;
+                        }
                     }
-                    if(istrue)
-                    {
-                        throw new Exception("Department is not found");
-                    }
+
                 }
             }
             catch (Exception ex)
@@ -562,7 +674,7 @@ namespace ConsoleApp1.Controls
 
         public static void MainMenu()
         {
-            LogIn(GetAllAdmins());
+            LogIn(Aplication.GetAllAdmins());
 
 
         }

@@ -16,31 +16,12 @@ namespace ConsoleApp1.Controls
     public class DoctorControl
     {
 
-        public static List<Candidate> allCandidates = JsonHelper.LoadFromFile<Candidate>(PathConfig.CandidatesFilePath);
-
-        public static string filePathD = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "doctors.json"
-        );
-        public static List<Doctor> GetAllDoctors()
-        {
-            return JsonHelper.LoadFromFile<Doctor>(filePathD);
-        }
-        public static string filePathC = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-        "logs, files and checks",
-        "candidates.json"
-        );
-        public static List<Candidate> GetAllCandidates()
-        {
-            return JsonHelper.LoadFromFile<Candidate>(filePathC);
-        }
+        
 
         public DoctorControl() { }
         static DoctorControl()
         {
-            string folderPathD = Path.GetDirectoryName(filePathD)!;
+            string folderPathD = Path.GetDirectoryName(Aplication.filePathDoctor)!;
             if (!Directory.Exists(folderPathD))
             {
                 Directory.CreateDirectory(folderPathD);
@@ -53,14 +34,14 @@ namespace ConsoleApp1.Controls
                 JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, Aplication.allDoctors);
             }
 
-            string folderPathC = Path.GetDirectoryName(filePathC)!;
+            string folderPathC = Path.GetDirectoryName(Aplication.filePathC)!;
             if (!Directory.Exists(folderPathC))
             {
                 Directory.CreateDirectory(folderPathC);
             }
             if (!File.Exists(PathConfig.CandidatesFilePath))
             {
-                JsonHelper.SaveToFile(PathConfig.CandidatesFilePath, allCandidates);
+                JsonHelper.SaveToFile(PathConfig.CandidatesFilePath, Aplication.allCandidates);
             }
 
         }
@@ -164,11 +145,11 @@ namespace ConsoleApp1.Controls
             } while (key != ConsoleKey.Enter);
             if (selectedIndex == 0)
             {
-                SignUp(GetAllCandidates());
+                SignUp(Aplication.GetAllCandidates());
             }
             else if (selectedIndex == 1)
             {
-                SignIn(GetAllDoctors());
+                SignIn(Aplication.GetAllDoctors());
             }
         }
 
@@ -198,7 +179,7 @@ namespace ConsoleApp1.Controls
             {
                 Console.ForegroundColor = ConsoleColor.Cyan;
                 Console.WriteLine();
-                Console.WriteLine("\t|Enter name: ");
+                Console.Write("\t|Enter name: ");
                 name = Console.ReadLine()!;
                 if (name == "")
                 {
@@ -540,8 +521,112 @@ namespace ConsoleApp1.Controls
 
         public static void MainMenu(Doctor index)
         {
+            string[] crudOptions = {
+                "\n\n\n\t|1.Show profile",
+                "\n\t|2.Show All Patients",
+                "\n\t|3.Change Username",
+                "\n\t|4.Change Password",
+                "\n\n\t|Close",
+
+            };
+            int selectedCrudIndex = 0;
+            ConsoleKey crudKey;
+            do
+            {
+                Console.Clear();
+                DoctorTxt();
+                for (int i = 0; i < crudOptions.Length; i++)
+                {
+                    if (i == selectedCrudIndex)
+                    {
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine("   " + crudOptions[i]);
+                        Console.ResetColor();
+                    }
+                    else
+                    {
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("   " + crudOptions[i]);
+                        Console.ResetColor();
+                    }
+                }
+
+                crudKey = Console.ReadKey(true).Key;
+                if (crudKey == ConsoleKey.UpArrow)
+                {
+                    selectedCrudIndex = (selectedCrudIndex == 0) ? crudOptions.Length - 1 : selectedCrudIndex - 1;
+                }
+                else if (crudKey == ConsoleKey.DownArrow)
+                {
+                    selectedCrudIndex = (selectedCrudIndex + 1) % crudOptions.Length;
+                }
+
+            } while (crudKey != ConsoleKey.Enter);
+            if(selectedCrudIndex == 0)
+            {
+                while (true)
+                {
+                    var doctorInList = PathConfig.doctorsFromFile.FirstOrDefault(u => u.Email == index.Email);
+                    if (doctorInList!.Email == index.Email)
+                    {
+
+                        Console.Clear();
+                        DoctorTxt();
+                        Console.WriteLine();
+                        Console.WriteLine();
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.WriteLine("\n--- Doctor PROFILE ---\n");
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tName: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(doctorInList.Name);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tSurname: ");
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine(doctorInList.Surname);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tEmail: ");
+                        Console.ForegroundColor = ConsoleColor.Gray;
+                        Console.WriteLine(doctorInList.Email);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tUsername: ");
+                        Console.ForegroundColor = ConsoleColor.Blue;
+                        Console.WriteLine(doctorInList.UserName);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tPassword: ");
+                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.WriteLine(doctorInList.Password);
+
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.Write("\tReservations times: ");
+                        Console.ForegroundColor = ConsoleColor.DarkYellow;
+                        Console.WriteLine(doctorInList.TimeSlots.ToString());
 
 
+                        Console.ForegroundColor = ConsoleColor.White;
+
+                        Console.WriteLine("\tPress Ecs for continue....");
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            MainMenu(index);
+                            break;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+
+                    }
+                }
+            }
 
 
         }

@@ -1,181 +1,20 @@
 [
   {
-    "name": "Pediatriya",
-    "doctorCount": 3,
-    "doctors": [
-      {
-        "workExperience": "2015-01-01T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "\u0130nsanlara k\u00F6m\u0259k etm\u0259k ist\u0259yir\u0259m.",
-        "name": "Umid",
-        "surname": "Aslanov",
-        "email": "aslanov063@gmail.com",
-        "userName": "Aslanov_UA86",
-        "password": "umid123",
-        "age": 23
-      },
-      {
-        "workExperience": "2010-08-05T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "H\u0259yat xilas etm\u0259k m\u0259nim m\u0259qs\u0259dimdir",
-        "name": "Huseyin",
-        "surname": "Memmedzade",
-        "email": "huseyin.m@gmail.com",
-        "userName": "Memmedzade_HM10",
-        "password": "huseyin456",
-        "age": 32
-      },
-      {
-        "workExperience": "2020-03-04T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "M\u0259suliyy\u0259tli v\u0259 vicdanl\u0131yam",
-        "name": "Ali",
-        "surname": "Agayev",
-        "email": "ali.agayev20@gmail.com",
-        "userName": "Agayev_AA20",
-        "password": "ali789",
-        "age": 26
-      },
-      {
-        "workExperience": "2025-07-09T14:19:10.7009547+04:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "lkjdg",
-        "name": "lksfjg",
-        "surname": "slfkgh",
-        "email": "dfklgh@fdggd.dfg",
-        "userName": "fgd",
-        "password": "dfg",
-        "age": null
-      },
-      {
-        "workExperience": "2025-07-09T12:04:14.1325664+04:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "df",
-        "name": "dfsiufy",
-        "surname": "dfu",
-        "email": "sj@dfjf.rf",
-        "userName": "fg",
-        "password": "g",
-        "age": null
-      },
-      {
-        "workExperience": "2025-07-09T14:24:01.275852+04:00",
-        "reservedTimeSlots": [],
-        "department": "Pediatriya",
-        "timeSlots": [],
-        "motivationText": "dfghdf",
-        "name": "dklfgh",
-        "surname": "fjkghjfg",
-        "email": "dfg@dfgdf.dfg",
-        "userName": "fdg",
-        "password": "sdfg",
-        "age": 43
-      }
-    ]
+    "phoneNumber": "45345634635",
+    "name": "Ayan",
+    "surname": "Aliyeva",
+    "email": "aliyeva@gmail.com",
+    "userName": "ayan_12",
+    "password": "ayan123",
+    "age": 16
   },
   {
-    "name": "Travmatologiya",
-    "doctorCount": 2,
-    "doctors": [
-      {
-        "workExperience": "2010-08-05T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Travmatologiya",
-        "timeSlots": [],
-        "motivationText": "H\u0259mi\u015F\u0259 h\u0259kim olmaq ist\u0259mi\u015F\u0259m",
-        "name": "Huseyin",
-        "surname": "Memmedzade",
-        "email": "huseyin.m@gmail.com",
-        "userName": "Memmedzade_HM10",
-        "password": "huseyin456",
-        "age": 32
-      },
-      {
-        "workExperience": "2020-03-04T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Travmatologiya",
-        "timeSlots": [],
-        "motivationText": "Tibb m\u0259nim h\u0259v\u0259simdir",
-        "name": "Heyder",
-        "surname": "Omerzade",
-        "email": "heyder.o@gmail.com",
-        "userName": "Omerzade_HO20",
-        "password": "heyder321",
-        "age": 35
-      }
-    ]
-  },
-  {
-    "name": "Stomatologiya",
-    "doctorCount": 4,
-    "doctors": [
-      {
-        "workExperience": "2010-08-05T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Stomatologiya",
-        "timeSlots": [],
-        "motivationText": "C\u0259miyy\u0259t\u0259 faydal\u0131 olmaq ist\u0259yir\u0259m",
-        "name": "Resad",
-        "surname": "Memmedov",
-        "email": "resad.m@gmail.com",
-        "userName": "Memmedov_RM10",
-        "password": "resad654",
-        "age": 30
-      },
-      {
-        "workExperience": "2020-03-04T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Stomatologiya",
-        "timeSlots": [],
-        "motivationText": "T\u0259cr\u00FCb\u0259mi b\u00F6l\u00FC\u015Fm\u0259k \u00FC\u00E7\u00FCn burdayam",
-        "name": "Emin",
-        "surname": "Abbasov",
-        "email": "emin.a@gmail.com",
-        "userName": "Abbasov_EA20",
-        "password": "emin987",
-        "age": 37
-      },
-      {
-        "workExperience": "2010-08-05T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Stomatologiya",
-        "timeSlots": [],
-        "motivationText": "Pe\u015F\u0259m\u0259 sadiq\u0259m",
-        "name": "Ibrahim",
-        "surname": "Nebiyev",
-        "email": "ibrahim.n@gmail.com",
-        "userName": "Nebiyev_IN10",
-        "password": "ibrahim159",
-        "age": 33
-      },
-      {
-        "workExperience": "2020-03-04T00:00:00",
-        "reservedTimeSlots": [],
-        "department": "Stomatologiya",
-        "timeSlots": [],
-        "motivationText": "Yard\u0131m etm\u0259k \u00FC\u00E7\u00FCn hekim olmag isdeyirem",
-        "name": "Ali",
-        "surname": "Nebili",
-        "email": "ali.nebili@gmail.com",
-        "userName": "Nebili_AN20",
-        "password": "ali753",
-        "age": 45
-      }
-    ]
-  },
-  {
-    "name": "oemromeromer",
-    "doctorCount": 0,
-    "doctors": null
+    "phoneNumber": "34535646",
+    "name": "omer",
+    "surname": "aliyev",
+    "email": "aliyevomer386@gmail.com",
+    "userName": "omer",
+    "password": "omer123",
+    "age": 34
   }
 ]

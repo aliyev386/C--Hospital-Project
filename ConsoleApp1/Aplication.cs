@@ -37,6 +37,14 @@ namespace ConsoleApp1
 
         static Aplication()
         {
+            if (File.Exists(PathConfig.DepartmentsFilePath) && File.Exists(PathConfig.DoctorsFilePath))
+            {
+                allDoctors = JsonHelper.LoadFromFile<Doctor>(PathConfig.DoctorsFilePath);
+                departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
+                return;
+            }
+
+
             emptySlots = new List<string>();
 
             doctors1 = new List<Doctor>();
@@ -67,13 +75,14 @@ namespace ConsoleApp1
                 new Doctor("Ibrahim", "Nebiyev", "ibrahim.n@gmail.com", "Nebiyev_IN10", "ibrahim159", 33, DateTime.Parse("05-08-2010"), new List<string>(emptySlots), departments[2].Name, "Peşəmə sadiqəm"),
                 new Doctor("Ali", "Nebili", "ali.nebili@gmail.com", "Nebili_AN20", "ali753", 45, DateTime.Parse("04-03-2020"), new List<string>(emptySlots), departments[2].Name, "Yardım etmək üçün hekim olmag isdeyirem"),
             });
-
+            allDoctors.AddRange(doctors1);
+            allDoctors.AddRange(doctors2);
+            allDoctors.AddRange(doctors3);
             departments[0].DoctorCount = doctors1.Count;
             departments[1].DoctorCount = doctors2.Count;
             departments[2].DoctorCount = doctors3.Count;
-
-            allDoctors = JsonHelper.LoadFromFile<Doctor>(PathConfig.DoctorsFilePath);
-            departments = JsonHelper.LoadFromFile<Department>(PathConfig.DepartmentsFilePath);
+            JsonHelper.SaveToFile(PathConfig.DepartmentsFilePath, departments);
+            JsonHelper.SaveToFile(PathConfig.DoctorsFilePath, allDoctors);
         }
 
 
@@ -98,6 +107,36 @@ namespace ConsoleApp1
         "logs, files and checks",
         "departments.json"
         );
+        public static List<Candidate> allCandidates = JsonHelper.LoadFromFile<Candidate>(PathConfig.CandidatesFilePath);
+
+        public static string filePathDoctor = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+        "logs, files and checks",
+        "doctors.json"
+        );
+        public static List<Doctor> GetAllDoctors()
+        {
+            return JsonHelper.LoadFromFile<Doctor>(filePathDoctor);
+        }
+        public static string filePathC = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+        "logs, files and checks",
+        "candidates.json"
+        );
+        public static List<Candidate> GetAllCandidates()
+        {
+            return JsonHelper.LoadFromFile<Candidate>(filePathC);
+        }
+        public static string filePathAdmin = Path.Combine(
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
+        "logs, files and checks",
+        "admins.json"
+        );
+
+        public static List<Admin> GetAllAdmins()
+        {
+            return JsonHelper.LoadFromFile<Admin>(filePathAdmin);
+        }
 
         public static List<User> GetAllUsers()
         {
@@ -196,7 +235,7 @@ namespace ConsoleApp1
             {
                 Console.Clear();
                 Logs.LogInfo("Admin selected");
-                AdminControl.LogIn(AdminControl.GetAllAdmins());
+                AdminControl.LogIn(GetAllAdmins());
 
             }
             else if (selectedIndex == 1)
