@@ -57,6 +57,19 @@
         "userName": "dfg",
         "password": "dfg",
         "age": 4
+      },
+      {
+        "workExperience": "2025-07-11T19:07:56.2343282+04:00",
+        "reservedTimeSlots": [],
+        "department": "Pediatriya",
+        "timeSlots": [],
+        "motivationText": "kfdsjgldfjkshgkjdsfh g;sdjhfglk jsdfhgk ",
+        "name": "doctor",
+        "surname": "new",
+        "email": "doc@gmail.fdj",
+        "userName": "doctor",
+        "password": "doctorNew",
+        "age": 34
       }
     ]
   },

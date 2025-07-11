@@ -5,7 +5,9 @@ using Serilog;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.Design;
+using System.Diagnostics.Contracts;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 using System.Xml.Linq;
@@ -158,19 +160,11 @@ namespace ConsoleApp1.Controls
                         Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("\nUsername Or Password is Wrong!!!");
                         Console.ResetColor();
-                        Console.WriteLine("\n\tPress Ecs for continue....");
-                        ConsoleKey ecsKey;
-                        ecsKey = Console.ReadKey(true).Key;
-                        if (ecsKey == ConsoleKey.Escape)
-                        {
-                            Console.Clear();
-                            Aplication.Start();
-                            break;
-                        }
-                        else
-                        {
-                            continue;
-                        }
+                        Console.WriteLine("\n\tPress any key for continue....");
+                        Console.ReadLine();
+                        Console.Clear();
+                        continue;
+                        
                     }
                 }
             }
@@ -311,11 +305,26 @@ namespace ConsoleApp1.Controls
 
                     if (candidates.Count == 0)
                     {
-                        Console.ForegroundColor = ConsoleColor.Red;
+                        Console.Clear();
+                        AdminTxt();
+                        Console.ForegroundColor = ConsoleColor.DarkRed;
                         Console.WriteLine("There are no candidates.");
                         Console.ResetColor();
-                        Console.ReadKey();
-                        return;
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue...");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
+                        }
+                        else
+                        {
+                            return;
+                        }
+                        
                     }
 
                     int selectedIndexCv = NavigateMenu(
@@ -341,7 +350,7 @@ namespace ConsoleApp1.Controls
                         Password: {candidate.Password}
                         Experience Year: {candidate.WorkExperience}
                         Reserved Time Slots: {candidate.ReservedTimeSlots}
-                        Age: {candidate.Age}
+                        Age: {candidate.Age}                                           
                         Department: {candidate.Department}
                         Motivation: {candidate.MotivationText}
                         ", true);
@@ -376,8 +385,11 @@ namespace ConsoleApp1.Controls
                         }
                         if (index == -1)
                         {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
                             Console.WriteLine("Department not found.");
-                            return;
+                            Console.ResetColor();
+                            Thread.Sleep(2000);
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
                         }
                         if (Aplication.departments[index].Doctors == null)
                         {
@@ -406,8 +418,20 @@ namespace ConsoleApp1.Controls
                         GmailSender.SendEmail(candidate.Email, "Request has been received.", $"Dear {candidate.Name} {candidate.Surname} your request has been received.");
                         Console.ResetColor();
                         Log.Information($"Doctor accepted: {candidate.Name} {candidate.Surname}");
-                        Console.ReadKey();
-                        Aplication.Start();
+                        Console.ForegroundColor = ConsoleColor.DarkGray;
+                        Console.WriteLine("\tPress Ecs for continue...");
+                        Console.ResetColor();
+                        ConsoleKey ecsKey;
+                        ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());   
+                        }
+                        else
+                        {
+                            return;
+                        }
                     }
                     else if (actionIndex == 1)
                     {
@@ -430,20 +454,33 @@ namespace ConsoleApp1.Controls
                         Console.ResetColor();
                         Log.Information("Doctor rejected: {0} {1}", candidate.Name, candidate.Surname);
                         Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.WriteLine("\tPress Ecs for continue...");
                         Console.ResetColor();
                         ConsoleKey ecsKey;
                         ecsKey = Console.ReadKey(true).Key;
+                        if (ecsKey == ConsoleKey.Escape)
+                        {
+                            Console.Clear();
+                            Crud(Aplication.GetAllUsers(), Aplication.GetAllDepartments());
+                        }
+                        else
+                        {
+                            return;
+                        }
 
                     }
                 }
             }
             catch (Exception ex)
             {
+                Console.Clear();
+                AdminTxt();
                 Console.ForegroundColor = ConsoleColor.DarkRed;
                 Console.WriteLine("There is no candidate yet.");
                 Console.ResetColor();
                 Logs.LogException("There is no candidate yet.", ex);
+                Thread.Sleep(5000);
+                Crud(Aplication.GetAllUsers(),Aplication.GetAllDepartments());
             }
             try
             {
@@ -519,7 +556,7 @@ namespace ConsoleApp1.Controls
                             Console.ResetColor();
                         }
                         Console.ForegroundColor = ConsoleColor.DarkGray;
-                        Console.WriteLine("\tPress Ecs for continue....");
+                        Console.WriteLine("\tPress Ecs for continue...");
                         Console.ResetColor();
                         ConsoleKey ecsKey;
                         ecsKey = Console.ReadKey(true).Key;

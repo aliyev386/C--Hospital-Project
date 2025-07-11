@@ -1,0 +1,23 @@
+[2025-07-11 19:05:26 INF] =============Hospital=============
+[2025-07-11 19:05:26 INF] Program started.
+[2025-07-11 19:05:29 INF] Admin selected
+[2025-07-11 19:05:33 INF] user daxil oldu
+[2025-07-11 19:05:33 INF] Loading...
+[2025-07-11 19:06:13 INF] Doctor rejected: dfsjgh dsfgjhdfg
+[2025-07-11 19:06:32 INF] =============Hospital=============
+[2025-07-11 19:06:32 INF] Program started.
+[2025-07-11 19:06:33 INF] Admin selected
+[2025-07-11 19:06:36 INF] user daxil oldu
+[2025-07-11 19:06:36 INF] Loading...
+[2025-07-11 19:07:50 INF] =============Hospital=============
+[2025-07-11 19:07:50 INF] Program started.
+[2025-07-11 19:07:52 INF] Doctor selected
+[2025-07-11 19:07:52 INF] Sign in or Sign up.
+[2025-07-11 19:07:56 INF] Sign up selected.
+[2025-07-11 19:08:27 INF] Cv sended
+[2025-07-11 19:08:33 INF] =============Hospital=============
+[2025-07-11 19:08:33 INF] Program started.
+[2025-07-11 19:08:45 INF] Admin selected
+[2025-07-11 19:08:57 INF] user daxil oldu
+[2025-07-11 19:08:57 INF] Loading...
+[2025-07-11 19:09:26 INF] Doctor accepted: doctor new

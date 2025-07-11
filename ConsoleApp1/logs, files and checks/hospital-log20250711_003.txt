@@ -1,0 +1,34 @@
+[2025-07-11 19:26:39 INF] =============Hospital=============
+[2025-07-11 19:26:39 INF] Program started.
+[2025-07-11 19:26:40 INF] Admin selected
+[2025-07-11 19:26:43 INF] user daxil oldu
+[2025-07-11 19:26:43 INF] Loading...
+[2025-07-11 19:27:11 INF] =============Hospital=============
+[2025-07-11 19:27:11 INF] Program started.
+[2025-07-11 19:27:12 INF] Admin selected
+[2025-07-11 19:27:13 INF] user daxil oldu
+[2025-07-11 19:27:13 INF] Loading...
+[2025-07-11 19:28:54 INF] =============Hospital=============
+[2025-07-11 19:28:54 INF] Program started.
+[2025-07-11 19:28:54 INF] Admin selected
+[2025-07-11 19:29:01 INF] user daxil oldu
+[2025-07-11 19:29:01 INF] Loading...
+[2025-07-11 19:29:12 INF] =============Hospital=============
+[2025-07-11 19:29:12 INF] Program started.
+[2025-07-11 19:29:14 INF] Admin selected
+[2025-07-11 19:29:17 INF] user daxil oldu
+[2025-07-11 19:29:17 INF] Loading...
+[2025-07-11 19:29:35 INF] =============Hospital=============
+[2025-07-11 19:29:35 INF] Program started.
+[2025-07-11 19:29:36 INF] Admin selected
+[2025-07-11 19:29:37 INF] user daxil oldu
+[2025-07-11 19:29:37 INF] Loading...
+[2025-07-11 19:30:47 INF] =============Hospital=============
+[2025-07-11 19:30:47 INF] Program started.
+[2025-07-11 19:30:47 INF] Admin selected
+[2025-07-11 19:30:48 ERR] Username number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.AdminControl.LogIn(List`1 adminFromFile) in C:\Users\Aliye_oa18\Desktop\New folder\ConsoleApp1\Controls\AdminControl.cs:line 130
+[2025-07-11 19:30:48 ERR] Password number is null.
+System.Exception: It cant be null
+   at ConsoleApp1.Controls.AdminControl.LogIn(List`1 adminFromFile) in C:\Users\Aliye_oa18\Desktop\New folder\ConsoleApp1\Controls\AdminControl.cs:line 143
