@@ -1,6 +1,0 @@
-[2025-07-11 19:26:34 INF] =============Hospital=============
-[2025-07-11 19:26:34 INF] Program started.
-[2025-07-11 19:26:35 INF] Admin selected
-[2025-07-11 19:26:38 ERR] Password number is null.
-System.Exception: It cant be null
-   at ConsoleApp1.Controls.AdminControl.LogIn(List`1 adminFromFile) in C:\Users\Aliye_oa18\Desktop\New folder\ConsoleApp1\Controls\AdminControl.cs:line 142

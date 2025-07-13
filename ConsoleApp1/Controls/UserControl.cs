@@ -27,10 +27,6 @@ namespace ConsoleApp1.Controls
 
     public class UserControl
     {
-
-
-
-
         public static void UserTxt()
         {
             Console.ForegroundColor = ConsoleColor.DarkCyan;
@@ -1102,9 +1098,8 @@ namespace ConsoleApp1.Controls
         public static void PrintCheck(string userFullName, string userEmail, string doctorFullName, string department, string timeSlot, DateTime date)
         {
             string rootFolder = Path.Combine(
-        Directory.GetParent(AppContext.BaseDirectory).Parent.Parent.Parent.FullName,
-        "logs, files and checks");
-            string checkFolder = Path.Combine(rootFolder, "checks");
+        Directory.GetParent(AppContext.BaseDirectory)!.Parent!.Parent!.Parent!.FullName);
+            string checkFolder = Path.Combine(rootFolder, "Check-files");
             if (!Directory.Exists(checkFolder))
             {
                 Directory.CreateDirectory(checkFolder);

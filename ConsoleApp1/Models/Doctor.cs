@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.ConstrainedExecution;
 using System.Text;
 using System.Threading.Tasks;
+using ConsoleApp1.AbstractClass;
 
 namespace ConsoleApp1.Models
 {

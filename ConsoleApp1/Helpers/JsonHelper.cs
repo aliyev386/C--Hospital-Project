@@ -38,33 +38,4 @@ namespace ConsoleApp1.Helpers
             }) ?? new List<T>();
         }
     }
-
-    public static class PathConfig
-    {
-        public static readonly string DesktopPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-
-        public static readonly string RootFolder = Path.Combine(
-         Directory.GetParent(AppDomain.CurrentDomain.BaseDirectory)!.Parent!.Parent!.Parent!.FullName,
-         "logs, files and checks"
-     );
-
-        
-        public static readonly string LogFilePath = Path.Combine(RootFolder, "hospital-log.txt");
-
-        public static readonly string UsersFilePath = Path.Combine(RootFolder, "users.json");
-        public static readonly string ReservationFilePath = Path.Combine(RootFolder, "reservations.json");
-        public static readonly string DoctorsFilePath = Path.Combine(RootFolder, "doctors.json");
-        public static readonly string CandidatesFilePath = Path.Combine(RootFolder, "candidates.json");
-        public static readonly string DepartmentsFilePath = Path.Combine(RootFolder, "departments.json");
-        public static readonly string AdminsFilePath = Path.Combine(RootFolder, "admins.json");
-
-        public static List<User> usersFromFile = JsonHelper.LoadFromFile<User>(UsersFilePath);
-        public static List<Reservation> reservationsFromFile = JsonHelper.LoadFromFile<Reservation>(ReservationFilePath);
-        public static List<Doctor> doctorsFromFile = JsonHelper.LoadFromFile<Doctor>(DoctorsFilePath);
-        public static List<Doctor> CandidatesFromFile = JsonHelper.LoadFromFile<Doctor>(CandidatesFilePath);
-        public static List<Department> departmentsFromFile = JsonHelper.LoadFromFile<Department>(DepartmentsFilePath);
-        public static List<Admin> adminsFromFile = JsonHelper.LoadFromFile<Admin>(AdminsFilePath);
-    }
-
-
 }

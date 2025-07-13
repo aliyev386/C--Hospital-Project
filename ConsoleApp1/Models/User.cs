@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using ConsoleApp1.AbstractClass;
 namespace ConsoleApp1.Models
 {
     public class User : Person

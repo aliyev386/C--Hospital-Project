@@ -11,8 +11,10 @@ namespace ConsoleApp1.Helpers
     {
         public static void ConfigureLogger()
         {
-            if (!Directory.Exists(PathConfig.RootFolder))
-                Directory.CreateDirectory(PathConfig.RootFolder);
+            if (!Directory.Exists(PathConfig.RootFolderLogs))
+            {
+                Directory.CreateDirectory(PathConfig.RootFolderLogs);
+            }
 
             var outputTemplate = "[{Timestamp:yyyy-MM-dd HH:mm:ss} {Level:u3}] {Message:lj}{NewLine}{Exception}";
 

@@ -175,8 +175,8 @@ namespace ConsoleApp1
 
 
             Logs.ConfigureLogger();
-            Log.Information("=============Hospital=============");
-            Log.Information("Program started.");
+            Logs.LogInfo("=============Hospital=============");
+            Logs.LogInfo("Program started.");
 
 
 

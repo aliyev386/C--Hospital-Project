@@ -1,25 +1,21 @@
-﻿using ConsoleApp1.Helpers;
-using Serilog;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using System.Text.Json.Serialization;
-using System.Text.RegularExpressions;
 using System.Threading.Tasks;
-
-namespace ConsoleApp1.Models
+using ConsoleApp1.Interfaces;
+namespace ConsoleApp1.AbstractClass
 {
-    public abstract class Person
+    public abstract class Person : IGenerateUsername
     {
         public string Name { get; set; }
         public string Surname { get; set; }
         private string _email;
         public string Email
         {
-            get;set;
+            get; set;
         }
-        
+
         public string UserName { get; set; }
         public string Password { get; set; }
         public int? Age { get; set; }

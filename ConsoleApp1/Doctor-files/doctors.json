@@ -3,10 +3,7 @@
     "workExperience": "2015-01-01T00:00:00",
     "reservedTimeSlots": [],
     "department": "Pediatriya",
-    "timeSlots": [
-      "09:00-11:00",
-      "12:00-14:00"
-    ],
+    "timeSlots": [],
     "motivationText": "\u0130nsanlara k\u00F6m\u0259k etm\u0259k ist\u0259yir\u0259m.",
     "name": "Umid",
     "surname": "Aslanov",
@@ -58,7 +55,9 @@
     "workExperience": "2020-03-04T00:00:00",
     "reservedTimeSlots": [],
     "department": "Travmatologiya",
-    "timeSlots": [],
+    "timeSlots": [
+      "09:00-11:00"
+    ],
     "motivationText": "Tibb m\u0259nim h\u0259v\u0259simdir",
     "name": "Heyder",
     "surname": "Omerzade",
@@ -118,31 +117,5 @@
     "userName": "Nebili_AN20",
     "password": "ali753",
     "age": 45
-  },
-  {
-    "workExperience": "2025-07-10T14:17:56.014296+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "lkjdgh",
-    "name": "lsfkdjg",
-    "surname": "slkjgh",
-    "email": "ldfkh@dfghgf.fg",
-    "userName": "dfg",
-    "password": "dfg",
-    "age": 4
-  },
-  {
-    "workExperience": "2025-07-11T19:07:56.2343282+04:00",
-    "reservedTimeSlots": [],
-    "department": "Pediatriya",
-    "timeSlots": [],
-    "motivationText": "kfdsjgldfjkshgkjdsfh g;sdjhfglk jsdfhgk ",
-    "name": "doctor",
-    "surname": "new",
-    "email": "doc@gmail.fdj",
-    "userName": "doctor",
-    "password": "doctorNew",
-    "age": 34
   }
 ]

@@ -42,9 +42,7 @@ namespace ConsoleApp1.Controls
         public object GetDoctors()
         {
             var data = Aplication.allDoctors;
-
             return data;
-
         }
 
         public static List<Admin> admins = new List<Admin>
