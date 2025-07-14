@@ -8,6 +8,7 @@ namespace ConsoleApp1.Interfaces
 {
     public interface IGenerateUsername
     {
-        string GenerateUsername();
+        public string GenerateUsername(string Name, string Surname);
+
     }
 }

@@ -39,14 +39,6 @@ namespace ConsoleApp1.Models
             Department = department;
             MotivationText = motivationText;
         }
-        public override string GenerateUsername()
-        {
-            Random rand = new Random();
-            int number = rand.Next(10, 99);
-            string initials = $"{Name[0]}{Surname[0]}".ToLower();
-            string username = $"{Surname}_{initials}{number}";
-            return username;
-        }
         public override string ToString()
         {
             return $"Name: {Name}\nSurname: {Surname}\nEmail: {Email}\nUsername: {UserName}\nPassword: {Password}\nWork experience: {WorkExperience}\nMotivation text: {MotivationText}";

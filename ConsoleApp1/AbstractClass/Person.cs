@@ -29,15 +29,15 @@ namespace ConsoleApp1.AbstractClass
             Password = password;
             Age = age;
         }
-        public virtual string GenerateUsername()
+
+        public string GenerateUsername(string name, string surname)
         {
             Random rand = new Random();
             int number = rand.Next(10, 99);
-            string initials = $"{Name[0]}{Surname[0]}".ToLower();
-            string username = $"{Surname}_{initials}{number}";
+            string initials = $"{name[0]}{surname[0]}".ToLower();
+            string username = $"{surname}_{initials}{number}";
             return username;
         }
-
 
 
     }

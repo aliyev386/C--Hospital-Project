@@ -1,2 +1,12 @@
 [2025-07-14 02:52:54 INF] =============Hospital=============
 [2025-07-14 02:52:54 INF] Program started.
+[2025-07-14 13:33:27 INF] =============Hospital=============
+[2025-07-14 13:33:27 INF] Program started.
+[2025-07-14 13:33:30 INF] User selected
+[2025-07-14 13:33:30 INF] Sign in or Sign up.
+[2025-07-14 13:33:31 INF] Sign up selected.
+[2025-07-14 13:43:47 INF] =============Hospital=============
+[2025-07-14 13:43:47 INF] Program started.
+[2025-07-14 13:43:50 INF] User selected
+[2025-07-14 13:43:50 INF] Sign in or Sign up.
+[2025-07-14 13:43:51 INF] Sign up selected.

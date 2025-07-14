@@ -320,10 +320,8 @@ namespace ConsoleApp1.Controls
                 }
                 break;
             }
-
             User tempUser = new User(name, surname, email, "", "", age, phoneNumber);
-            string usernameOffer = tempUser.GenerateUsername();
-
+            string usernameOffer = tempUser.GenerateUsername(name,surname);
             Console.WriteLine();
             Console.ForegroundColor = ConsoleColor.Cyan;
             Console.WriteLine($"\t|System suggests this username: {usernameOffer}");

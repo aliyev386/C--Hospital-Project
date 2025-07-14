@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using ConsoleApp1.AbstractClass;
 namespace ConsoleApp1.Models
 {
-    public class Candidate : Person
+    public class Candidate : Person 
     {
         public DateTime WorkExperience { get; set; }
         public List<string> ReservedTimeSlots { get; set; } = new();
@@ -26,14 +26,6 @@ namespace ConsoleApp1.Models
             ReservedTimeSlots = reservedSlots ?? new List<string>();
             Department = department;
             MotivationText = motivationText;
-        }
-        public override string GenerateUsername()
-        {
-            Random rand = new Random();
-            int number = rand.Next(10, 99);
-            string initials = $"{Name[0]}{Surname[0]}".ToLower();
-            string username = $"{Surname}_{initials}{number}";
-            return username;
         }
         public override string ToString()
         {

@@ -5,9 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using ConsoleApp1.AbstractClass;
+using ConsoleApp1.Interfaces;
 namespace ConsoleApp1.Models
 {
-    public class User : Person
+    public class User : Person , IGenerateUsername
     {
         public string PhoneNumber { get; set; }
         public User() { }
@@ -21,14 +22,6 @@ namespace ConsoleApp1.Models
             Password = password;
             Age = age;
             PhoneNumber = phoneNumber;
-        }
-        public override string GenerateUsername()
-        {
-            Random rand = new Random();
-            int number = rand.Next(10, 99);
-            string initials = $"{Name[0]}{Surname[0]}".ToLower();
-            string username = $"{Surname}_{initials}{number}";
-            return username;
         }
         public override string ToString()
         {
